@@ -889,7 +889,7 @@ ul.slick-dots {
 /* Footer Style */
 
 footer {
-	background-color: #1e2db7;
+	background-color: #95c11f;
 	padding: 80px 0px;
 	color: #fff;
 }
@@ -949,7 +949,7 @@ footer ul.menu-list li a {
 }
 
 footer ul.menu-list li a:hover {
-	color: #a4c639;
+	color:  #95c11f;
 }
 
 footer .contact-form input {
