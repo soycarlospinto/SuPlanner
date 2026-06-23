@@ -255,7 +255,7 @@ header .navbar {
 	box-shadow: 0px 1px 10px rgba(0,0,0,0.1);
 }
 .background-header .navbar-brand h2 {
-	color: #a4c639!important;
+	color: #95c11f!important;
 }
 .background-header .navbar-nav a.nav-link {
 	color: #1e1e1e!important;
@@ -265,7 +265,7 @@ header .navbar {
 .background-header .navbar-nav .nav-link.current,
 .background-header .navbar-nav .nav-link.show,
 .background-header .navbar-nav .show>.nav-link {
-	color: #a4c639!important;
+	color: #95c11f!important;
 }
 .navbar .navbar-brand {
 	float: 	left;
@@ -309,8 +309,8 @@ header .navbar {
 .navbar .navbar-nav .nav-link.current,
 .navbar .navbar-nav .nav-link.show,
 .navbar .navbar-nav .show>.nav-link {
-	color: #a4c639;
-	border-bottom: 3px solid #a4c639;
+	color: #95c11f;
+	border-bottom: 3px solid #95c11f;
 }
 .navbar .navbar-toggler-icon {
 	background-image: none;
@@ -327,7 +327,7 @@ header .navbar {
 }
 .navbar .navbar-toggler-icon:after {
 	content: '\f0c9';
-	color: #a4c639;
+	color: #95c11f;
 	font-size: 18px;
 	line-height: 26px;
 	font-family: 'FontAwesome';
@@ -455,7 +455,7 @@ ul.slick-dots {
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 1px;
-  color:#a4c639;
+  color:#95c11f;
   animation:fadeOutRight 1s both;
 }
 
@@ -522,7 +522,7 @@ ul.slick-dots {
 /* Request Form */
 
 .request-form {
-	background-color: #a4c639;
+	background-color: #95c11f;
 	padding: 40px 0px;
 	color: #fff;
 }
@@ -606,7 +606,7 @@ ul.slick-dots {
 
 .fun-facts em {
 	font-style: normal;
-	color: #a4c639;
+	color: #95c11f;
 }
 
 .fun-facts p {
@@ -627,7 +627,7 @@ ul.slick-dots {
 
 .count-digit {
     margin: 5px 0px;
-    color: #a4c639;
+    color: #95c11f;
     font-weight: 700;
     font-size: 36px;
 }
@@ -685,7 +685,7 @@ ul.slick-dots {
 
 .more-info .right-content em {
 	font-style: normal;
-	color: #a4c639;
+	color: #95c11f;
 }
 
 .more-info .right-content p {
@@ -726,7 +726,7 @@ ul.slick-dots {
 	margin-top: 8px;
 	font-weight: 600;
 	font-size: 14px;
-	color: #a4c639;
+	color: #95c11f;
 }
 .testimonial-item img {
 	max-width: 60px;
@@ -759,7 +759,7 @@ ul.slick-dots {
 }
 
 .callback-form .contact-form {
-	background-color: #a4c639;
+	background-color: #95c11f;
 	padding: 60px;
 	border-radius: 5px;
 	text-align: center;
@@ -835,11 +835,11 @@ ul.slick-dots {
 
 .callback-form .contact-form button.border-button:hover {
 	background-color: #fff;
-	color: #a4c639;
+	color: #95c11f;
 }
 
 .contact-us .contact-form button.filled-button {
-	background-color: #a4c639;
+	background-color: #95c11f;
 	color: #fff;
 	border: none;
 	font-size: 13px;
@@ -857,7 +857,7 @@ ul.slick-dots {
 
 .contact-us .contact-form button.filled-button:hover {
 	background-color: #fff;
-	color: #a4c639;
+	color: #95c11f;
 }
 
 
@@ -931,7 +931,7 @@ footer ul.social-icons li a {
 }
 
 footer ul.social-icons li a:hover {
-	background-color: #a4c639;
+	background-color: #95c11f;
 }
 
 footer ul.menu-list li {
@@ -949,7 +949,7 @@ footer ul.menu-list li a {
 }
 
 footer ul.menu-list li a:hover {
-	color:  #95c11f;
+	color: #a4c639;
 }
 
 footer .contact-form input {
@@ -1010,7 +1010,7 @@ footer .contact-form ::placeholder {
 footer .contact-form button.filled-button {
 	background-color: transparent;
 	color: #fff;
-	background-color: #a4c639;
+	background-color: #95c11f;
 	border: none;
 	font-size: 13px;
 	text-transform: uppercase;
@@ -1027,7 +1027,7 @@ footer .contact-form button.filled-button {
 
 footer .contact-form button.filled-button:hover {
 	background-color: #fff;
-	color: #a4c639;
+	color: #95c11f;
 }
 
 
@@ -1035,7 +1035,7 @@ footer .contact-form button.filled-button:hover {
 /* Sub-footer Style */
 
 .sub-footer {
-	background-color: #343434;
+	background-color: #4c25b0;
 	text-align: center;
 	padding: 25px 0px;
 }
@@ -1105,7 +1105,7 @@ footer .contact-form button.filled-button:hover {
 }
 
 .team-item .down-content span {
-	color: #a4c639;
+	color: #95c11f;
 	font-weight: 600;
 	font-size: 14px;
 	display: block;
@@ -1140,7 +1140,7 @@ footer .contact-form button.filled-button:hover {
 	width: 100%;
 	padding: 30px 30px;
 	display: inline-block;
-	background-color: #a4c639;
+	background-color: #95c11f;
   	font-size: 20px;
   	color: #d3f513;
   	letter-spacing: 0.5px;
@@ -1182,7 +1182,7 @@ footer .contact-form button.filled-button:hover {
 }
 .tabs-content p {
   font-size: 14px;
-  color: #7a7a7a;
+  color: #c32792;
   margin-bottom: 0px;
 }
 
@@ -1201,7 +1201,7 @@ footer .contact-form button.filled-button:hover {
 }
 
 .contact-information .contact-item i {
-	color: #a4c639;
+	color: #95c11f;
 	font-size: 48px;
 	margin-bottom: 40px;
 }
@@ -1219,7 +1219,7 @@ footer .contact-form button.filled-button:hover {
 
 .contact-information .contact-item a {
 	font-weight: 600;
-	color: #a4c639;
+	color: #95c11f;
 	font-size: 15px;
 }
 
@@ -1333,7 +1333,7 @@ footer .contact-form button.filled-button:hover {
 	.navbar .navbar-nav .nav-link.current,
 	.navbar .navbar-nav .nav-link.show,
 	.navbar .navbar-nav .show>.nav-link {
-		color: #a4c639!important;
+		color: #95c11f!important;
 		border-bottom: none!important;
 	}
 }
