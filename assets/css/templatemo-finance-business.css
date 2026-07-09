@@ -1337,3 +1337,245 @@ footer .contact-form button.filled-button:hover {
 		border-bottom: none!important;
 	}
 }
+
+/* ===== EFECTOS MODERNOS ===== */
+
+/* Navbar Glass */
+header {
+    backdrop-filter: blur(12px);
+    background: rgba(0,0,0,0.75) !important;
+}
+
+/* Animación general */
+.service-item,
+.count-area-content,
+.more-info-content,
+.testimonial-item,
+.partner-item {
+    transition: all 0.4s ease;
+}
+
+/* Tarjetas */
+.service-item {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,.1);
+}
+
+.service-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,.2);
+}
+
+/* Zoom imágenes */
+.service-item img,
+.left-image img {
+    transition: transform 0.6s ease;
+}
+
+.service-item:hover img,
+.left-image:hover img {
+    transform: scale(1.08);
+}
+
+/* Botones modernos */
+.filled-button,
+.border-button {
+    transition: all 0.3s ease;
+}
+
+.filled-button:hover,
+.border-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(67, 209, 135, .4);
+}
+
+/* Estadísticas */
+.count-area-content:hover {
+    transform: scale(1.05);
+}
+
+/* Equipo */
+.testimonial-item {
+    transition: all .4s ease;
+}
+
+.testimonial-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,.15);
+}
+
+/* Aparición suave */
+.section-heading,
+.service-item,
+.fun-facts,
+.more-info,
+.testimonial-item {
+    animation: fadeUp 1s ease;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Texto principal */
+.main-banner .text-content h4 {
+    animation: slideInLeft 1s ease;
+}
+
+.main-banner .text-content p {
+    animation: slideInRight 1.2s ease;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity:0;
+        transform:translateX(-50px);
+    }
+    to {
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity:0;
+        transform:translateX(50px);
+    }
+    to {
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+/* Footer moderno */
+footer {
+    box-shadow: 0 -10px 40px rgba(0,0,0,.15);
+}
+
+/* Scroll suave */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ====== EFECTOS MODERNOS ====== */
+
+/* Scroll suave */
+html{
+    scroll-behavior:smooth;
+}
+
+/* Navbar con efecto vidrio */
+header{
+    background:rgba(20,20,20,.75)!important;
+    backdrop-filter:blur(12px);
+    transition:.4s;
+}
+
+/* Tarjetas */
+.service-item{
+    border-radius:18px;
+    overflow:hidden;
+    transition:.4s;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.service-item:hover{
+    transform:translateY(-12px);
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+}
+
+/* Zoom en imágenes */
+.service-item img{
+    transition:.6s;
+}
+
+.service-item:hover img{
+    transform:scale(1.1);
+}
+
+/* Botones */
+.filled-button,
+.border-button{
+    transition:.3s;
+}
+
+.filled-button:hover,
+.border-button:hover{
+    transform:translateY(-4px);
+    box-shadow:0 0 20px rgba(67,209,135,.6);
+}
+
+/* Estadísticas */
+.count-area-content{
+    transition:.4s;
+}
+
+.count-area-content:hover{
+    transform:scale(1.08);
+}
+
+/* Equipo */
+.testimonial-item{
+    transition:.4s;
+}
+
+.testimonial-item:hover{
+    transform:translateY(-10px);
+    box-shadow:0 15px 30px rgba(0,0,0,.2);
+}
+
+/* Logos */
+.partner-item{
+    transition:.4s;
+}
+
+.partner-item:hover{
+    transform:scale(1.15);
+}
+
+/* Títulos */
+.section-heading h2{
+    position:relative;
+}
+
+.section-heading h2::after{
+    content:"";
+    display:block;
+    width:0;
+    height:4px;
+    margin:12px auto;
+    background:#43d187;
+    transition:.5s;
+}
+
+.section-heading:hover h2::after{
+    width:120px;
+}
+
+/* Animación inicial */
+.service-item,
+.more-info,
+.fun-facts,
+.testimonial-item{
+    animation:fadeUp 1s ease;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
