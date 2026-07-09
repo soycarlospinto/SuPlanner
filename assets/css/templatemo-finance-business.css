@@ -1511,7 +1511,7 @@ header{
 .filled-button:hover,
 .border-button:hover{
     transform:translateY(-4px);
-    box-shadow:0 0 20px rgba(67,209,135,.6);
+    box-shadow:0 0 20px rgba(#63bb13);
 }
 
 /* Estadísticas */
@@ -1553,7 +1553,7 @@ header{
     width:0;
     height:4px;
     margin:12px auto;
-    background:#43d187;
+    background: #95c11f;
     transition:.5s;
 }
 
