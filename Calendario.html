@@ -1,32 +1,436 @@
 <!DOCTYPE html>
-<html lang="en">
-
-
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendar and schedule</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planner</title>
 
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="style.css">
 
+<style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
 
+body{
+background:#f4f7fa;
+}
 
+header{
+background:#8BC400;
+color:white;
+padding:18px;
+font-size:30px;
+font-weight:bold;
+text-align:center;
+}
+
+.container{
+display:grid;
+grid-template-columns:45% 55%;
+height:calc(100vh - 70px);
+}
+
+/*--------------------*/
+/* PANEL IZQUIERDO */
+/*--------------------*/
+
+.left{
+padding:20px;
+border-right:2px solid #ddd;
+display:flex;
+flex-direction:column;
+}
+
+.top-menu{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.back{
+background:#235a9f;
+color:white;
+padding:12px 18px;
+border-radius:25px;
+cursor:pointer;
+}
+
+.search{
+display:flex;
+gap:10px;
+}
+
+.search input{
+padding:10px;
+border-radius:20px;
+border:1px solid #ccc;
+}
+
+.search button{
+background:#8BC400;
+border:none;
+color:white;
+width:40px;
+border-radius:50%;
+cursor:pointer;
+}
+
+.notes{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+margin-top:20px;
+}
+
+.note{
+padding:18px;
+border-radius:15px;
+color:white;
+height:140px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+transition:.3s;
+cursor:pointer;
+}
+
+.note:hover{
+transform:scale(1.05);
+}
+
+.blue{
+background:#2E86DE;
+}
+
+.green{
+background:#8BC400;
+}
+
+.note small{
+font-weight:bold;
+}
+
+.add-note{
+position:absolute;
+bottom:25px;
+left:20%;
+transform:translateX(-50%);
+}
+
+.add-btn{
+background:#235a9f;
+width:70px;
+height:70px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+font-size:28px;
+cursor:pointer;
+box-shadow:0 5px 15px rgba(0,0,0,.3);
+}
+
+/*--------------------*/
+/* PANEL DERECHO */
+/*--------------------*/
+
+.right{
+padding:20px;
+overflow:auto;
+}
+
+.card{
+background:white;
+border-radius:15px;
+padding:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+margin-bottom:20px;
+}
+
+.calendar{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:10px;
+margin-top:20px;
+}
+
+.day{
+padding:15px;
+background:#f5f5f5;
+text-align:center;
+border-radius:10px;
+cursor:pointer;
+}
+
+.today{
+background:#8BC400;
+color:white;
+font-weight:bold;
+}
+
+.events{
+margin-top:20px;
+}
+
+.event{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px;
+background:#fafafa;
+margin-bottom:10px;
+border-radius:10px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+}
+
+.box{
+background:white;
+padding:20px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.box h2{
+color:#235a9f;
+}
+
+footer{
+position:fixed;
+bottom:15px;
+right:15px;
+}
+
+.dark{
+background:#222;
+color:white;
+padding:12px;
+border-radius:50%;
+cursor:pointer;
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+.container{
+grid-template-columns:1fr;
+height:auto;
+}
+
+.left{
+border-right:none;
+border-bottom:2px solid #ddd;
+}
+
+.add-note{
+position:relative;
+left:50%;
+margin-top:30px;
+}
+
+.stats{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
 </head>
+
 <body>
-    
 
+<header>
+Agenda Personal
+</header>
 
+<div class="container">
 
+<!-- PANEL IZQUIERDO -->
 
+<div class="left">
 
+<div class="top-menu">
 
+<div class="back">
+<i class="fa-solid fa-arrow-left"></i>
+</div>
 
+<div class="search">
 
+<input placeholder="Buscar nota...">
 
+<button>
+<i class="fa fa-search"></i>
+</button>
 
+</div>
 
+</div>
 
+<h2>Mis Notas</h2>
+
+<div class="notes">
+
+<div class="note blue">
+
+<small>27/02/2025</small>
+
+<h3>Tareas Pendientes</h3>
+
+<i class="fa-solid fa-lock"></i>
+
+</div>
+
+<div class="note green">
+
+<small>10/04/2025</small>
+
+<h3>Proyecto Final</h3>
+
+<i class="fa-solid fa-book"></i>
+
+</div>
+
+<div class="note green">
+
+<small>05/06/2025</small>
+
+<h3>Reunión</h3>
+
+<i class="fa-solid fa-users"></i>
+
+</div>
+
+<div class="note blue">
+
+<small>22/09/2025</small>
+
+<h3>Examen</h3>
+
+<i class="fa-solid fa-graduation-cap"></i>
+
+</div>
+
+</div>
+
+<div class="add-note">
+
+<div class="add-btn">
+
+<i class="fa-solid fa-plus"></i>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PANEL DERECHO -->
+
+<div class="right">
+
+<div class="card">
+
+<h2>Calendario</h2>
+
+<div class="calendar">
+
+<div class="day">1</div>
+<div class="day">2</div>
+<div class="day">3</div>
+<div class="day">4</div>
+<div class="day">5</div>
+<div class="day">6</div>
+<div class="day today">7</div>
+<div class="day">8</div>
+<div class="day">9</div>
+<div class="day">10</div>
+<div class="day">11</div>
+<div class="day">12</div>
+<div class="day">13</div>
+<div class="day">14</div>
+<div class="day">15</div>
+<div class="day">16</div>
+<div class="day">17</div>
+<div class="day">18</div>
+<div class="day">19</div>
+<div class="day">20</div>
+<div class="day">21</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Próximos Eventos</h2>
+
+<div class="events">
+
+<div class="event">
+Biología
+<span>Lunes 12</span>
+</div>
+
+<div class="event">
+Presentación Inglés
+<span>Martes 13</span>
+</div>
+
+<div class="event">
+Matemáticas
+<span>Viernes 16</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="stats">
+
+<div class="box">
+<h2>12</h2>
+Notas
+</div>
+
+<div class="box">
+<h2>5</h2>
+Eventos
+</div>
+
+<div class="box">
+<h2>80%</h2>
+Completado
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+<div class="dark">
+<i class="fa-solid fa-moon"></i>
+</div>
+
+</footer>
 
 </body>
 </html>
