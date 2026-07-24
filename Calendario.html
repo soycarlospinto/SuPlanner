@@ -266,9 +266,11 @@ Agenda Personal
 
 <div class="top-menu">
 
-<div class="back">
-<i class="fa-solid fa-arrow-left"></i>
-</div>
+    <div class="back" id="btnBack">
+       
+        <i class="fa-solid fa-arrow-left"></i>
+    
+    </div>
 
 <div class="search">
 
@@ -431,6 +433,12 @@ Completado
 </div>
 
 </footer>
+<script>
+   
+   document.getElementById("btnBack").addEventListener("click", function () {
+        window.location.href = "index.html";
+    });
+    </script>
 
 </body>
 </html>
