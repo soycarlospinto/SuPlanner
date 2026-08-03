@@ -34,7 +34,7 @@ h1,h2,h3,h4,h5,h6 {
 
 a.filled-button {
 	background-color: #a4c639;
-	color: #fff;
+	color: black;
 	font-size: 13px;
 	text-transform: uppercase;
 	font-weight: 700;
@@ -45,14 +45,14 @@ a.filled-button {
 }
 
 a.filled-button:hover {
-	background-color: #fff;
+	background-color: black;
 	color: #a4c639;
 }
 
 a.border-button {
 	background-color: transparent;
-	color: #fff;
-	border: 2px solid #fff;
+	color: black;
+	border: 2px solid black;
 	font-size: 13px;
 	text-transform: uppercase;
 	font-weight: 700;
@@ -63,7 +63,7 @@ a.border-button {
 }
 
 a.border-button:hover {
-	background-color: #fff;
+	background-color: black;
 	color: #a4c639;
 }
 
@@ -174,7 +174,7 @@ a.border-button:hover {
 /* Sub Header Style */
 
 .sub-header {
-	background-color: #a4c639;
+	background-color: #005191;
 	height: 46px;
 	line-height: 46px;
 }
@@ -244,6 +244,8 @@ header {
 }
 header .navbar {
 	padding: 20px 0px;
+	
+	background-color: #ffffff9a;
 }
 .background-header .navbar {
 	padding: 10px 0px;
@@ -273,9 +275,15 @@ header .navbar {
 	outline: none;
 }
 .navbar .navbar-brand h2 {
+<<<<<<< HEAD
+	color: #ffffff00;
+	text-transform: uppercase;
+	font-size: 24px;
+=======
 	color: #fff;
 	text-transform: none;
 	font-size: 26px;
+>>>>>>> kenneth-rodriguez
 	font-weight: 700;
 	-webkit-transition: all .3s ease 0s;
     -moz-transition: all .3s ease 0s;
@@ -298,9 +306,9 @@ header .navbar {
 .navbar .navbar-nav a.nav-link {
 	text-transform: capitalize;
 	font-size: 15px;
-	font-weight: 300;
+	font-weight: 500;
 	letter-spacing: 0.5px;
-	color: #fff;
+	color: #111658;
 	transition: all 0.5s;
 	margin-top: 5px;
 }
@@ -309,15 +317,15 @@ header .navbar {
 .navbar .navbar-nav .nav-link.current,
 .navbar .navbar-nav .nav-link.show,
 .navbar .navbar-nav .show>.nav-link {
-	color: #95c11f;
+	color: #000000;
 	border-bottom: 3px solid #95c11f;
 }
 .navbar .navbar-toggler-icon {
 	background-image: none;
 }
 .navbar .navbar-toggler {
-	border-color: #fff;
-	background-color: #fff;	
+	border-color: #ffffff;
+	background-color: #ffffff;	
 	height: 36px;
 	outline: none;
 	border-radius: 0px;
