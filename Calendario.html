@@ -2,13 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link rel="stylesheet" href="Calendario.css">
-
 <title>Personal Agenda - Planner</title>
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
@@ -84,7 +79,7 @@ header{
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    gap: 15px;
+    gap: 10px;
 }
 
 .back{
@@ -99,9 +94,24 @@ header{
     box-shadow: 0 4px 10px rgba(35, 90, 159, 0.2);
 }
 
-.back:hover {
-    opacity: 0.9;
+.back:hover { opacity: 0.9; }
+
+.lang-btn {
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
+
+.lang-btn:hover { background: var(--day-bg); }
 
 .search{
     display: flex;
@@ -185,21 +195,11 @@ header{
     transition: opacity 0.2s ease, background 0.2s ease;
 }
 
-.note:hover .delete-note {
-    opacity: 1;
-}
+.note:hover .delete-note { opacity: 1; }
+.delete-note:hover { background: rgba(220, 53, 69, 0.8); }
 
-.delete-note:hover {
-    background: rgba(220, 53, 69, 0.8);
-}
-
-.blue{
-    background: var(--note-blue);
-}
-
-.green{
-    background: var(--note-green);
-}
+.blue{ background: var(--note-blue); }
+.green{ background: var(--note-green); }
 
 .note small{
     font-weight: 600;
@@ -212,7 +212,6 @@ header{
     padding-right: 15px;
 }
 
-/* SECCIÓN ADICIONAL: Tareas Rápidas */
 .quick-tasks-section {
     background: var(--bg-card);
     padding: 18px;
@@ -285,9 +284,7 @@ header{
     cursor: pointer;
 }
 
-.quick-task-item button:hover {
-    color: #dc3545;
-}
+.quick-task-item button:hover { color: #dc3545; }
 
 .add-note{
     position: absolute;
@@ -311,9 +308,7 @@ header{
     transition: transform 0.2s ease;
 }
 
-.add-btn:hover {
-    transform: scale(1.1);
-}
+.add-btn:hover { transform: scale(1.1); }
 
 /* PANEL DERECHO */
 .right{
@@ -355,9 +350,7 @@ header{
     position: relative;
 }
 
-.day:hover {
-    opacity: 0.8;
-}
+.day:hover { opacity: 0.8; }
 
 .today{
     background: var(--bg-header);
@@ -365,13 +358,11 @@ header{
     font-weight: bold;
 }
 
-/* Estilo para el día seleccionado en el calendario */
 .day.selected-day {
     border: 2px solid var(--accent-blue);
     background-color: var(--bg-main);
 }
 
-/* Tooltip flotante para el calendario */
 .day .calendar-tooltip {
     visibility: hidden;
     width: 140px;
@@ -508,7 +499,6 @@ footer{
     border: 1px solid var(--border-color);
 }
 
-/* MODALES GENÉRICOS */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -605,76 +595,46 @@ footer{
 
 <body id="body">
 
-<header>
-    Personal Agenda
-</header>
+<header id="headerTitle">Personal Agenda</header>
 
 <div class="container">
 
     <!-- PANEL IZQUIERDO -->
     <div class="left">
         <div class="top-menu">
-            <div class="back" id="btnBack" title="Regresar">
+            <div class="back" id="btnBack" data-i18n-title="btnBackTitle">
                 <i class="fa-solid fa-arrow-left"></i>
             </div>
+            
+            <button class="lang-btn" id="btnLang" data-i18n-title="btnLangTitle">
+                <i class="fa-solid fa-globe"></i>
+                <span id="langText">EN</span>
+            </button>
+
             <div class="search">
-                <input type="text" id="searchInput" placeholder="Buscar nota...">
+                <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder">
                 <button>
                     <i class="fa fa-search"></i>
                 </button>
             </div>
         </div>
 
-        <h2>Mis Notas</h2>
+        <h2 id="txtMyNotes">Mis Notas</h2>
 
-        <div class="notes" id="notesContainer">
-            <div class="note blue" data-date="27/02/2025" data-content="Revisar pendientes semanales y organizar prioridades.">
-                <button class="delete-note" title="Eliminar nota"><i class="fa-solid fa-trash"></i></button>
-                <small>27/02/2025</small>
-                <h3>Tareas Pendientes</h3>
-                <i class="fa-solid fa-lock"></i>
-            </div>
-            <div class="note green" data-date="10/04/2025" data-content="Avanzar con la investigación y el diseño de la interfaz del proyecto.">
-                <button class="delete-note" title="Eliminar nota"><i class="fa-solid fa-trash"></i></button>
-                <small>10/04/2025</small>
-                <h3>Proyecto Final</h3>
-                <i class="fa-solid fa-book"></i>
-            </div>
-            <div class="note green" data-date="05/06/2025" data-content="Reunión con el equipo de trabajo a las 10:00 AM.">
-                <button class="delete-note" title="Eliminar nota"><i class="fa-solid fa-trash"></i></button>
-                <small>05/06/2025</small>
-                <h3>Reunión</h3>
-                <i class="fa-solid fa-users"></i>
-            </div>
-            <div class="note blue" data-date="22/09/2025" data-content="Estudiar capítulos del 1 al 4 para el examen parcial.">
-                <button class="delete-note" title="Eliminar nota"><i class="fa-solid fa-trash"></i></button>
-                <small>22/09/2025</small>
-                <h3>Examen</h3>
-                <i class="fa-solid fa-graduation-cap"></i>
-            </div>
-        </div>
+        <div class="notes" id="notesContainer"></div>
 
-        <!-- SECCIÓN ADICIONAL: Tareas Rápidas -->
+        <!-- Tareas Rápidas -->
         <div class="quick-tasks-section">
-            <h3>Tareas Rápidas del Día</h3>
+            <h3 id="txtQuickTasks">Tareas Rápidas del Día</h3>
             <div class="quick-task-input-group">
-                <input type="text" id="quickTaskInput" placeholder="Añadir tarea rápida...">
+                <input type="text" id="quickTaskInput" data-i18n-placeholder="quickTaskPlaceholder">
                 <button id="addQuickTaskBtn"><i class="fa-solid fa-plus"></i></button>
             </div>
-            <div class="quick-tasks-list" id="quickTasksList">
-                <div class="quick-task-item">
-                    <span>Revisar correo electrónico</span>
-                    <button class="delete-quick-task"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-                <div class="quick-task-item">
-                    <span>Llamar al proveedor</span>
-                    <button class="delete-quick-task"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-            </div>
+            <div class="quick-tasks-list" id="quickTasksList"></div>
         </div>
 
         <div class="add-note">
-            <div class="add-btn" id="addNoteBtn" title="Añadir nota">
+            <div class="add-btn" id="addNoteBtn" data-i18n-title="addNoteTitle">
                 <i class="fa-solid fa-plus"></i>
             </div>
         </div>
@@ -684,44 +644,27 @@ footer{
     <div class="right">
         <!-- Calendario -->
         <div class="card">
-            <h2>Calendario</h2>
+            <h2 id="txtCalendar">Calendario</h2>
             <div class="calendar" id="calendarGrid"></div>
         </div>
 
         <!-- Próximos Eventos -->
         <div class="card">
-            <h2>Próximos Eventos</h2>
-            <div class="events" id="eventsContainer">
-                <div class="event" data-date="12/05/2026">Biología<span>Lunes 12</span></div>
-                <div class="event" data-date="13/05/2026">Presentación Inglés<span>Martes 13</span></div>
-                <div class="event" data-date="16/05/2026">Matemáticas<span>Viernes 16</span></div>
-            </div>
+            <h2 id="txtEvents">Próximos Eventos</h2>
+            <div class="events" id="eventsContainer"></div>
         </div>
 
         <!-- Control de Hábitos -->
         <div class="card">
-            <h2>Control de Hábitos Diarios</h2>
-            <div class="habits-list">
-                <div class="habit-item">
-                    <span>Beber 2L de agua</span>
-                    <div class="habit-checkbox"><i class="fa-solid fa-check"></i></div>
-                </div>
-                <div class="habit-item">
-                    <span>30 min de lectura</span>
-                    <div class="habit-checkbox"><i class="fa-solid fa-check"></i></div>
-                </div>
-                <div class="habit-item">
-                    <span>Ejercicio físico</span>
-                    <div class="habit-checkbox"><i class="fa-solid fa-check"></i></div>
-                </div>
-            </div>
+            <h2 id="txtHabits">Control de Hábitos Diarios</h2>
+            <div class="habits-list" id="habitsContainer"></div>
         </div>
 
         <!-- Estadísticas -->
         <div class="stats">
-            <div class="box"><h2 id="totalNotes">4</h2>Notas</div>
-            <div class="box"><h2 id="totalEvents">3</h2>Eventos</div>
-            <div class="box"><h2>80%</h2>Completado</div>
+            <div class="box"><h2 id="totalNotes">0</h2><span id="lblNotes">Notas</span></div>
+            <div class="box"><h2 id="totalEvents">0</h2><span id="lblEvents">Eventos</span></div>
+            <div class="box"><h2>80%</h2><span id="lblCompleted">Completado</span></div>
         </div>
     </div>
 
@@ -730,13 +673,13 @@ footer{
 <!-- MODAL PARA CREAR NOTAS -->
 <div class="modal-overlay" id="noteModal">
     <div class="modal">
-        <h3>Crear Nueva Nota</h3>
-        <input type="text" id="noteTitleInput" placeholder="Título de la nota...">
-        <textarea id="noteContentInput" placeholder="Contenido de la nota..."></textarea>
+        <h3 id="txtCreateNote">Crear Nueva Nota</h3>
+        <input type="text" id="noteTitleInput" data-i18n-placeholder="titlePlaceholder">
+        <textarea id="noteContentInput" data-i18n-placeholder="contentPlaceholder"></textarea>
         <input type="date" id="noteDateInput">
         <select id="noteColorInput">
-            <option value="blue">Azul</option>
-            <option value="green">Verde</option>
+            <option value="blue" id="optBlue">Azul</option>
+            <option value="green" id="optGreen">Verde</option>
         </select>
         <div class="modal-buttons">
             <button class="btn-cancel" id="cancelModalBtn">Cancelar</button>
@@ -758,25 +701,288 @@ footer{
 </div>
 
 <footer>
-    <div class="dark" id="btnTheme" title="Cambiar modo">
+    <div class="dark" id="btnTheme" data-i18n-title="themeTitle">
         <i class="fa-solid fa-moon" id="themeIcon"></i>
     </div>
 </footer>
-
 <script>
-    // 1. Botón de Regresar
-    document.getElementById("btnBack").addEventListener("click", function () {
-        if (window.history.length > 1) {
-            window.history.back();
-        } else {
-            alert("Estás en la página principal.");
+    // 1. DICCIONARIO COMPLETO DE TRADUCCIÓN
+    const translations = {
+        es: {
+            headerTitle: "Agenda Personal",
+            langBtn: "EN",
+            btnBackTitle: "Regresar",
+            btnLangTitle: "Cambiar idioma",
+            themeTitle: "Cambiar modo",
+            addNoteTitle: "Añadir nota",
+            deleteNoteTitle: "Eliminar nota",
+            searchPlaceholder: "Buscar nota...",
+            myNotes: "Mis Notas",
+            quickTasks: "Tareas Rápidas del Día",
+            quickTaskPlaceholder: "Añadir tarea rápida...",
+            calendar: "Calendario",
+            events: "Próximos Eventos",
+            habits: "Control de Hábitos Diarios",
+            lblNotes: "Notas",
+            lblEvents: "Eventos",
+            lblCompleted: "Completado",
+            createNote: "Crear Nueva Nota",
+            titlePlaceholder: "Título de la nota...",
+            contentPlaceholder: "Contenido de la nota...",
+            optBlue: "Azul",
+            optGreen: "Verde",
+            btnCancel: "Cancelar",
+            btnSave: "Guardar",
+            btnClose: "Cerrar",
+            noContent: "Sin contenido adicional.",
+            noDate: "Sin fecha",
+            dayPrefix: "Día",
+            noEvents: "Sin notas ni eventos",
+            noteLabel: "Nota: ",
+            eventLabel: "Evento: ",
+            alertNoTitle: "Por favor, introduce un título para la nota.",
+            alertMainPage: "Estás en la página principal.",
+            datePrefix: "Fecha: ",
+            initialNotes: [
+                { id: "note_1", title: "Tareas Pendientes", content: "Revisar pendientes semanales y organizar prioridades.", date: "27/02/2025", color: "blue", icon: "fa-lock" },
+                { id: "note_2", title: "Proyecto Final", content: "Avanzar con la investigación y el diseño de la interfaz del proyecto.", date: "10/04/2025", color: "green", icon: "fa-book" },
+                { id: "note_3", title: "Reunión", content: "Reunión con el equipo de trabajo a las 10:00 AM.", date: "05/06/2025", color: "green", icon: "fa-users" },
+                { id: "note_4", title: "Examen", content: "Estudiar capítulos del 1 al 4 para el examen parcial.", date: "22/09/2025", color: "blue", icon: "fa-graduation-cap" }
+            ],
+            initialQuickTasks: [
+                "Revisar correo electrónico",
+                "Llamar al proveedor"
+            ],
+            initialEvents: [
+                { title: "Biología", dateStr: "Lunes 12", day: 12 },
+                { title: "Presentación Inglés", dateStr: "Martes 13", day: 13 },
+                { title: "Matemáticas", dateStr: "Viernes 16", day: 16 }
+            ],
+            initialHabits: [
+                "Beber 2L de agua",
+                "30 min de lectura",
+                "Ejercicio físico"
+            ]
+        },
+        en: {
+            headerTitle: "Personal Agenda",
+            langBtn: "ES",
+            btnBackTitle: "Go back",
+            btnLangTitle: "Switch language",
+            themeTitle: "Toggle theme",
+            addNoteTitle: "Add note",
+            deleteNoteTitle: "Delete note",
+            searchPlaceholder: "Search note...",
+            myNotes: "My Notes",
+            quickTasks: "Quick Tasks of the Day",
+            quickTaskPlaceholder: "Add quick task...",
+            calendar: "Calendar",
+            events: "Upcoming Events",
+            habits: "Daily Habits Tracker",
+            lblNotes: "Notes",
+            lblEvents: "Events",
+            lblCompleted: "Completed",
+            createNote: "Create New Note",
+            titlePlaceholder: "Note title...",
+            contentPlaceholder: "Note content...",
+            optBlue: "Blue",
+            optGreen: "Green",
+            btnCancel: "Cancel",
+            btnSave: "Save",
+            btnClose: "Close",
+            noContent: "No additional content.",
+            noDate: "No date",
+            dayPrefix: "Day",
+            noEvents: "No notes or events",
+            noteLabel: "Note: ",
+            eventLabel: "Event: ",
+            alertNoTitle: "Please enter a title for the note.",
+            alertMainPage: "You are on the main page.",
+            datePrefix: "Date: ",
+            initialNotes: [
+                { id: "note_1", title: "Pending Tasks", content: "Review weekly pending tasks and set priorities.", date: "27/02/2025", color: "blue", icon: "fa-lock" },
+                { id: "note_2", title: "Final Project", content: "Move forward with research and project interface design.", date: "10/04/2025", color: "green", icon: "fa-book" },
+                { id: "note_3", title: "Meeting", content: "Meeting with the work team at 10:00 AM.", date: "05/06/2025", color: "green", icon: "fa-users" },
+                { id: "note_4", title: "Exam", content: "Study chapters 1 through 4 for the midterm exam.", date: "22/09/2025", color: "blue", icon: "fa-graduation-cap" }
+            ],
+            initialQuickTasks: [
+                "Check email inbox",
+                "Call supplier"
+            ],
+            initialEvents: [
+                { title: "Biology", dateStr: "Monday 12", day: 12 },
+                { title: "English Presentation", dateStr: "Tuesday 13", day: 13 },
+                { title: "Mathematics", dateStr: "Friday 16", day: 16 }
+            ],
+            initialHabits: [
+                "Drink 2L of water",
+                "30 mins reading",
+                "Physical exercise"
+            ]
         }
-    });
+    };
 
-    // 2. Renderizado dinámico del Calendario con interacción de clic y tooltips
+    let currentLang = 'es';
+    
+    // Estado unificado para notas
+    let activeNotes = JSON.parse(JSON.stringify(translations.es.initialNotes));
+    let userCreatedQuickTasks = [];
+
+    // 2. CAMBIO GLOBAL DE IDIOMA Y RE-RENDERIZADO TOTAL
+    function updateLanguage(lang) {
+        currentLang = lang;
+        const t = translations[lang];
+
+        // Textos estáticos UI
+        document.getElementById("headerTitle").textContent = t.headerTitle;
+        document.getElementById("langText").textContent = t.langBtn;
+        document.getElementById("txtMyNotes").textContent = t.myNotes;
+        document.getElementById("txtQuickTasks").textContent = t.quickTasks;
+        document.getElementById("txtCalendar").textContent = t.calendar;
+        document.getElementById("txtEvents").textContent = t.events;
+        document.getElementById("txtHabits").textContent = t.habits;
+        document.getElementById("lblNotes").textContent = t.lblNotes;
+        document.getElementById("lblEvents").textContent = t.lblEvents;
+        document.getElementById("lblCompleted").textContent = t.lblCompleted;
+        document.getElementById("txtCreateNote").textContent = t.createNote;
+        document.getElementById("optBlue").textContent = t.optBlue;
+        document.getElementById("optGreen").textContent = t.optGreen;
+        document.getElementById("cancelModalBtn").textContent = t.btnCancel;
+        document.getElementById("saveNoteBtn").textContent = t.btnSave;
+        document.getElementById("closeViewModalBtn").textContent = t.btnClose;
+
+        // Placeholders y Títulos flotantes
+        document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+            const key = el.getAttribute("data-i18n-placeholder");
+            if (t[key]) el.placeholder = t[key];
+        });
+        document.querySelectorAll("[data-i18n-title]").forEach(el => {
+            const key = el.getAttribute("data-i18n-title");
+            if (t[key]) el.title = t[key];
+        });
+
+        // Actualizar traducciones de notas por defecto si aún existen
+        activeNotes.forEach(note => {
+            if (note.id.startsWith("note_")) {
+                const translationMatch = t.initialNotes.find(n => n.id === note.id);
+                if (translationMatch) {
+                    note.title = translationMatch.title;
+                    note.content = translationMatch.content;
+                }
+            }
+        });
+
+        // Re-renderizado
+        renderNotes();
+        renderQuickTasks();
+        renderEvents();
+        renderHabits();
+        renderCalendar();
+    }
+
+    // 3. RENDERIZADO DE NOTAS
+    function renderNotes() {
+        const notesContainer = document.getElementById("notesContainer");
+        notesContainer.innerHTML = "";
+        const t = translations[currentLang];
+
+        activeNotes.forEach(noteData => {
+            const noteDiv = document.createElement("div");
+            noteDiv.className = `note ${noteData.color}`;
+            noteDiv.setAttribute("data-date", noteData.date);
+            noteDiv.setAttribute("data-content", noteData.content);
+
+            noteDiv.innerHTML = `
+                <button class="delete-note" title="${t.deleteNoteTitle}"><i class="fa-solid fa-trash"></i></button>
+                <small>${noteData.date}</small>
+                <h3>${noteData.title}</h3>
+                <i class="fa-solid ${noteData.icon || 'fa-note-sticky'}"></i>
+            `;
+
+            noteDiv.querySelector(".delete-note").addEventListener("click", function(e) {
+                e.stopPropagation();
+                // Eliminar la nota del arreglo global
+                activeNotes = activeNotes.filter(n => n.id !== noteData.id);
+                renderNotes();
+            });
+
+            attachNoteClickEvent(noteDiv);
+            notesContainer.appendChild(noteDiv);
+        });
+
+        updateNotesCount();
+    }
+
+    // 4. RENDERIZADO DE TAREAS RÁPIDAS
+    function renderQuickTasks() {
+        const list = document.getElementById("quickTasksList");
+        list.innerHTML = "";
+        const t = translations[currentLang];
+
+        const allTasks = [...t.initialQuickTasks, ...userCreatedQuickTasks];
+
+        allTasks.forEach(taskText => {
+            const item = document.createElement("div");
+            item.className = "quick-task-item";
+            item.innerHTML = `
+                <span>${taskText}</span>
+                <button class="delete-quick-task"><i class="fa-solid fa-xmark"></i></button>
+            `;
+
+            item.addEventListener("click", function(e) {
+                if (!e.target.closest("button")) this.classList.toggle("completed");
+            });
+
+            item.querySelector(".delete-quick-task").addEventListener("click", function() {
+                userCreatedQuickTasks = userCreatedQuickTasks.filter(t => t !== taskText);
+                item.remove();
+            });
+
+            list.appendChild(item);
+        });
+    }
+
+    // 5. RENDERIZADO DE EVENTOS Y HÁBITOS TRADUCIDOS
+    function renderEvents() {
+        const eventsContainer = document.getElementById("eventsContainer");
+        eventsContainer.innerHTML = "";
+        const t = translations[currentLang];
+
+        t.initialEvents.forEach(ev => {
+            const evDiv = document.createElement("div");
+            evDiv.className = "event";
+            evDiv.setAttribute("data-day", ev.day);
+            evDiv.innerHTML = `${ev.title}<span>${ev.dateStr}</span>`;
+            eventsContainer.appendChild(evDiv);
+        });
+
+        document.getElementById("totalEvents").textContent = t.initialEvents.length;
+    }
+
+    function renderHabits() {
+        const habitsContainer = document.getElementById("habitsContainer");
+        habitsContainer.innerHTML = "";
+        const t = translations[currentLang];
+
+        t.initialHabits.forEach(habitText => {
+            const habitDiv = document.createElement("div");
+            habitDiv.className = "habit-item";
+            habitDiv.innerHTML = `
+                <span>${habitText}</span>
+                <div class="habit-checkbox"><i class="fa-solid fa-check"></i></div>
+            `;
+            habitDiv.addEventListener("click", function() {
+                this.classList.toggle("completed");
+            });
+            habitsContainer.appendChild(habitDiv);
+        });
+    }
+
+    // 6. CALENDARIO DINÁMICO E INTERACTIVO
     function renderCalendar() {
         const calendarGrid = document.getElementById("calendarGrid");
         calendarGrid.innerHTML = "";
+        const t = translations[currentLang];
 
         for (let i = 1; i <= 21; i++) {
             const dayDiv = document.createElement("div");
@@ -790,28 +996,28 @@ footer{
             document.querySelectorAll(".note").forEach(note => {
                 const noteDate = note.getAttribute("data-date");
                 if (noteDate && noteDate.startsWith(dayStr)) {
-                    matches.push("Nota: " + note.querySelector("h3").textContent);
+                    matches.push(t.noteLabel + note.querySelector("h3").textContent);
                 }
             });
 
             document.querySelectorAll(".event").forEach(event => {
-                const eventSpan = event.querySelector("span").textContent.toLowerCase();
-                if (eventSpan.includes(i)) {
-                    matches.push("Evento: " + event.childNodes[0].textContent.trim());
+                const eventDay = event.getAttribute("data-day");
+                if (eventDay == i) {
+                    const eventTitle = event.childNodes[0].textContent.trim();
+                    matches.push(t.eventLabel + eventTitle);
                 }
             });
 
             const tooltip = document.createElement("div");
             tooltip.className = "calendar-tooltip";
             if (matches.length > 0) {
-                tooltip.innerHTML = `<strong>Día ${i}</strong><br>` + matches.join("<br>");
+                tooltip.innerHTML = `<strong>${t.dayPrefix} ${i}</strong><br>` + matches.join("<br>");
             } else {
-                tooltip.innerHTML = `Día ${i}<br>Sin notas ni eventos`;
+                tooltip.innerHTML = `${t.dayPrefix} ${i}<br>${t.noEvents}`;
             }
 
             dayDiv.appendChild(tooltip);
 
-            // Funcionalidad de selección al hacer clic en un día
             dayDiv.addEventListener("click", function() {
                 document.querySelectorAll(".day").forEach(d => d.classList.remove("selected-day"));
                 this.classList.add("selected-day");
@@ -821,63 +1027,43 @@ footer{
         }
     }
 
-    // 3. Visualizar Nota al hacer clic
+    // 7. VISUALIZAR NOTAS EN MODAL
     const viewNoteModal = document.getElementById("viewNoteModal");
     const viewNoteTitle = document.getElementById("viewNoteTitle");
     const viewNoteDate = document.getElementById("viewNoteDate");
     const viewNoteContent = document.getElementById("viewNoteContent");
-    const closeViewModalBtn = document.getElementById("closeViewModalBtn");
 
     function attachNoteClickEvent(noteElement) {
         noteElement.addEventListener("click", function(e) {
-            // Evitar que se active si se presiona el botón de eliminar
             if (e.target.closest(".delete-note")) return;
 
             const title = this.querySelector("h3").textContent;
             const date = this.querySelector("small").textContent;
-            const content = this.getAttribute("data-content") || "Sin contenido adicional.";
+            const content = this.getAttribute("data-content") || translations[currentLang].noContent;
 
             viewNoteTitle.textContent = title;
-            viewNoteDate.textContent = "Fecha: " + date;
+            viewNoteDate.textContent = translations[currentLang].datePrefix + date;
             viewNoteContent.textContent = content;
             viewNoteModal.classList.add("active");
         });
     }
 
-    closeViewModalBtn.addEventListener("click", function() {
+    document.getElementById("closeViewModalBtn").addEventListener("click", function() {
         viewNoteModal.classList.remove("active");
     });
 
-    // 4. Lógica del Modal para Crear Notas y Eliminar
+    // 8. CREAR NUEVA NOTA
     const addNoteBtn = document.getElementById("addNoteBtn");
     const noteModal = document.getElementById("noteModal");
-    const cancelModalBtn = document.getElementById("cancelModalBtn");
-    const saveNoteBtn = document.getElementById("saveNoteBtn");
     const noteTitleInput = document.getElementById("noteTitleInput");
     const noteContentInput = document.getElementById("noteContentInput");
     const noteDateInput = document.getElementById("noteDateInput");
     const noteColorInput = document.getElementById("noteColorInput");
-    const notesContainer = document.getElementById("notesContainer");
-    const totalNotesElem = document.getElementById("totalNotes");
 
     function updateNotesCount() {
-        const currentCount = document.querySelectorAll(".note").length;
-        totalNotesElem.textContent = currentCount;
+        document.getElementById("totalNotes").textContent = activeNotes.length;
         renderCalendar();
     }
-
-    document.querySelectorAll(".delete-note").forEach(btn => {
-        btn.addEventListener("click", function(e) {
-            e.stopPropagation();
-            this.closest(".note").remove();
-            updateNotesCount();
-        });
-    });
-
-    // Asignar evento de visualización a las notas iniciales
-    document.querySelectorAll(".note").forEach(note => {
-        attachNoteClickEvent(note);
-    });
 
     addNoteBtn.addEventListener("click", function () {
         noteTitleInput.value = "";
@@ -886,110 +1072,74 @@ footer{
         noteModal.classList.add("active");
     });
 
-    cancelModalBtn.addEventListener("click", function () {
+    document.getElementById("cancelModalBtn").addEventListener("click", function () {
         noteModal.classList.remove("active");
     });
 
-    saveNoteBtn.addEventListener("click", function () {
+    document.getElementById("saveNoteBtn").addEventListener("click", function () {
         const title = noteTitleInput.value.trim();
-        const content = noteContentInput.value.trim() || "Sin contenido adicional.";
+        const content = noteContentInput.value.trim() || translations[currentLang].noContent;
         const dateVal = noteDateInput.value;
         const color = noteColorInput.value;
 
         if (!title) {
-            alert("Por favor, introduce un título para la nota.");
+            alert(translations[currentLang].alertNoTitle);
             return;
         }
 
-        let formattedDate = "Sin fecha";
+        let formattedDate = translations[currentLang].noDate;
         if (dateVal) {
             const parts = dateVal.split("-");
             formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
         }
 
-        const newNote = document.createElement("div");
-        newNote.className = `note ${color}`;
-        newNote.setAttribute("data-date", formattedDate);
-        newNote.setAttribute("data-content", content);
-        newNote.innerHTML = `
-            <button class="delete-note" title="Eliminar nota"><i class="fa-solid fa-trash"></i></button>
-            <small>${formattedDate}</small>
-            <h3>${title}</h3>
-            <i class="fa-solid fa-note-sticky"></i>
-        `;
+        const newNoteData = {
+            id: "user_note_" + Date.now(),
+            title: title,
+            content: content,
+            date: formattedDate,
+            color: color,
+            icon: "fa-note-sticky"
+        };
 
-        newNote.querySelector(".delete-note").addEventListener("click", function(e) {
-            e.stopPropagation();
-            newNote.remove();
-            updateNotesCount();
-        });
-
-        attachNoteClickEvent(newNote);
-
-        notesContainer.appendChild(newNote);
-        updateNotesCount();
+        activeNotes.push(newNoteData);
+        renderNotes();
         noteModal.classList.remove("active");
     });
 
-    // 5. Tareas Rápidas
+    // 9. AGREGAR TAREAS RÁPIDAS
     const quickTaskInput = document.getElementById("quickTaskInput");
-    const addQuickTaskBtn = document.getElementById("addQuickTaskBtn");
-    const quickTasksList = document.getElementById("quickTasksList");
 
     function addQuickTask() {
         const text = quickTaskInput.value.trim();
         if (!text) return;
 
-        const taskItem = document.createElement("div");
-        taskItem.className = "quick-task-item";
-        taskItem.innerHTML = `
-            <span>${text}</span>
-            <button class="delete-quick-task"><i class="fa-solid fa-xmark"></i></button>
-        `;
-
-        taskItem.addEventListener("click", function(e) {
-            if (!e.target.closest("button")) {
-                this.classList.toggle("completed");
-            }
-        });
-
-        taskItem.querySelector(".delete-quick-task").addEventListener("click", function() {
-            taskItem.remove();
-        });
-
-        quickTasksList.appendChild(taskItem);
+        userCreatedQuickTasks.push(text);
+        renderQuickTasks();
         quickTaskInput.value = "";
     }
 
-    addQuickTaskBtn.addEventListener("click", addQuickTask);
+    document.getElementById("addQuickTaskBtn").addEventListener("click", addQuickTask);
     quickTaskInput.addEventListener("keypress", function(e) {
         if (e.key === "Enter") addQuickTask();
     });
 
-    document.querySelectorAll(".quick-task-item").forEach(item => {
-        item.addEventListener("click", function(e) {
-            if (!e.target.closest("button")) {
-                this.classList.toggle("completed");
-            }
-        });
-        item.querySelector(".delete-quick-task").addEventListener("click", function() {
-            item.remove();
-        });
+    // 10. BOTONES DE NAVEGACIÓN Y TEMA
+    document.getElementById("btnLang").addEventListener("click", function() {
+        updateLanguage(currentLang === 'es' ? 'en' : 'es');
     });
 
-    // 6. Interactividad de Hábitos
-    document.querySelectorAll(".habit-item").forEach(item => {
-        item.addEventListener("click", function() {
-            this.classList.toggle("completed");
-        });
+    document.getElementById("btnBack").addEventListener("click", function () {
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            alert(translations[currentLang].alertMainPage);
+        }
     });
 
-    // 7. Modo Oscuro
-    const btnTheme = document.getElementById("btnTheme");
-    const body = document.getElementById("body");
-    const themeIcon = document.getElementById("themeIcon");
-
-    btnTheme.addEventListener("click", function () {
+    document.getElementById("btnTheme").addEventListener("click", function () {
+        const body = document.getElementById("body");
+        const themeIcon = document.getElementById("themeIcon");
         body.classList.toggle("dark-mode");
         if (body.classList.contains("dark-mode")) {
             themeIcon.classList.replace("fa-moon", "fa-sun");
@@ -998,9 +1148,8 @@ footer{
         }
     });
 
-    // 8. Buscador en tiempo real
-    const searchInput = document.getElementById("searchInput");
-    searchInput.addEventListener("input", function(e) {
+    // 11. BUSCADOR
+    document.getElementById("searchInput").addEventListener("input", function(e) {
         const term = e.target.value.toLowerCase();
         document.querySelectorAll(".note").forEach(note => {
             const title = note.querySelector("h3").textContent.toLowerCase();
@@ -1008,9 +1157,10 @@ footer{
         });
     });
 
-    // Inicializar el calendario al cargar la página
-    renderCalendar();
+    // Inicializar todo
+    updateLanguage('es');
 </script>
+
 
 </body>
 </html>
