@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SU-Library | Sistema Digital</title>
+    <!-- Font Awesome para Iconografía -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ==========================================================================
+           1. VARIABLES Y ESTILOS BASE
+           ========================================================================== */
+        :root {
+            --primary-blue: #0A539F;
+            --secondary-blue: #00A3E0;
+            --light-blue: #D6F0FA;
+            --su-green: #8CC63F;
+            --su-green-dark: #76AB30;
+            --dark-gray: #333333;
+            --light-gray: #F4F6F8;
+            --card-gray: #EAEAEA;
+            --white: #FFFFFF;
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #1a1e24;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* ==========================================================================
+           2. MARCO DE DISPOSITIVO (Simulador Móvil)
+           ========================================================================== */
+        .app-container {
+            width: 380px;
+            height: 750px;
+            background-color: var(--white);
+            border-radius: 35px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 8px solid #2d3238;
+        }
+
+        /* Vistas / Pantallas */
+        .view {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+            padding-bottom: 70px; /* Espacio para el menú inferior */
+            overflow-y: auto;
+        }
+
+        .view.active {
+            display: flex;
+        }
+
+        /* ==========================================================================
+           3. COMPONENTES REUTILIZABLES
+           ========================================================================== */
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px 10px;
+        }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* Títulos */
+        .brand-logo {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .brand-logo h1 {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-logo.green h1 {
+            color: var(--su-green-dark);
+        }
+
+        .brand-logo p {
+            font-size: 1.2rem;
+            color: var(--su-green-dark);
+            font-weight: 600;
+        }
+
+        .brand-underline {
+            height: 3px;
+            width: 140px;
+            background-color: var(--su-green);
+            margin: 4px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Buscador */
+        .search-container {
+            padding: 0 24px 15px;
+        }
+
+        .search-box {
+            background-color: var(--secondary-blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            gap: 12px;
+        }
+
+        .search-box i {
+            color: var(--white);
+            font-size: 1.1rem;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            color: var(--white);
+            width: 100%;
+            font-size: 0.95rem;
+        }
+
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Botones Tag / Categorías */
+        .tag-btn {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .tag-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .tag-blue { background-color: var(--primary-blue); color: var(--white); }
+        .tag-green { background-color: var(--su-green); color: var(--white); }
+
+        /* ==========================================================================
+           4. PANTALLA 1: INICIO & CATEGORÍAS
+           ========================================================================== */
+        .categories-card {
+            background-color: var(--card-gray);
+            margin: 10px 24px;
+            padding: 20px 15px;
+            border-radius: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
+        }
+
+        .categories-card .tag-btn {
+            width: 100%;
+            padding: 12px 5px;
+            text-align: center;
+        }
+
+        .vestibules-section {
+            padding: 15px 24px;
+            text-align: center;
+        }
+
+        .section-title {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .vestibules-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            max-width: 260px;
+            margin: 0 auto;
+        }
+
+        /* ==========================================================================
+           5. PANTALLA 2: EXPLORADOR DE LIBROS
+           ========================================================================== */
+        .tabs-bar {
+            background-color: var(--light-blue);
+            display: flex;
+            justify-content: space-around;
+            padding: 6px 10px;
+        }
+
+        .tab-item {
+            padding: 8px 14px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .tab-item.active {
+            background-color: var(--white);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            padding: 20px 24px;
+        }
+
+        .book-card {
+            background-color: var(--white);
+            border-radius: 16px;
+            padding: 15px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            border: 1px solid #f0f0f0;
+        }
+
+        .bookmark-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #ccc;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .bookmark-btn.saved {
+            color: var(--su-green);
+        }
+
+        .book-cover {
+            width: 100px;
+            height: 135px;
+            border-radius: 6px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px;
+            color: var(--white);
+            font-weight: bold;
+            box-shadow: 2px 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .cover-lcl-1 {
+            background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+        }
+
+        .cover-lcl-2 {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .cover-math {
+            background: linear-gradient(135deg, #2980b9 0%, #2c3e50 100%);
+        }
+
+        .book-title {
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .book-code {
+            font-size: 1.3rem;
+            align-self: flex-end;
+        }
+
+        .book-info {
+            margin-top: 12px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .book-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--dark-gray);
+        }
+
+        .book-category {
+            font-size: 0.75rem;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        /* ==========================================================================
+           6. NAVEGACIÓN INFERIOR (Menú Persistente)
+           ========================================================================== */
+        .bottom-nav {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 55px;
+            background-color: var(--su-green);
+            border-radius: 30px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(140, 198, 63, 0.4);
+            z-index: 100;
+        }
+
+        .nav-item {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-item.active {
+            color: var(--white);
+            background-color: var(--primary-blue);
+            font-size: 1.3rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+
+        <!-- ==========================================
+             PANTALLA 1: HOME & CATEGORÍAS
+             ========================================== -->
+        <section id="view-home" class="view active">
+            <header class="header">
+                <button class="btn-icon"><i class="fas fa-arrow-left"></i></button>
+                <div></div>
+            </header>
+
+            <div class="brand-logo">
+                <h1>SU-Library</h1>
+                <div class="brand-underline"></div>
+            </div>
+
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="home-search" placeholder="Buscar materias, vestíbulos...">
+                </div>
+            </div>
+
+            <!-- Botones de Categorías principales -->
+            <div class="categories-card">
+                <button class="tag-btn tag-blue" onclick="filterCategory('Sciences')">Sciences</button>
+                <button class="tag-btn tag-green" onclick="filterCategory('Philosophy')">Philosophy</button>
+                <button class="tag-btn tag-green" onclick="filterCategory('Education')">Education</button>
+                <button class="tag-btn tag-green" onclick="filterCategory('History')">History</button>
+                <button class="tag-btn tag-blue" onclick="filterCategory('Education')">Education</button>
+                <button class="tag-btn tag-green" onclick="filterCategory('Fiction')">Fiction</button>
+            </div>
+
+            <!-- Sección de Vestíbulos -->
+            <div class="vestibules-section">
+                <h3 class="section-title">Vestibules</h3>
+                <div class="vestibules-grid">
+                    <button class="tag-btn tag-green">vestibule 1</button>
+                    <button class="tag-btn tag-green">vestibule 2</button>
+                    <button class="tag-btn tag-green">vestibule 3</button>
+                    <button class="tag-btn tag-green">vestibule 4</button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             PANTALLA 2: CATÁLOGO DE LIBROS
+             ========================================== -->
+        <section id="view-catalog" class="view">
+            <header class="header">
+                <button class="btn-icon" onclick="switchView('home')"><i class="fas fa-arrow-left"></i></button>
+                <button class="btn-icon"><i class="fas fa-search"></i></button>
+            </header>
+
+            <div class="brand-logo green">
+                <h1>SU-Library</h1>
+                <p id="current-category-title">Education</p>
+            </div>
+
+            <!-- Pestañas de Idiomas / Materias -->
+            <nav class="tabs-bar">
+                <div class="tab-item" onclick="filterTab(this, 'English')">English</div>
+                <div class="tab-item active" onclick="filterTab(this, 'Spanish')">Spanish</div>
+                <div class="tab-item" onclick="filterTab(this, 'Math')">Math</div>
+                <div class="tab-item" onclick="filterTab(this, 'Science')">Science</div>
+            </nav>
+
+            <!-- Lista de Libros Renderizada Dinámicamente -->
+            <div class="books-grid" id="books-container">
+                <!-- Se llena mediante JavaScript -->
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             PANTALLA 3: GUARDADOS / BOOKMARKS
+             ========================================== -->
+        <section id="view-saved" class="view">
+            <header class="header">
+                <button class="btn-icon" onclick="switchView('home')"><i class="fas fa-arrow-left"></i></button>
+            </header>
+
+            <div class="brand-logo">
+                <h1>Mis Libros</h1>
+                <p style="font-size: 0.9rem; color: #666; margin-top:5px;">Guardados para lectura</p>
+            </div>
+
+            <div class="books-grid" id="saved-books-container">
+                <!-- Libros marcados -->
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             BARRA DE NAVEGACIÓN INFERIOR
+             ========================================== -->
+        <nav class="bottom-nav">
+            <div class="nav-item" onclick="switchView('saved')" id="nav-saved">
+                <i class="fas fa-bookmark"></i>
+            </div>
+            <div class="nav-item active" onclick="switchView('home')" id="nav-home">
+                <i class="fas fa-th-large"></i>
+            </div>
+            <div class="nav-item" onclick="switchView('catalog')" id="nav-catalog">
+                <i class="fas fa-history"></i>
+            </div>
+        </nav>
+
+    </div>
+
+    <!-- ==========================================================================
+       7. LÓGICA JAVASCRIPT
+       ========================================================================== -->
+    <script>
+        // --- Base de Datos de Libros Simulada ---
+        const booksData = [
+            { id: 1, title: 'LCL', code: '3.1', category: 'Spanish', language: 'Spanish', coverClass: 'cover-lcl-1', saved: false },
+            { id: 2, title: 'LCL', code: '4.3', category: 'Spanish', language: 'Spanish', coverClass: 'cover-lcl-2', saved: false },
+            { id: 3, title: 'MATH', code: '1.0', category: 'Math', language: 'English', coverClass: 'cover-math', saved: false },
+            { id: 4, title: 'SCI', code: '2.2', category: 'Science', language: 'English', coverClass: 'cover-lcl-1', saved: false }
+        ];
+
+        // --- Navegación entre Pantallas ---
+        function switchView(viewName) {
+            // Ocultar todas las vistas
+            document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+
+            // Mostrar la vista seleccionada
+            if(viewName === 'home') {
+                document.getElementById('view-home').classList.add('active');
+                document.getElementById('nav-home').classList.add('active');
+            } else if(viewName === 'catalog') {
+                document.getElementById('view-catalog').classList.add('active');
+                document.getElementById('nav-catalog').classList.add('active');
+                renderBooks(booksData);
+            } else if(viewName === 'saved') {
+                document.getElementById('view-saved').classList.add('active');
+                document.getElementById('nav-saved').classList.add('active');
+                renderSavedBooks();
+            }
+        }
+
+        // --- Renderizar Libros en el Catálogo ---
+        function renderBooks(books) {
+            const container = document.getElementById('books-container');
+            container.innerHTML = '';
+
+            if(books.length === 0) {
+                container.innerHTML = '<p style="grid-column: span 2; text-align: center; color: #888; margin-top: 20px;">No se encontraron libros.</p>';
+                return;
+            }
+
+            books.forEach(book => {
+                const card = document.createElement('div');
+                card.className = 'book-card';
+                card.innerHTML = `
+                    <button class="bookmark-btn ${book.saved ? 'saved' : ''}" onclick="toggleSave(${book.id})">
+                        <i class="fas fa-bookmark"></i>
+                    </button>
+                    <div class="book-cover ${book.coverClass}">
+                        <span class="book-title">${book.title}</span>
+                        <span class="book-code">${book.code}</span>
+                    </div>
+                    <div class="book-info">
+                        <div class="book-name">${book.title} ${book.code}</div>
+                        <div class="book-category">${book.category}</div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // --- Renderizar Libros Guardados ---
+        function renderSavedBooks() {
+            const savedBooks = booksData.filter(b => b.saved);
+            const container = document.getElementById('saved-books-container');
+            container.innerHTML = '';
+
+            if(savedBooks.length === 0) {
+                container.innerHTML = '<p style="grid-column: span 2; text-align: center; color: #888; margin-top: 40px;">No tienes libros guardados aún.</p>';
+                return;
+            }
+
+            savedBooks.forEach(book => {
+                const card = document.createElement('div');
+                card.className = 'book-card';
+                card.innerHTML = `
+                    <button class="bookmark-btn saved" onclick="toggleSave(${book.id})">
+                        <i class="fas fa-bookmark"></i>
+                    </button>
+                    <div class="book-cover ${book.coverClass}">
+                        <span class="book-title">${book.title}</span>
+                        <span class="book-code">${book.code}</span>
+                    </div>
+                    <div class="book-info">
+                        <div class="book-name">${book.title} ${book.code}</div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // --- Guardar / Desguardar Libro ---
+        function toggleSave(bookId) {
+            const book = booksData.find(b => b.id === bookId);
+            if(book) {
+                book.saved = !book.saved;
+                // Re-renderizar según la vista activa
+                if(document.getElementById('view-catalog').classList.contains('active')) {
+                    renderBooks(booksData);
+                } else if(document.getElementById('view-saved').classList.contains('active')) {
+                    renderSavedBooks();
+                }
+            }
+        }
+
+        // --- Filtrado por Categoría desde Inicio ---
+        function filterCategory(categoryName) {
+            document.getElementById('current-category-title').innerText = categoryName;
+            switchView('catalog');
+        }
+
+        // --- Filtrado por Pestañas ---
+        function filterTab(element, language) {
+            document.querySelectorAll('.tab-item').forEach(tab => tab.classList.remove('active'));
+            element.classList.add('active');
+
+            const filtered = booksData.filter(b => b.language === language || b.category === language);
+            renderBooks(filtered);
+        }
+
+        // --- Búsqueda en tiempo real ---
+        document.getElementById('home-search').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            if(query.length > 1) {
+                const filtered = booksData.filter(b => 
+                    b.title.toLowerCase().includes(query) || 
+                    b.category.toLowerCase().includes(query)
+                );
+                document.getElementById('current-category-title').innerText = 'Resultados';
+                switchView('catalog');
+                renderBooks(filtered);
+            }
+        });
+
+        // Inicializar
+        renderBooks(booksData);
+    </script>
+</body>
+</html>
