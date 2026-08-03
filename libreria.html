@@ -22,9 +22,9 @@
             --card-gray: #EAEAEA;
             --white: #FFFFFF;
             --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
-            --shadow-md: 0 6px 18px rgba(0,0,0,0.08);
+            --shadow-md: 0 6px 18px rgba(0,0,0,0.12);
             --border-radius: 12px;
-            --transition: all 0.25s ease;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         * {
@@ -43,7 +43,33 @@
         }
 
         /* ==========================================================================
-           2. BARRA LATERAL (SIDEBAR)
+           2. ANIMACIONES KEYFRAMES
+           ========================================================================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popBookmark {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.4); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(140, 198, 63, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(140, 198, 63, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(140, 198, 63, 0); }
+        }
+
+        /* ==========================================================================
+           3. BARRA LATERAL (SIDEBAR)
            ========================================================================== */
         .sidebar {
             width: 260px;
@@ -54,14 +80,21 @@
             justify-content: space-between;
             padding: 30px 20px;
             flex-shrink: 0;
+            z-index: 20;
         }
 
-        /* Logo en Sidebar */
         .brand-logo {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             margin-bottom: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .brand-logo:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
         }
 
         .brand-logo h1 {
@@ -80,7 +113,6 @@
             border-radius: 2px;
         }
 
-        /* Menú de Navegación */
         .nav-menu {
             list-style: none;
             display: flex;
@@ -104,11 +136,16 @@
 
         .nav-link i {
             font-size: 1.2rem;
+            transition: transform 0.2s ease;
         }
 
         .nav-link:hover, .nav-link.active {
             background-color: var(--light-blue);
             color: var(--primary-blue);
+        }
+
+        .nav-link:hover i {
+            transform: translateX(4px);
         }
 
         .nav-link.active i {
@@ -123,7 +160,7 @@
         }
 
         /* ==========================================================================
-           3. ÁREA PRINCIPAL (MAIN CONTENT)
+           4. ÁREA PRINCIPAL (MAIN CONTENT) Y HEADER
            ========================================================================== */
         .main-wrapper {
             flex-grow: 1;
@@ -132,10 +169,9 @@
             overflow-y: auto;
         }
 
-        /* Top Header */
         .top-header {
             background-color: var(--white);
-            padding: 20px 40px;
+            padding: 15px 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -151,9 +187,15 @@
             display: flex;
             align-items: center;
             padding: 10px 20px;
-            width: 400px;
+            width: 380px;
             gap: 12px;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .search-box:focus-within {
+            box-shadow: 0 0 0 3px rgba(0, 163, 224, 0.3);
+            width: 420px;
         }
 
         .search-box i {
@@ -174,10 +216,38 @@
             color: rgba(255, 255, 255, 0.85);
         }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Botón Selector de Idioma */
+        .lang-switch-btn {
+            background-color: var(--light-blue);
+            color: var(--primary-blue);
+            border: 1px solid rgba(10, 83, 159, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .lang-switch-btn:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
         .user-profile {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .avatar {
@@ -192,7 +262,9 @@
             font-weight: bold;
         }
 
-        /* Contenido de Páginas */
+        /* ==========================================================================
+           5. COMPONENTES VISTAS Y BOTONES DE NAVEGACIÓN
+           ========================================================================== */
         .content-container {
             padding: 35px 40px;
             max-width: 1400px;
@@ -206,19 +278,59 @@
 
         .page.active {
             display: block;
+            animation: fadeInUp 0.4s ease-out forwards;
+        }
+
+        /* Barra de Botones de Navegación */
+        .nav-buttons-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .action-btn {
+            background-color: var(--white);
+            border: 1px solid #DDD;
+            color: var(--dark-gray);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            text-decoration: none;
+        }
+
+        .action-btn:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .btn-home-accent {
+            background-color: var(--light-blue);
+            color: var(--primary-blue);
+            border-color: rgba(10, 83, 159, 0.2);
+        }
+
+        .section-header-flex {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
         .section-title {
             font-size: 1.4rem;
             color: var(--dark-gray);
-            margin-bottom: 20px;
             font-weight: 700;
         }
 
-        /* ==========================================================================
-           4. COMPONENTES VISTA ESCRITORIO
-           ========================================================================== */
-        
         /* Panel Gris de Categorías */
         .categories-panel {
             background-color: var(--card-gray);
@@ -248,12 +360,16 @@
         }
 
         .tag-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.02);
             box-shadow: var(--shadow-md);
         }
 
         .tag-blue { background-color: var(--primary-blue); color: var(--white); }
         .tag-green { background-color: var(--su-green); color: var(--white); }
+
+        .tag-green:hover {
+            animation: pulseGlow 1.2s infinite;
+        }
 
         /* Vestíbulos */
         .vestibules-grid {
@@ -263,7 +379,7 @@
             margin-bottom: 35px;
         }
 
-        /* Pestañas (Tabs) de Asignaturas */
+        /* Tabs de Asignaturas */
         .tabs-bar {
             background-color: var(--light-blue);
             display: flex;
@@ -288,7 +404,7 @@
             box-shadow: var(--shadow-sm);
         }
 
-        /* Grid de Libros (Desktop amplia: 4-5 columnas) */
+        /* Grid de Libros y Tarjetas Animadas */
         .books-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -306,10 +422,11 @@
             position: relative;
             border: 1px solid #EFEFEF;
             transition: var(--transition);
+            animation: fadeInUp 0.4s ease-out forwards;
         }
 
         .book-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px);
             box-shadow: var(--shadow-md);
         }
 
@@ -329,6 +446,10 @@
             color: var(--su-green);
         }
 
+        .bookmark-btn.pop {
+            animation: popBookmark 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
         .book-cover {
             width: 120px;
             height: 160px;
@@ -341,6 +462,11 @@
             color: var(--white);
             font-weight: bold;
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: var(--transition);
+        }
+
+        .book-card:hover .book-cover {
+            transform: scale(1.03);
         }
 
         .cover-1 { background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); }
@@ -377,8 +503,9 @@
          ========================================== -->
     <aside class="sidebar">
         <div>
-            <div class="brand-logo">
-                <h1>SU-Library</h1>
+            <!-- Clic en el logo redirige al inicio de la aplicación -->
+            <div class="brand-logo" onclick="goHome()" title="Ir al Inicio">
+                <h1>SuPlanner</h1>
                 <div class="brand-underline"></div>
             </div>
 
@@ -386,23 +513,23 @@
                 <ul class="nav-menu">
                     <li class="nav-link active" onclick="showPage('home', this)">
                         <i class="fas fa-th-large"></i>
-                        <span>Inicio & Categorías</span>
+                        <span data-i18n="navHome">Inicio & Categorías</span>
                     </li>
                     <li class="nav-link" onclick="showPage('catalog', this)">
                         <i class="fas fa-book-open"></i>
-                        <span>Explorar Catálogo</span>
+                        <span data-i18n="navCatalog">Explorar Catálogo</span>
                     </li>
                     <li class="nav-link" onclick="showPage('saved', this)">
                         <i class="fas fa-bookmark"></i>
-                        <span>Mis Marcadores</span>
+                        <span data-i18n="navSaved">Mis Marcadores</span>
                     </li>
                 </ul>
             </nav>
         </div>
 
         <div class="sidebar-footer">
-            <p>&copy; 2026 SU-Library</p>
-            <p>Sistema de Gestión Escolar</p>
+            <p>&copy; 2026 SuPlanner</p>
+            <p data-i18n="footerSub">Sistema de Gestión Escolar</p>
         </div>
     </aside>
 
@@ -415,14 +542,22 @@
         <header class="top-header">
             <div class="search-box">
                 <i class="fas fa-search"></i>
-                <input type="text" id="global-search" placeholder="Buscar por título, categoría o materia...">
+                <input type="text" id="global-search" data-i18n-ph="searchPh" placeholder="Buscar por título, categoría o materia...">
             </div>
 
-            <div class="user-profile">
-                <div class="avatar">SU</div>
-                <div>
-                    <div style="font-weight: 700; font-size: 0.9rem;">Estudiante</div>
-                    <div style="font-size: 0.75rem; color: var(--text-muted);">Biblioteca Digital</div>
+            <div class="header-actions">
+                <!-- Botón de Cambio de Idioma -->
+                <button class="lang-switch-btn" onclick="toggleLanguage()">
+                    <i class="fas fa-globe"></i>
+                    <span id="lang-label">ES / EN</span>
+                </button>
+
+                <div class="user-profile">
+                    <div class="avatar">SU</div>
+                    <div>
+                        <div style="font-weight: 700; font-size: 0.9rem;" data-i18n="userRole">Estudiante</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);" data-i18n="userSub">Biblioteca Digital</div>
+                    </div>
                 </div>
             </div>
         </header>
@@ -432,65 +567,87 @@
 
             <!-- PÁGINA 1: INICIO & CATEGORÍAS -->
             <section id="page-home" class="page active">
-                <h2 class="section-title">Categorías Principales</h2>
+                <h2 class="section-title" style="margin-bottom: 20px;" data-i18n="categoriesTitle">Categorías Principales</h2>
                 
-                <!-- Panel Gris de Categorías -->
                 <div class="categories-panel">
                     <div class="categories-grid">
                         <button class="tag-btn tag-blue" onclick="openCategory('Sciences')">Sciences</button>
                         <button class="tag-btn tag-green" onclick="openCategory('Philosophy')">Philosophy</button>
                         <button class="tag-btn tag-green" onclick="openCategory('Education')">Education</button>
                         <button class="tag-btn tag-green" onclick="openCategory('History')">History</button>
-                        <button class="tag-btn tag-blue" onclick="openCategory('Education')">Education</button>
+                        <button class="tag-btn tag-blue" onclick="openCategory('Technology')">Technology</button>
                         <button class="tag-btn tag-green" onclick="openCategory('Fiction')">Fiction</button>
                     </div>
                 </div>
 
-                <h2 class="section-title">Vestibules</h2>
+                <h2 class="section-title" style="margin-bottom: 20px;" data-i18n="vestibulesTitle">Vestíbulos</h2>
                 <div class="vestibules-grid">
-                    <button class="tag-btn tag-green">Vestibule 1</button>
-                    <button class="tag-btn tag-green">Vestibule 2</button>
-                    <button class="tag-btn tag-green">Vestibule 3</button>
-                    <button class="tag-btn tag-green">Vestibule 4</button>
+                    <button class="tag-btn tag-green"><span data-i18n="vestibule">Vestíbulo</span> 1</button>
+                    <button class="tag-btn tag-green"><span data-i18n="vestibule">Vestíbulo</span> 2</button>
+                    <button class="tag-btn tag-green"><span data-i18n="vestibule">Vestíbulo</span> 3</button>
+                    <button class="tag-btn tag-green"><span data-i18n="vestibule">Vestíbulo</span> 4</button>
                 </div>
             </section>
 
             <!-- PÁGINA 2: CATÁLOGO DE LIBROS -->
             <section id="page-catalog" class="page">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <h2 class="section-title" id="catalog-title" style="margin: 0; color: var(--su-green-dark);">Education</h2>
+                <!-- Barra de Botones de Navegación -->
+                <div class="nav-buttons-bar">
+                    <!-- Botón para Regresar a index.html o al historial anterior del navegador -->
+                    <button class="action-btn" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i>
+                        <span data-i18n="backBtn">Volver</span>
+                    </button>
+                    <button class="action-btn btn-home-accent" onclick="goHome()">
+                        <i class="fas fa-home"></i>
+                        <span data-i18n="homeBtn">Ir al Inicio</span>
+                    </button>
+                </div>
+
+                <div class="section-header-flex">
+                    <h2 class="section-title" id="catalog-title" style="color: var(--su-green-dark);">Education</h2>
                 </div>
 
                 <!-- Tabs de Materia -->
                 <div class="tabs-bar">
+                    <div class="tab-item active" onclick="filterTab(this, 'All')"><span data-i18n="tabAll">Todos</span></div>
                     <div class="tab-item" onclick="filterTab(this, 'English')">English</div>
-                    <div class="tab-item active" onclick="filterTab(this, 'Spanish')">Spanish</div>
+                    <div class="tab-item" onclick="filterTab(this, 'Spanish')">Spanish</div>
                     <div class="tab-item" onclick="filterTab(this, 'Math')">Math</div>
                     <div class="tab-item" onclick="filterTab(this, 'Science')">Science</div>
                 </div>
 
                 <!-- Grilla de Libros -->
-                <div class="books-grid" id="books-container">
-                    <!-- Se renderiza por JavaScript -->
-                </div>
+                <div class="books-grid" id="books-container"></div>
             </section>
 
             <!-- PÁGINA 3: GUARDADOS -->
             <section id="page-saved" class="page">
-                <h2 class="section-title">Libros Guardados / Marcadores</h2>
-                <div class="books-grid" id="saved-container">
-                    <!-- Se renderiza por JavaScript -->
+                <!-- Barra de Botones de Navegación -->
+                <div class="nav-buttons-bar">
+                    <!-- Botón para Regresar a index.html o al historial anterior del navegador -->
+                    <button class="action-btn" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i>
+                        <span data-i18n="backBtn">Volver</span>
+                    </button>
+                    <button class="action-btn btn-home-accent" onclick="goHome()">
+                        <i class="fas fa-home"></i>
+                        <span data-i18n="homeBtn">Ir al Inicio</span>
+                    </button>
                 </div>
+
+                <h2 class="section-title" style="margin-bottom: 20px;" data-i18n="savedTitle">Libros Guardados / Marcadores</h2>
+                <div class="books-grid" id="saved-container"></div>
             </section>
 
         </main>
     </div>
 
     <!-- ==========================================
-         LÓGICA JAVASCRIPT
+         LÓGICA JAVASCRIPT & TRADUCCIONES
          ========================================== -->
     <script>
-        // Datos de libros
+        // --- BASE DE DATOS DE LIBROS ---
         const booksData = [
             { id: 1, title: 'LCL', code: '3.1', category: 'Spanish', language: 'Spanish', coverClass: 'cover-1', saved: false },
             { id: 2, title: 'LCL', code: '4.3', category: 'Spanish', language: 'Spanish', coverClass: 'cover-2', saved: false },
@@ -499,18 +656,69 @@
             { id: 5, title: 'ENG', code: '5.0', category: 'English', language: 'English', coverClass: 'cover-1', saved: false }
         ];
 
-        // Navegación entre páginas
-        function showPage(pageId, linkElement) {
+        // --- DICCIONARIO DE IDIOMAS (i18n) ---
+        let currentLang = 'es';
+        const translations = {
+            es: {
+                navHome: "Inicio & Categorías",
+                navCatalog: "Explorar Catálogo",
+                navSaved: "Mis Marcadores",
+                footerSub: "Sistema de Gestión Escolar",
+                searchPh: "Buscar por título, categoría o materia...",
+                userRole: "Estudiante",
+                userSub: "Biblioteca Digital",
+                categoriesTitle: "Categorías Principales",
+                vestibulesTitle: "Vestíbulos",
+                vestibule: "Vestíbulo",
+                backBtn: "Volver",
+                homeBtn: "Ir al Inicio",
+                tabAll: "Todos",
+                savedTitle: "Libros Guardados / Marcadores",
+                noBooks: "No se encontraron libros en esta sección.",
+                noSaved: "Aún no has guardado ningún libro.",
+                searchResults: "Resultados de Búsqueda"
+            },
+            en: {
+                navHome: "Home & Categories",
+                navCatalog: "Explore Catalog",
+                navSaved: "My Bookmarks",
+                footerSub: "School Management System",
+                searchPh: "Search by title, category, or subject...",
+                userRole: "Student",
+                userSub: "Digital Library",
+                categoriesTitle: "Main Categories",
+                vestibulesTitle: "Vestibules",
+                vestibule: "Vestibule",
+                backBtn: "Back",
+                homeBtn: "Go to Home",
+                tabAll: "All",
+                savedTitle: "Saved Books / Bookmarks",
+                noBooks: "No books found in this section.",
+                noSaved: "You haven't saved any books yet.",
+                searchResults: "Search Results"
+            }
+        };
+
+        let currentPage = 'home';
+
+        // Cambiar entre secciones internas
+        function showPage(pageId, linkElement = null) {
+            currentPage = pageId;
+
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
 
-            document.getElementById(`page-${pageId}`).classList.add('active');
-            
+            const targetPage = document.getElementById(`page-${pageId}`);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
             if (linkElement) {
                 linkElement.classList.add('active');
             } else {
-                // Sincronizar link lateral si la navegación fue por código
-                const activeNav = Array.from(document.querySelectorAll('.nav-link')).find(el => el.getAttribute('onclick').includes(pageId));
+                const activeNav = Array.from(document.querySelectorAll('.nav-link')).find(el => 
+                    el.getAttribute('onclick') && el.getAttribute('onclick').includes(pageId)
+                );
                 if (activeNav) activeNav.classList.add('active');
             }
 
@@ -518,21 +726,61 @@
             if (pageId === 'saved') renderSavedBooks();
         }
 
-        // Renderizar Catálogo
+        // --- NAVEGACIÓN A INDEX.HTML ANTERIOR ---
+        function goBack() {
+            // Regresa al documento index.html anterior en el historial del navegador
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                // Si no hay historial previo, redirige explícitamente a index.html
+                window.location.href = 'index.html';
+            }
+        }
+
+        function goHome() {
+            showPage('home');
+        }
+
+        // --- SISTEMA DE TRADUCCIÓN ---
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            document.getElementById('lang-label').innerText = currentLang === 'es' ? 'ES / EN' : 'EN / ES';
+            applyTranslations();
+            
+            if (currentPage === 'catalog') renderBooks(booksData);
+            if (currentPage === 'saved') renderSavedBooks();
+        }
+
+        function applyTranslations() {
+            const langData = translations[currentLang];
+            
+            document.querySelectorAll('[data-i18n]').forEach(elem => {
+                const key = elem.getAttribute('data-i18n');
+                if (langData[key]) elem.innerText = langData[key];
+            });
+
+            document.querySelectorAll('[data-i18n-ph]').forEach(elem => {
+                const key = elem.getAttribute('data-i18n-ph');
+                if (langData[key]) elem.placeholder = langData[key];
+            });
+        }
+
+        // --- RENDERIZADO DE LIBROS Y ANIMACIONES ---
         function renderBooks(list) {
             const container = document.getElementById('books-container');
             container.innerHTML = '';
 
-            if(list.length === 0) {
-                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">No se encontraron libros en esta categoría.</p>';
+            if (list.length === 0) {
+                container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">${translations[currentLang].noBooks}</p>`;
                 return;
             }
 
-            list.forEach(book => {
+            list.forEach((book, index) => {
                 const card = document.createElement('div');
                 card.className = 'book-card';
+                card.style.animationDelay = `${index * 0.08}s`;
                 card.innerHTML = `
-                    <button class="bookmark-btn ${book.saved ? 'saved' : ''}" onclick="toggleSave(${book.id})">
+                    <button class="bookmark-btn ${book.saved ? 'saved' : ''}" onclick="toggleSave(${book.id}, this)">
                         <i class="fas fa-bookmark"></i>
                     </button>
                     <div class="book-cover ${book.coverClass}">
@@ -548,22 +796,22 @@
             });
         }
 
-        // Renderizar Guardados
         function renderSavedBooks() {
             const saved = booksData.filter(b => b.saved);
             const container = document.getElementById('saved-container');
             container.innerHTML = '';
 
-            if(saved.length === 0) {
-                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">Aún no has guardado ningún libro.</p>';
+            if (saved.length === 0) {
+                container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">${translations[currentLang].noSaved}</p>`;
                 return;
             }
 
-            saved.forEach(book => {
+            saved.forEach((book, index) => {
                 const card = document.createElement('div');
                 card.className = 'book-card';
+                card.style.animationDelay = `${index * 0.08}s`;
                 card.innerHTML = `
-                    <button class="bookmark-btn saved" onclick="toggleSave(${book.id})">
+                    <button class="bookmark-btn saved" onclick="toggleSave(${book.id}, this)">
                         <i class="fas fa-bookmark"></i>
                     </button>
                     <div class="book-cover ${book.coverClass}">
@@ -572,53 +820,66 @@
                     </div>
                     <div class="book-info">
                         <div class="book-name">${book.title} ${book.code}</div>
+                        <div class="book-category">${book.category}</div>
                     </div>
                 `;
                 container.appendChild(card);
             });
         }
 
-        // Guardar/Desguardar
-        function toggleSave(id) {
+        // --- ACCIONES Y FILTROS ---
+        function toggleSave(id, btnElem) {
             const book = booksData.find(b => b.id === id);
-            if(book) {
+            if (book) {
                 book.saved = !book.saved;
-                if(document.getElementById('page-catalog').classList.contains('active')) renderBooks(booksData);
-                if(document.getElementById('page-saved').classList.contains('active')) renderSavedBooks();
+                if (btnElem) {
+                    btnElem.classList.add('pop');
+                    setTimeout(() => btnElem.classList.remove('pop'), 300);
+                }
+                
+                if (currentPage === 'catalog') renderBooks(booksData);
+                if (currentPage === 'saved') renderSavedBooks();
             }
         }
 
-        // Abrir Categoría desde Inicio
         function openCategory(catName) {
             document.getElementById('catalog-title').innerText = catName;
             showPage('catalog');
+            const filtered = booksData.filter(b => b.category.toLowerCase() === catName.toLowerCase());
+            renderBooks(filtered.length > 0 ? filtered : booksData);
         }
 
-        // Filtrar por Tabs
         function filterTab(tabElem, lang) {
             document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
             tabElem.classList.add('active');
 
-            const filtered = booksData.filter(b => b.language === lang);
-            renderBooks(filtered);
+            if (lang === 'All') {
+                renderBooks(booksData);
+            } else {
+                const filtered = booksData.filter(b => b.language === lang);
+                renderBooks(filtered);
+            }
         }
 
         // Búsqueda Global
         document.getElementById('global-search').addEventListener('input', function(e) {
-            const query = e.target.value.toLowerCase();
-            if(query.length > 0) {
-                showPage('catalog');
-                document.getElementById('catalog-title').innerText = 'Resultados de Búsqueda';
+            const query = e.target.value.toLowerCase().trim();
+            if (query.length > 0) {
+                if (currentPage !== 'catalog') showPage('catalog');
+                document.getElementById('catalog-title').innerText = translations[currentLang].searchResults;
                 const filtered = booksData.filter(b => 
                     b.title.toLowerCase().includes(query) || 
                     b.category.toLowerCase().includes(query) ||
                     b.code.toLowerCase().includes(query)
                 );
                 renderBooks(filtered);
+            } else {
+                renderBooks(booksData);
             }
         });
 
-        // Inicializar
+        // Inicialización
+        applyTranslations();
         renderBooks(booksData);
     </script>
 </body>
