@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Personal Agenda - Planner</title>
+<title>Personal Agenda - SuPlanner</title>
+
+<!-- Bootstrap CSS & FontAwesome -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
@@ -35,7 +38,7 @@ body.dark-mode {
     --shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -43,29 +46,60 @@ body.dark-mode {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-body{
+body {
     background: var(--bg-main);
     color: var(--text-main);
 }
 
-header{
+/* ESTILOS DEL NUEVO HEADER Y NAVBAR */
+header {
     background: var(--bg-header);
-    color: white;
-    padding: 20px;
-    font-size: 26px;
-    font-weight: 700;
-    text-align: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 999;
 }
 
-.container{
+.navbar {
+    padding: 10px 0;
+}
+
+.navbar-brand img {
+    max-height: 45px;
+    width: auto;
+}
+
+.nav-link {
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 8px 16px !important;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover, .nav-item.active .nav-link {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff !important;
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* LAYOUT PRINCIPAL */
+.container-app {
     display: grid;
     grid-template-columns: 42% 58%;
-    height: calc(100vh - 75px);
+    min-height: calc(100vh - 65px);
 }
 
 /* PANEL IZQUIERDO */
-.left{
+.left {
     padding: 25px;
     border-right: 2px solid var(--border-color);
     display: flex;
@@ -74,7 +108,7 @@ header{
     overflow-y: auto;
 }
 
-.top-menu{
+.top-menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -82,7 +116,7 @@ header{
     gap: 10px;
 }
 
-.back{
+.back {
     background: var(--accent-blue);
     color: white;
     padding: 10px 16px;
@@ -113,7 +147,7 @@ header{
 
 .lang-btn:hover { background: var(--day-bg); }
 
-.search{
+.search {
     display: flex;
     flex: 1;
     gap: 8px;
@@ -123,7 +157,7 @@ header{
     border: 1px solid var(--border-color);
 }
 
-.search input{
+.search input {
     flex: 1;
     padding: 8px;
     border: none;
@@ -133,7 +167,7 @@ header{
     font-size: 14px;
 }
 
-.search button{
+.search button {
     background: var(--bg-header);
     border: none;
     color: white;
@@ -151,14 +185,14 @@ header{
     margin-bottom: 15px;
 }
 
-.notes{
+.notes {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
     margin-bottom: 25px;
 }
 
-.note{
+.note {
     padding: 18px;
     border-radius: 16px;
     color: white;
@@ -172,7 +206,7 @@ header{
     position: relative;
 }
 
-.note:hover{
+.note:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
@@ -198,10 +232,10 @@ header{
 .note:hover .delete-note { opacity: 1; }
 .delete-note:hover { background: rgba(220, 53, 69, 0.8); }
 
-.blue{ background: var(--note-blue); }
-.green{ background: var(--note-green); }
+.blue { background: var(--note-blue); }
+.green { background: var(--note-green); }
 
-.note small{
+.note small {
     font-weight: 600;
     font-size: 12px;
     opacity: 0.9;
@@ -286,14 +320,14 @@ header{
 
 .quick-task-item button:hover { color: #dc3545; }
 
-.add-note{
+.add-note {
     position: absolute;
     bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.add-btn{
+.add-btn {
     background: var(--accent-blue);
     width: 65px;
     height: 65px;
@@ -311,7 +345,7 @@ header{
 .add-btn:hover { transform: scale(1.1); }
 
 /* PANEL DERECHO */
-.right{
+.right {
     padding: 25px;
     overflow-y: auto;
     display: flex;
@@ -319,7 +353,7 @@ header{
     gap: 20px;
 }
 
-.card{
+.card-panel {
     background: var(--bg-card);
     border-radius: 16px;
     padding: 20px;
@@ -327,19 +361,19 @@ header{
     border: 1px solid var(--border-color);
 }
 
-.card h2 {
+.card-panel h2 {
     font-size: 18px;
     margin-bottom: 10px;
 }
 
-.calendar{
+.calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 8px;
     margin-top: 15px;
 }
 
-.day{
+.day {
     padding: 12px 0;
     background: var(--day-bg);
     text-align: center;
@@ -352,7 +386,7 @@ header{
 
 .day:hover { opacity: 0.8; }
 
-.today{
+.today {
     background: var(--bg-header);
     color: white;
     font-weight: bold;
@@ -389,14 +423,14 @@ header{
     opacity: 1;
 }
 
-.events{
+.events {
     margin-top: 15px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.event{
+.event {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -455,13 +489,13 @@ header{
     color: var(--text-muted);
 }
 
-.stats{
+.stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
 }
 
-.box{
+.box {
     background: var(--bg-card);
     padding: 18px;
     border-radius: 16px;
@@ -472,20 +506,20 @@ header{
     color: var(--text-muted);
 }
 
-.box h2{
+.box h2 {
     color: var(--accent-blue);
     font-size: 24px;
     margin-bottom: 5px;
 }
 
-footer{
+footer {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 100;
+    z-index: 1000;
 }
 
-.dark{
+.dark {
     background: var(--bg-card);
     color: var(--text-main);
     width: 45px;
@@ -509,7 +543,7 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1050;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
@@ -520,7 +554,7 @@ footer{
     visibility: visible;
 }
 
-.modal {
+.custom-modal {
     background: var(--bg-card);
     padding: 25px;
     border-radius: 16px;
@@ -530,13 +564,13 @@ footer{
     border: 1px solid var(--border-color);
 }
 
-.modal h3 {
+.custom-modal h3 {
     margin-bottom: 15px;
     font-size: 18px;
     color: var(--text-main);
 }
 
-.modal input, .modal select, .modal textarea {
+.custom-modal input, .custom-modal select, .custom-modal textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -547,7 +581,7 @@ footer{
     outline: none;
 }
 
-.modal textarea {
+.custom-modal textarea {
     resize: vertical;
     height: 100px;
 }
@@ -576,17 +610,17 @@ footer{
     color: white;
 }
 
-@media(max-width: 900px){
-    .container{
+@media(max-width: 900px) {
+    .container-app {
         grid-template-columns: 1fr;
         height: auto;
     }
-    .left{
+    .left {
         border-right: none;
         border-bottom: 2px solid var(--border-color);
         height: auto;
     }
-    .stats{
+    .stats {
         grid-template-columns: 1fr;
     }
 }
@@ -595,9 +629,43 @@ footer{
 
 <body id="body">
 
-<header id="headerTitle">Personal Agenda</header>
+<!-- HEADER INTEGRADO -->
+<header class="">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="logo2.png" alt="SuPlanner" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x45?text=SuPlanner';">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#top">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>  
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Functions</a>
+                    </li>                                     
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="Calendario.html">Agenda <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="libreria.html">Library</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
 
-<div class="container">
+<div class="container-app">
 
     <!-- PANEL IZQUIERDO -->
     <div class="left">
@@ -613,7 +681,7 @@ footer{
 
             <div class="search">
                 <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder">
-                <button>
+                <button id="searchBtn">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
@@ -643,19 +711,19 @@ footer{
     <!-- PANEL DERECHO -->
     <div class="right">
         <!-- Calendario -->
-        <div class="card">
+        <div class="card-panel">
             <h2 id="txtCalendar">Calendario</h2>
             <div class="calendar" id="calendarGrid"></div>
         </div>
 
         <!-- Próximos Eventos -->
-        <div class="card">
+        <div class="card-panel">
             <h2 id="txtEvents">Próximos Eventos</h2>
             <div class="events" id="eventsContainer"></div>
         </div>
 
         <!-- Control de Hábitos -->
-        <div class="card">
+        <div class="card-panel">
             <h2 id="txtHabits">Control de Hábitos Diarios</h2>
             <div class="habits-list" id="habitsContainer"></div>
         </div>
@@ -672,7 +740,7 @@ footer{
 
 <!-- MODAL PARA CREAR NOTAS -->
 <div class="modal-overlay" id="noteModal">
-    <div class="modal">
+    <div class="custom-modal">
         <h3 id="txtCreateNote">Crear Nueva Nota</h3>
         <input type="text" id="noteTitleInput" data-i18n-placeholder="titlePlaceholder">
         <textarea id="noteContentInput" data-i18n-placeholder="contentPlaceholder"></textarea>
@@ -690,7 +758,7 @@ footer{
 
 <!-- MODAL PARA VISUALIZAR NOTA -->
 <div class="modal-overlay" id="viewNoteModal">
-    <div class="modal">
+    <div class="custom-modal">
         <h3 id="viewNoteTitle">Título de la Nota</h3>
         <p id="viewNoteDate" style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;"></p>
         <p id="viewNoteContent" style="margin-bottom: 20px; font-size: 14px; line-height: 1.5;"></p>
@@ -705,11 +773,14 @@ footer{
         <i class="fa-solid fa-moon" id="themeIcon"></i>
     </div>
 </footer>
+
+<!-- Scripts requeridos para Bootstrap Navbar collapse -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-    // 1. DICCIONARIO COMPLETO DE TRADUCCIÓN
     const translations = {
         es: {
-            headerTitle: "Agenda Personal",
             langBtn: "EN",
             btnBackTitle: "Regresar",
             btnLangTitle: "Cambiar idioma",
@@ -765,7 +836,6 @@ footer{
             ]
         },
         en: {
-            headerTitle: "Personal Agenda",
             langBtn: "ES",
             btnBackTitle: "Go back",
             btnLangTitle: "Switch language",
@@ -823,18 +893,13 @@ footer{
     };
 
     let currentLang = 'es';
-    
-    // Estado unificado para notas
     let activeNotes = JSON.parse(JSON.stringify(translations.es.initialNotes));
     let userCreatedQuickTasks = [];
 
-    // 2. CAMBIO GLOBAL DE IDIOMA Y RE-RENDERIZADO TOTAL
     function updateLanguage(lang) {
         currentLang = lang;
         const t = translations[lang];
 
-        // Textos estáticos UI
-        document.getElementById("headerTitle").textContent = t.headerTitle;
         document.getElementById("langText").textContent = t.langBtn;
         document.getElementById("txtMyNotes").textContent = t.myNotes;
         document.getElementById("txtQuickTasks").textContent = t.quickTasks;
@@ -851,7 +916,6 @@ footer{
         document.getElementById("saveNoteBtn").textContent = t.btnSave;
         document.getElementById("closeViewModalBtn").textContent = t.btnClose;
 
-        // Placeholders y Títulos flotantes
         document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
             const key = el.getAttribute("data-i18n-placeholder");
             if (t[key]) el.placeholder = t[key];
@@ -861,7 +925,6 @@ footer{
             if (t[key]) el.title = t[key];
         });
 
-        // Actualizar traducciones de notas por defecto si aún existen
         activeNotes.forEach(note => {
             if (note.id.startsWith("note_")) {
                 const translationMatch = t.initialNotes.find(n => n.id === note.id);
@@ -872,7 +935,6 @@ footer{
             }
         });
 
-        // Re-renderizado
         renderNotes();
         renderQuickTasks();
         renderEvents();
@@ -880,7 +942,6 @@ footer{
         renderCalendar();
     }
 
-    // 3. RENDERIZADO DE NOTAS
     function renderNotes() {
         const notesContainer = document.getElementById("notesContainer");
         notesContainer.innerHTML = "";
@@ -901,7 +962,6 @@ footer{
 
             noteDiv.querySelector(".delete-note").addEventListener("click", function(e) {
                 e.stopPropagation();
-                // Eliminar la nota del arreglo global
                 activeNotes = activeNotes.filter(n => n.id !== noteData.id);
                 renderNotes();
             });
@@ -913,7 +973,6 @@ footer{
         updateNotesCount();
     }
 
-    // 4. RENDERIZADO DE TAREAS RÁPIDAS
     function renderQuickTasks() {
         const list = document.getElementById("quickTasksList");
         list.innerHTML = "";
@@ -933,7 +992,8 @@ footer{
                 if (!e.target.closest("button")) this.classList.toggle("completed");
             });
 
-            item.querySelector(".delete-quick-task").addEventListener("click", function() {
+            item.querySelector(".delete-quick-task").addEventListener("click", function(e) {
+                e.stopPropagation();
                 userCreatedQuickTasks = userCreatedQuickTasks.filter(t => t !== taskText);
                 item.remove();
             });
@@ -942,7 +1002,6 @@ footer{
         });
     }
 
-    // 5. RENDERIZADO DE EVENTOS Y HÁBITOS TRADUCIDOS
     function renderEvents() {
         const eventsContainer = document.getElementById("eventsContainer");
         eventsContainer.innerHTML = "";
@@ -978,7 +1037,6 @@ footer{
         });
     }
 
-    // 6. CALENDARIO DINÁMICO E INTERACTIVO
     function renderCalendar() {
         const calendarGrid = document.getElementById("calendarGrid");
         calendarGrid.innerHTML = "";
@@ -1027,7 +1085,6 @@ footer{
         }
     }
 
-    // 7. VISUALIZAR NOTAS EN MODAL
     const viewNoteModal = document.getElementById("viewNoteModal");
     const viewNoteTitle = document.getElementById("viewNoteTitle");
     const viewNoteDate = document.getElementById("viewNoteDate");
@@ -1052,7 +1109,6 @@ footer{
         viewNoteModal.classList.remove("active");
     });
 
-    // 8. CREAR NUEVA NOTA
     const addNoteBtn = document.getElementById("addNoteBtn");
     const noteModal = document.getElementById("noteModal");
     const noteTitleInput = document.getElementById("noteTitleInput");
@@ -1107,60 +1163,57 @@ footer{
         noteModal.classList.remove("active");
     });
 
-    // 9. AGREGAR TAREAS RÁPIDAS
-    const quickTaskInput = document.getElementById("quickTaskInput");
-
-    function addQuickTask() {
-        const text = quickTaskInput.value.trim();
-        if (!text) return;
-
-        userCreatedQuickTasks.push(text);
-        renderQuickTasks();
-        quickTaskInput.value = "";
-    }
-
-    document.getElementById("addQuickTaskBtn").addEventListener("click", addQuickTask);
-    quickTaskInput.addEventListener("keypress", function(e) {
-        if (e.key === "Enter") addQuickTask();
-    });
-
-    // 10. BOTONES DE NAVEGACIÓN Y TEMA
-    document.getElementById("btnLang").addEventListener("click", function() {
-        updateLanguage(currentLang === 'es' ? 'en' : 'es');
-    });
-
-    document.getElementById("btnBack").addEventListener("click", function () {
-        if (window.history.length > 1) {
-            window.history.back();
-        } else {
-            alert(translations[currentLang].alertMainPage);
+    document.getElementById("addQuickTaskBtn").addEventListener("click", function () {
+        const input = document.getElementById("quickTaskInput");
+        const val = input.value.trim();
+        if (val) {
+            userCreatedQuickTasks.push(val);
+            renderQuickTasks();
+            input.value = "";
         }
     });
 
-    document.getElementById("btnTheme").addEventListener("click", function () {
-        const body = document.getElementById("body");
-        const themeIcon = document.getElementById("themeIcon");
-        body.classList.toggle("dark-mode");
-        if (body.classList.contains("dark-mode")) {
-            themeIcon.classList.replace("fa-moon", "fa-sun");
-        } else {
-            themeIcon.classList.replace("fa-sun", "fa-moon");
+    document.getElementById("quickTaskInput").addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+            document.getElementById("addQuickTaskBtn").click();
         }
     });
 
-    // 11. BUSCADOR
-    document.getElementById("searchInput").addEventListener("input", function(e) {
-        const term = e.target.value.toLowerCase();
+    document.getElementById("searchInput").addEventListener("input", function () {
+        const query = this.value.toLowerCase();
         document.querySelectorAll(".note").forEach(note => {
             const title = note.querySelector("h3").textContent.toLowerCase();
-            note.style.display = title.includes(term) ? "flex" : "none";
+            const content = (note.getAttribute("data-content") || "").toLowerCase();
+            if (title.includes(query) || content.includes(query)) {
+                note.style.display = "flex";
+            } else {
+                note.style.display = "none";
+            }
         });
     });
 
-    // Inicializar todo
+    const btnTheme = document.getElementById("btnTheme");
+    const themeIcon = document.getElementById("themeIcon");
+
+    btnTheme.addEventListener("click", function () {
+        document.body.classList.toggle("dark-mode");
+        if (document.body.classList.contains("dark-mode")) {
+            themeIcon.className = "fa-solid fa-sun";
+        } else {
+            themeIcon.className = "fa-solid fa-moon";
+        }
+    });
+
+    document.getElementById("btnBack").addEventListener("click", function () {
+        alert(translations[currentLang].alertMainPage);
+    });
+
+    document.getElementById("btnLang").addEventListener("click", function () {
+        const nextLang = currentLang === 'es' ? 'en' : 'es';
+        updateLanguage(nextLang);
+    });
+
     updateLanguage('es');
 </script>
-
-
 </body>
 </html>
