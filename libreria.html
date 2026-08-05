@@ -1,672 +1,636 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SU-Library | Plataforma Web</title>
-    <!-- Font Awesome para Iconografía -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Biblioteca Digital SuPlanner">
+    <meta name="author" content="SuPlanner">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <title>SuPlanner - Library</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files (SuPlanner Main Theme) -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-finance-business.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         /* ==========================================================================
-           1. VARIABLES Y RESET GENERAL
+           1. ESTILOS REUTILIZADOS Y AJUSTADOS DEL HEADER GENERAL
            ========================================================================== */
-        :root {
-            --primary-blue: #0A539F;
-            --secondary-blue: #00A3E0;
-            --light-blue: #EBF7FC;
-            --su-green: #8CC63F;
-            --su-green-dark: #6FA328;
-            --dark-gray: #2B303A;
-            --text-muted: #6C757D;
-            --bg-light: #F4F6F9;
-            --card-gray: #EAEAEA;
-            --white: #FFFFFF;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
-            --shadow-md: 0 6px 18px rgba(0,0,0,0.12);
-            --border-radius: 12px;
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        header {
+            position: relative; /* Ajustado para dar paso al layout de la app */
+            width: 100%;
+            height: 85px;
+            background-color: #1a2332; /* Fondo sólido oscuro acorde al tema */
+            z-index: 100;
+            transition: all 0.3s ease;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        .sub-header {
+            background-color: #121824;
+        }
+
+        .navbar {
+            padding: 10px 0px;
+            height: 100%;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-right: 20px;
+            overflow: visible;
+        }
+
+        .navbar-brand img {
+            height: 80px;
+            max-height: 80px;
+            width: auto;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav {
+            align-items: center;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            color: #ffffff !important;
+            font-weight: 500;
+        }
+
+        .navbar-nav .nav-item.active .nav-link,
+        .navbar-nav .nav-item .nav-link:hover {
+            color: #a4c639 !important; /* Accent color del sitio */
+        }
+
+        @media (max-width: 991px) {
+            header {
+                height: auto;
+            }
+            .navbar-brand img {
+                height: 50px;
+                max-height: 50px;
+            }
+        }
+
+        /* ==========================================================================
+           2. ESTILOS DE LA APLICACIÓN DE BIBLIOTECA (SPA)
+           ========================================================================== */
+        :root {
+            --bg-color: #F8F9FA;
+            --sidebar-bg: #FFFFFF;
+            --primary-accent: #2c3e50;
+            --secondary-accent: #34495e;
+            --text-dark: #222222;
+            --text-muted: #777777;
+            --card-bg: #FFFFFF;
+            --border-color: #E0E0E0;
         }
 
         body {
-            background-color: var(--bg-light);
-            color: var(--dark-gray);
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+        }
+
+        /* Layout principal dividiendo Sidebar y Contenido */
+        .app-wrapper {
             display: flex;
-            height: 100vh;
-            overflow: hidden;
+            min-height: calc(100vh - 125px); /* Ajustado según header y subheader */
         }
 
-        /* ==========================================================================
-           2. ANIMACIONES KEYFRAMES
-           ========================================================================== */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes popBookmark {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.4); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 0 0 rgba(140, 198, 63, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(140, 198, 63, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(140, 198, 63, 0); }
-        }
-
-        /* ==========================================================================
-           3. BARRA LATERAL (SIDEBAR)
-           ========================================================================== */
         .sidebar {
             width: 260px;
-            background-color: var(--white);
-            border-right: 1px solid #E0E0E0;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 30px 20px;
+            padding: 20px 0;
             flex-shrink: 0;
-            z-index: 20;
-        }
-
-        .brand-logo {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-bottom: 40px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .brand-logo:hover {
-            opacity: 0.85;
-            transform: translateY(-1px);
-        }
-
-        .brand-logo h1 {
-            font-size: 1.8rem;
-            color: var(--primary-blue);
-            font-weight: 800;
-            line-height: 1;
-        }
-
-        .brand-underline {
-            height: 4px;
-            width: 100%;
-            max-width: 130px;
-            background-color: var(--su-green);
-            margin-top: 6px;
-            border-radius: 2px;
         }
 
         .nav-menu {
-            list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 5px;
+            padding: 0 10px;
         }
 
-        .nav-link {
+        .nav-link-app {
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 12px 18px;
+            gap: 12px;
+            padding: 12px 15px;
             color: var(--text-muted);
             text-decoration: none;
-            font-weight: 600;
+            border-radius: 8px;
             font-size: 0.95rem;
-            border-radius: var(--border-radius);
-            transition: var(--transition);
             cursor: pointer;
+            transition: all 0.2s ease;
         }
 
-        .nav-link i {
-            font-size: 1.2rem;
-            transition: transform 0.2s ease;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            background-color: var(--light-blue);
-            color: var(--primary-blue);
-        }
-
-        .nav-link:hover i {
-            transform: translateX(4px);
-        }
-
-        .nav-link.active i {
-            color: var(--primary-blue);
+        .nav-link-app:hover, .nav-link-app.active {
+            background-color: #f0f4f8;
+            color: var(--primary-accent);
+            font-weight: 600;
         }
 
         .sidebar-footer {
-            border-top: 1px solid #E0E0E0;
-            padding-top: 20px;
-            font-size: 0.85rem;
+            padding: 20px 15px 0 15px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .sidebar-footer .sub-text {
+            font-size: 0.75rem;
             color: var(--text-muted);
         }
 
-        /* ==========================================================================
-           4. ÁREA PRINCIPAL (MAIN CONTENT) Y HEADER
-           ========================================================================== */
-        .main-wrapper {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
+        .main-content {
+            flex: 1;
+            padding: 25px 35px;
             overflow-y: auto;
         }
 
         .top-header {
-            background-color: var(--white);
-            padding: 15px 40px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #E0E0E0;
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            align-items: center;
+            margin-bottom: 30px;
         }
 
-        .search-box {
-            background-color: var(--secondary-blue);
-            border-radius: 25px;
+        .action-controls {
             display: flex;
             align-items: center;
-            padding: 10px 20px;
-            width: 380px;
-            gap: 12px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-            transition: var(--transition);
+            gap: 15px;
         }
 
-        .search-box:focus-within {
-            box-shadow: 0 0 0 3px rgba(0, 163, 224, 0.3);
-            width: 420px;
-        }
-
-        .search-box i {
-            color: var(--white);
-            font-size: 1rem;
-        }
-
-        .search-box input {
-            border: none;
-            background: transparent;
-            outline: none;
-            color: var(--white);
-            width: 100%;
-            font-size: 0.95rem;
-        }
-
-        .search-box input::placeholder {
-            color: rgba(255, 255, 255, 0.85);
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        /* Botón Selector de Idioma */
-        .lang-switch-btn {
-            background-color: var(--light-blue);
-            color: var(--primary-blue);
-            border: 1px solid rgba(10, 83, 159, 0.2);
+        .btn-icon-text {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
             padding: 8px 16px;
             border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.85rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: var(--transition);
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            transition: all 0.2s ease;
         }
 
-        .lang-switch-btn:hover {
-            background-color: var(--primary-blue);
-            color: var(--white);
-            transform: translateY(-2px);
+        .btn-icon-text:hover {
+            background: #f0f0f0;
         }
 
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        .search-box {
+            position: relative;
+            width: 320px;
         }
 
-        .avatar {
-            width: 42px;
-            height: 42px;
-            background-color: var(--su-green);
-            color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-
-        /* ==========================================================================
-           5. COMPONENTES VISTAS Y BOTONES DE NAVEGACIÓN
-           ========================================================================== */
-        .content-container {
-            padding: 35px 40px;
-            max-width: 1400px;
-            margin: 0 auto;
+        .search-box input {
             width: 100%;
+            padding: 10px 15px 10px 38px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            outline: none;
+            font-size: 0.9rem;
         }
 
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        /* Vistas / Páginas SPA */
         .page {
             display: none;
         }
 
         .page.active {
             display: block;
-            animation: fadeInUp 0.4s ease-out forwards;
         }
 
-        /* Barra de Botones de Navegación */
-        .nav-buttons-bar {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .action-btn {
-            background-color: var(--white);
-            border: 1px solid #DDD;
-            color: var(--dark-gray);
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
-            text-decoration: none;
-        }
-
-        .action-btn:hover {
-            background-color: var(--primary-blue);
-            color: var(--white);
-            border-color: var(--primary-blue);
-            transform: translateY(-2px);
-        }
-
-        .btn-home-accent {
-            background-color: var(--light-blue);
-            color: var(--primary-blue);
-            border-color: rgba(10, 83, 159, 0.2);
-        }
-
-        .section-header-flex {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
+        /* Secciones y Rejilla */
         .section-title {
-            font-size: 1.4rem;
-            color: var(--dark-gray);
-            font-weight: 700;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
         }
 
-        /* Panel Gris de Categorías */
-        .categories-panel {
-            background-color: var(--card-gray);
-            border-radius: var(--border-radius);
-            padding: 25px;
-            margin-bottom: 35px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .categories-grid {
+        .categories-grid, .vestibules-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 15px;
+            margin-bottom: 35px;
         }
 
-        /* Botones Tag */
-        .tag-btn {
-            border: none;
-            padding: 12px 20px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: var(--transition);
+        .cat-card, .vest-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .tag-btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: var(--shadow-md);
+        .cat-card:hover, .vest-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
         }
 
-        .tag-blue { background-color: var(--primary-blue); color: var(--white); }
-        .tag-green { background-color: var(--su-green); color: var(--white); }
-
-        .tag-green:hover {
-            animation: pulseGlow 1.2s infinite;
+        .cat-card i {
+            font-size: 1.8rem;
+            color: var(--primary-accent);
+            margin-bottom: 10px;
         }
 
-        /* Vestíbulos */
-        .vestibules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin-bottom: 35px;
-        }
-
-        /* Tabs de Asignaturas */
-        .tabs-bar {
-            background-color: var(--light-blue);
+        /* Formato de Libros */
+        .tabs-header {
             display: flex;
-            gap: 10px;
-            padding: 8px;
-            border-radius: var(--border-radius);
+            gap: 15px;
+            border-bottom: 1px solid var(--border-color);
             margin-bottom: 25px;
         }
 
         .tab-item {
-            padding: 10px 24px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--primary-blue);
+            padding: 10px 5px;
             cursor: pointer;
-            border-radius: 8px;
-            transition: var(--transition);
+            color: var(--text-muted);
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
         }
 
-        .tab-item.active, .tab-item:hover {
-            background-color: var(--white);
-            box-shadow: var(--shadow-sm);
+        .tab-item.active {
+            color: var(--primary-accent);
+            border-bottom-color: var(--primary-accent);
         }
 
-        /* Grid de Libros y Tarjetas Animadas */
         .books-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 20px;
         }
 
         .book-card {
-            background-color: var(--white);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            box-shadow: var(--shadow-sm);
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            position: relative;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            position: relative;
-            border: 1px solid #EFEFEF;
-            transition: var(--transition);
-            animation: fadeInUp 0.4s ease-out forwards;
+            transition: transform 0.2s ease;
         }
 
         .book-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .bookmark-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: #DDD;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: var(--transition);
-        }
-
-        .bookmark-btn.saved, .bookmark-btn:hover {
-            color: var(--su-green);
-        }
-
-        .bookmark-btn.pop {
-            animation: popBookmark 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateY(-3px);
         }
 
         .book-cover {
-            width: 120px;
-            height: 160px;
-            border-radius: 8px;
-            margin-top: 10px;
+            height: 200px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            padding: 12px;
-            color: var(--white);
+            justify-content: center;
+            align-items: center;
+            color: white;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            transition: var(--transition);
+            position: relative;
         }
 
-        .book-card:hover .book-cover {
-            transform: scale(1.03);
+        .cover-1 { background: linear-gradient(135deg, #1e3c72, #2a5298); }
+        .cover-2 { background: linear-gradient(135deg, #2b5876, #4e4376); }
+        .cover-3 { background: linear-gradient(135deg, #00b09b, #96c93d); }
+        .cover-4 { background: linear-gradient(135deg, #d31027, #ea384d); }
+
+        .book-title { font-size: 1.1rem; }
+        .book-code { font-size: 0.8rem; opacity: 0.8; }
+
+        .bookmark-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.8);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            transition: all 0.2s ease;
         }
 
-        .cover-1 { background: linear-gradient(135deg, #E67E22 0%, #D35400 100%); }
-        .cover-2 { background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); }
-        .cover-3 { background: linear-gradient(135deg, #2980B9 0%, #2C3E50 100%); }
-        .cover-4 { background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%); }
-
-        .book-title { font-size: 1.2rem; }
-        .book-code { font-size: 1.4rem; align-self: flex-end; }
+        .bookmark-btn.saved {
+            color: #e74c3c;
+            background: #ffffff;
+        }
 
         .book-info {
-            margin-top: 15px;
-            text-align: center;
-            width: 100%;
+            padding: 12px;
         }
 
         .book-name {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--dark-gray);
+            font-size: 0.9rem;
+            font-weight: 600;
         }
 
         .book-category {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            margin-top: 4px;
+        }
+
+        /* Estilos Adaptativos */
+        @media (max-width: 900px) {
+            .app-wrapper {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: 15px;
+            }
+            .nav-menu {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+            .sidebar-footer {
+                display: none;
+            }
+            .top-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+            .search-box {
+                width: 100%;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <!-- ==========================================
-         BARRA LATERAL / SIDEBAR
-         ========================================== -->
-    <aside class="sidebar">
-        <div>
-            <!-- Clic en el logo redirige al inicio de la aplicación -->
-            <div class="brand-logo" onclick="goHome()" title="Ir al Inicio">
-                <h1>SuPlanner</h1>
-                <div class="brand-underline"></div>
-            </div>
-
-            <nav>
-                <ul class="nav-menu">
-                    <li class="nav-link active" onclick="showPage('home', this)">
-                        <i class="fas fa-th-large"></i>
-                        <span data-i18n="navHome">Inicio & Categorías</span>
-                    </li>
-                    <li class="nav-link" onclick="showPage('catalog', this)">
-                        <i class="fas fa-book-open"></i>
-                        <span data-i18n="navCatalog">Explorar Catálogo</span>
-                    </li>
-                    <li class="nav-link" onclick="showPage('saved', this)">
-                        <i class="fas fa-bookmark"></i>
-                        <span data-i18n="navSaved">Mis Marcadores</span>
-                    </li>
-                </ul>
-            </nav>
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
 
-        <div class="sidebar-footer">
-            <p>&copy; 2026 SuPlanner</p>
-            <p data-i18n="footerSub">Sistema de Gestión Escolar</p>
-        </div>
-    </aside>
-
-    <!-- ==========================================
-         ÁREA PRINCIPAL DE CONTENIDO
-         ========================================== -->
-    <div class="main-wrapper">
-        
-        <!-- HEADER SUPERIOR -->
-        <header class="top-header">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="global-search" data-i18n-ph="searchPh" placeholder="Buscar por título, categoría o materia...">
+    <!-- Sub Header General -->
+    <div class="sub-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-xs-12">
+                    <ul class="left-info">
+                        <li><a href="#"><i class="fa fa-clock-o"></i>Mon-Sat 05:00 AM -10:00 PM</a></li>
+                        <li><a href="#"><i class="fa fa-phone"></i>6825-6832</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="right-icons">
+                        <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-behance"></i></a></li>
+                    </ul>
+                </div>
             </div>
+        </div>
+    </div>
 
-            <div class="header-actions">
-                <!-- Botón de Cambio de Idioma -->
-                <button class="lang-switch-btn" onclick="toggleLanguage()">
-                    <i class="fas fa-globe"></i>
-                    <span id="lang-label">ES / EN</span>
+    <!-- Header / Barra de Navegación del Sitio -->
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="logo2.png" alt="SuPlanner">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-
-                <div class="user-profile">
-                    <div class="avatar">SU</div>
-                    <div>
-                        <div style="font-weight: 700; font-size: 0.9rem;" data-i18n="userRole">Estudiante</div>
-                        <div style="font-size: 0.75rem; color: var(--text-muted);" data-i18n="userSub">Biblioteca Digital</div>
-                    </div>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="services.html">Functions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Calendario.html">Agenda</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="libreria.html">Library <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </header>
+        </nav>
+    </header>
 
-        <!-- CONTENEDOR DE PÁGINAS -->
-        <main class="content-container">
+    <!-- App Wrapper (Layout de Biblioteca Digital) -->
+    <div class="app-wrapper">
+        
+        <!-- Sidebar SPA -->
+        <aside class="sidebar">
+            <nav class="nav-menu">
+                <a class="nav-link-app active" onclick="showPage('home', this)">
+                    <i class="fas fa-th-large"></i>
+                    <span data-i18n="navHome">Inicio & Categorías</span>
+                </a>
+                <a class="nav-link-app" onclick="showPage('catalog', this)">
+                    <i class="fas fa-book"></i>
+                    <span data-i18n="navCatalog">Explorar Catálogo</span>
+                </a>
+                <a class="nav-link-app" onclick="showPage('saved', this)">
+                    <i class="fas fa-bookmark"></i>
+                    <span data-i18n="navSaved">Mis Marcadores</span>
+                </a>
+            </nav>
 
-            <!-- PÁGINA 1: INICIO & CATEGORÍAS -->
-            <section id="page-home" class="page active">
-                <h2 class="section-title" style="margin-bottom: 20px;" data-i18n="categoriesTitle">Categorías Principales</h2>
-                
-                <div class="categories-panel">
-                    <div class="categories-grid">
-                        <button class="tag-btn tag-blue" onclick="openCategory('Sciences')">Sciences</button>
-                        <button class="tag-btn tag-green" onclick="openCategory('Philosophy')">Philosophy</button>
-                        <button class="tag-btn tag-green" onclick="openCategory('Education')">Education</button>
-                        <button class="tag-btn tag-green" onclick="openCategory('History')">History</button>
-                        <button class="tag-btn tag-blue" onclick="openCategory('Technology')">Technology</button>
-                        <button class="tag-btn tag-green" onclick="openCategory('Fiction')">Fiction</button>
-                    </div>
-                </div>
+            <div class="sidebar-footer">
+                <strong>SuPlanner Library</strong>
+                <div class="sub-text" data-i18n="footerSub">Sistema de Gestión Escolar</div>
+            </div>
+        </aside>
 
-                <h2 class="section-title" style="margin-bottom: 20px;" data-i18n="vestibulesTitle">Vestíbulos</h2>
-                <div class="vestibules-grid">
-                    <button class="tag-btn tag-green"><span data-i18n="vestibule">Vestíbulo</span> 1</button>
-                    <button class="tag-btn tag-green"><span data-i18n="vestibule">Vestíbulo</span> 2</button>
-                    <button class="tag-btn tag-green"><span data-i18n="vestibule">Vestíbulo</span> 3</button>
-                    <button class="tag-btn tag-green"><span data-i18n="vestibule">Vestíbulo</span> 4</button>
-                </div>
-            </section>
-
-            <!-- PÁGINA 2: CATÁLOGO DE LIBROS -->
-            <section id="page-catalog" class="page">
-                <!-- Barra de Botones de Navegación -->
-                <div class="nav-buttons-bar">
-                    <!-- Botón para Regresar a index.html o al historial anterior del navegador -->
-                    <button class="action-btn" onclick="goBack()">
+        <!-- Área de Contenido Principal -->
+        <main class="main-content">
+            
+            <!-- Barra Superior Interna (Navegación y Búsqueda) -->
+            <div class="top-header">
+                <div class="action-controls">
+                    <button class="btn-icon-text" onclick="goBack()">
                         <i class="fas fa-arrow-left"></i>
                         <span data-i18n="backBtn">Volver</span>
                     </button>
-                    <button class="action-btn btn-home-accent" onclick="goHome()">
+                    <button class="btn-icon-text" onclick="goHome()">
                         <i class="fas fa-home"></i>
                         <span data-i18n="homeBtn">Ir al Inicio</span>
                     </button>
+                    <button class="btn-icon-text" onclick="toggleLanguage()">
+                        <i class="fas fa-globe"></i>
+                        <span id="lang-label">ES / EN</span>
+                    </button>
                 </div>
 
-                <div class="section-header-flex">
-                    <h2 class="section-title" id="catalog-title" style="color: var(--su-green-dark);">Education</h2>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="global-search" placeholder="Buscar por título, categoría..." data-i18n-ph="searchPh">
+                </div>
+            </div>
+
+            <!-- VISTA 1: INICIO & CATEGORÍAS -->
+            <div id="page-home" class="page active">
+                <div class="section-title" data-i18n="categoriesTitle">Categorías Principales</div>
+                <div class="categories-grid">
+                    <div class="cat-card" onclick="openCategory('Education')">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div>Education</div>
+                    </div>
+                    <div class="cat-card" onclick="openCategory('Sciences')">
+                        <i class="fas fa-flask"></i>
+                        <div>Sciences</div>
+                    </div>
+                    <div class="cat-card" onclick="openCategory('Philosophy')">
+                        <i class="fas fa-brain"></i>
+                        <div>Philosophy</div>
+                    </div>
+                    <div class="cat-card" onclick="openCategory('History')">
+                        <i class="fas fa-landmark"></i>
+                        <div>History</div>
+                    </div>
+                    <div class="cat-card" onclick="openCategory('Technology')">
+                        <i class="fas fa-laptop-code"></i>
+                        <div>Technology</div>
+                    </div>
                 </div>
 
-                <!-- Tabs de Materia -->
-                <div class="tabs-bar">
-                    <div class="tab-item active" onclick="filterTab(this, 'All')"><span data-i18n="tabAll">Todos</span></div>
+                <div class="section-title" data-i18n="vestibulesTitle">Vestíbulos</div>
+                <div class="vestibules-grid">
+                    <div class="vest-card" onclick="showPage('catalog')">
+                        <strong data-i18n="vestibule">Vestíbulo</strong> 1
+                    </div>
+                    <div class="vest-card" onclick="showPage('catalog')">
+                        <strong data-i18n="vestibule">Vestíbulo</strong> 2
+                    </div>
+                    <div class="vest-card" onclick="showPage('catalog')">
+                        <strong data-i18n="vestibule">Vestíbulo</strong> 3
+                    </div>
+                </div>
+            </div>
+
+            <!-- VISTA 2: CATÁLOGO -->
+            <div id="page-catalog" class="page">
+                <div class="section-title" id="catalog-title">Catálogo Completo</div>
+                
+                <div class="tabs-header">
+                    <div class="tab-item active" onclick="filterTab(this, 'All')" data-i18n="tabAll">Todos</div>
                     <div class="tab-item" onclick="filterTab(this, 'English')">English</div>
                     <div class="tab-item" onclick="filterTab(this, 'Spanish')">Spanish</div>
                     <div class="tab-item" onclick="filterTab(this, 'Math')">Math</div>
                     <div class="tab-item" onclick="filterTab(this, 'Science')">Science</div>
                 </div>
 
-                <!-- Grilla de Libros -->
-                <div class="books-grid" id="books-container"></div>
-            </section>
-
-            <!-- PÁGINA 3: GUARDADOS -->
-            <section id="page-saved" class="page">
-                <!-- Barra de Botones de Navegación -->
-                <div class="nav-buttons-bar">
-                    <!-- Botón para Regresar a index.html o al historial anterior del navegador -->
-                    <button class="action-btn" onclick="goBack()">
-                        <i class="fas fa-arrow-left"></i>
-                        <span data-i18n="backBtn">Volver</span>
-                    </button>
-                    <button class="action-btn btn-home-accent" onclick="goHome()">
-                        <i class="fas fa-home"></i>
-                        <span data-i18n="homeBtn">Ir al Inicio</span>
-                    </button>
+                <div class="books-grid" id="books-container">
+                    <!-- Tarjetas de libros generadas dinámicamente -->
                 </div>
+            </div>
 
-                <h2 class="section-title" style="margin-bottom: 20px;" data-i18n="savedTitle">Libros Guardados / Marcadores</h2>
-                <div class="books-grid" id="saved-container"></div>
-            </section>
+            <!-- VISTA 3: MARCADORES / GUARDADOS -->
+            <div id="page-saved" class="page">
+                <div class="section-title" data-i18n="savedTitle">Libros Guardados / Marcadores</div>
+                <div class="books-grid" id="saved-container">
+                    <!-- Libros guardados -->
+                </div>
+            </div>
 
         </main>
     </div>
 
-    <!-- ==========================================
-         LÓGICA JAVASCRIPT & TRADUCCIONES
-         ========================================== -->
+    <!-- Sub Footer -->
+    <div class="sub-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Copyright &copy; 2026 SuPlanner Co., Ltd.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts Base -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/custom.js"></script>
+
+    <!-- Lógica de Aplicación Web y Persistencia -->
     <script>
-        // --- BASE DE DATOS DE LIBROS ---
-        const booksData = [
-            { id: 1, title: 'LCL', code: '3.1', category: 'Spanish', language: 'Spanish', coverClass: 'cover-1', saved: false },
-            { id: 2, title: 'LCL', code: '4.3', category: 'Spanish', language: 'Spanish', coverClass: 'cover-2', saved: false },
-            { id: 3, title: 'MATH', code: '1.0', category: 'Math', language: 'Math', coverClass: 'cover-3', saved: false },
-            { id: 4, title: 'SCI', code: '2.2', category: 'Science', language: 'Science', coverClass: 'cover-4', saved: false },
-            { id: 5, title: 'ENG', code: '5.0', category: 'English', language: 'English', coverClass: 'cover-1', saved: false }
+        // Base de Datos de Libros
+        const initialBooks = [
+            { id: 1, title: 'LCL', code: '3.1', category: 'Education', language: 'Spanish', coverClass: 'cover-1' },
+            { id: 2, title: 'LCL', code: '4.3', category: 'Education', language: 'Spanish', coverClass: 'cover-2' },
+            { id: 3, title: 'MATH', code: '1.0', category: 'Sciences', language: 'Math', coverClass: 'cover-3' },
+            { id: 4, title: 'SCI', code: '2.2', category: 'Sciences', language: 'Science', coverClass: 'cover-4' },
+            { id: 5, title: 'ENG', code: '5.0', category: 'Education', language: 'English', coverClass: 'cover-1' },
+            { id: 6, title: 'PHIL', code: '1.1', category: 'Philosophy', language: 'Spanish', coverClass: 'cover-3' },
+            { id: 7, title: 'HIST', code: '2.0', category: 'History', language: 'Spanish', coverClass: 'cover-2' },
+            { id: 8, title: 'TECH', code: '4.0', category: 'Technology', language: 'English', coverClass: 'cover-4' }
         ];
 
-        // --- DICCIONARIO DE IDIOMAS (i18n) ---
+        // Cargar estado de marcadores
+        function loadSavedState() {
+            const savedIds = JSON.parse(localStorage.getItem('su_saved_books') || '[]');
+            return initialBooks.map(book => ({
+                ...book,
+                saved: savedIds.includes(book.id)
+            }));
+        }
+
+        let booksData = loadSavedState();
         let currentLang = 'es';
+        let currentPage = 'home';
+
         const translations = {
             es: {
                 navHome: "Inicio & Categorías",
                 navCatalog: "Explorar Catálogo",
                 navSaved: "Mis Marcadores",
                 footerSub: "Sistema de Gestión Escolar",
-                searchPh: "Buscar por título, categoría o materia...",
-                userRole: "Estudiante",
-                userSub: "Biblioteca Digital",
+                searchPh: "Buscar por título, categoría...",
                 categoriesTitle: "Categorías Principales",
                 vestibulesTitle: "Vestíbulos",
                 vestibule: "Vestíbulo",
@@ -683,9 +647,7 @@
                 navCatalog: "Explore Catalog",
                 navSaved: "My Bookmarks",
                 footerSub: "School Management System",
-                searchPh: "Search by title, category, or subject...",
-                userRole: "Student",
-                userSub: "Digital Library",
+                searchPh: "Search by title, category...",
                 categoriesTitle: "Main Categories",
                 vestibulesTitle: "Vestibules",
                 vestibule: "Vestibule",
@@ -699,40 +661,26 @@
             }
         };
 
-        let currentPage = 'home';
-
-        // Cambiar entre secciones internas
         function showPage(pageId, linkElement = null) {
             currentPage = pageId;
-
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            document.querySelectorAll('.nav-link-app').forEach(link => link.classList.remove('active'));
 
             const targetPage = document.getElementById(`page-${pageId}`);
-            if (targetPage) {
-                targetPage.classList.add('active');
-            }
+            if (targetPage) targetPage.classList.add('active');
 
             if (linkElement) {
                 linkElement.classList.add('active');
-            } else {
-                const activeNav = Array.from(document.querySelectorAll('.nav-link')).find(el => 
-                    el.getAttribute('onclick') && el.getAttribute('onclick').includes(pageId)
-                );
-                if (activeNav) activeNav.classList.add('active');
             }
 
             if (pageId === 'catalog') renderBooks(booksData);
             if (pageId === 'saved') renderSavedBooks();
         }
 
-        // --- NAVEGACIÓN A INDEX.HTML ANTERIOR ---
         function goBack() {
-            // Regresa al documento index.html anterior en el historial del navegador
             if (window.history.length > 1) {
                 window.history.back();
             } else {
-                // Si no hay historial previo, redirige explícitamente a index.html
                 window.location.href = 'index.html';
             }
         }
@@ -741,7 +689,6 @@
             showPage('home');
         }
 
-        // --- SISTEMA DE TRADUCCIÓN ---
         function toggleLanguage() {
             currentLang = currentLang === 'es' ? 'en' : 'es';
             document.getElementById('lang-label').innerText = currentLang === 'es' ? 'ES / EN' : 'EN / ES';
@@ -753,19 +700,16 @@
 
         function applyTranslations() {
             const langData = translations[currentLang];
-            
             document.querySelectorAll('[data-i18n]').forEach(elem => {
                 const key = elem.getAttribute('data-i18n');
                 if (langData[key]) elem.innerText = langData[key];
             });
-
             document.querySelectorAll('[data-i18n-ph]').forEach(elem => {
                 const key = elem.getAttribute('data-i18n-ph');
                 if (langData[key]) elem.placeholder = langData[key];
             });
         }
 
-        // --- RENDERIZADO DE LIBROS Y ANIMACIONES ---
         function renderBooks(list) {
             const container = document.getElementById('books-container');
             container.innerHTML = '';
@@ -775,12 +719,11 @@
                 return;
             }
 
-            list.forEach((book, index) => {
+            list.forEach((book) => {
                 const card = document.createElement('div');
                 card.className = 'book-card';
-                card.style.animationDelay = `${index * 0.08}s`;
                 card.innerHTML = `
-                    <button class="bookmark-btn ${book.saved ? 'saved' : ''}" onclick="toggleSave(${book.id}, this)">
+                    <button class="bookmark-btn ${book.saved ? 'saved' : ''}" onclick="toggleSave(${book.id})">
                         <i class="fas fa-bookmark"></i>
                     </button>
                     <div class="book-cover ${book.coverClass}">
@@ -806,12 +749,11 @@
                 return;
             }
 
-            saved.forEach((book, index) => {
+            saved.forEach((book) => {
                 const card = document.createElement('div');
                 card.className = 'book-card';
-                card.style.animationDelay = `${index * 0.08}s`;
                 card.innerHTML = `
-                    <button class="bookmark-btn saved" onclick="toggleSave(${book.id}, this)">
+                    <button class="bookmark-btn saved" onclick="toggleSave(${book.id})">
                         <i class="fas fa-bookmark"></i>
                     </button>
                     <div class="book-cover ${book.coverClass}">
@@ -827,16 +769,13 @@
             });
         }
 
-        // --- ACCIONES Y FILTROS ---
-        function toggleSave(id, btnElem) {
+        function toggleSave(id) {
             const book = booksData.find(b => b.id === id);
             if (book) {
                 book.saved = !book.saved;
-                if (btnElem) {
-                    btnElem.classList.add('pop');
-                    setTimeout(() => btnElem.classList.remove('pop'), 300);
-                }
-                
+                const savedIds = booksData.filter(b => b.saved).map(b => b.id);
+                localStorage.setItem('su_saved_books', JSON.stringify(savedIds));
+
                 if (currentPage === 'catalog') renderBooks(booksData);
                 if (currentPage === 'saved') renderSavedBooks();
             }
@@ -861,7 +800,6 @@
             }
         }
 
-        // Búsqueda Global
         document.getElementById('global-search').addEventListener('input', function(e) {
             const query = e.target.value.toLowerCase().trim();
             if (query.length > 0) {

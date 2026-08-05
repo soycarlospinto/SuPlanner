@@ -24,7 +24,72 @@ SuPlanner
 "URL SuPlanner"
 
 -->
-  </head>
+<style>
+  /* --- CONTROL DE LA BARRA DE NAVEGACIÓN Y HEADER --- */
+  header {
+    position: absolute;
+    width: 100%;
+    height: 85px; /* Altura del header ajustada */
+    background-color: transparent;
+    z-index: 100;
+    transition: all 0.3s ease;
+  }
+
+  .navbar {
+    padding: 10px 0px;
+    height: 100%;
+  }
+
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-right: 20px;
+    overflow: visible; /* Permite destacar el logo */
+  }
+
+  /* Logo más visible y destacado */
+  .navbar-brand img {
+    height: 108px;           /* Altura mayor para máxima visibilidad */
+    max-height: 108px;
+    width: auto;            /* Mantiene la proporción original */
+    object-fit: contain;
+    transition: all 0.3s ease;
+    filter:none;
+  }
+
+  .navbar-nav {
+    align-items: center;    /* Centra verticalmente los botones del menú con el logo */
+  }
+
+  .navbar-nav .nav-item .nav-link {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  /* Ajuste responsivo para teléfonos y tablets */
+  @media (max-width: 991px) {
+    header {
+      height: 70px;
+    }
+    
+    .navbar-brand img {
+      height: 50px;         /* Tamaño adaptado para pantallas móviles */
+      max-height: 50px;
+    }
+  }
+
+  /* --- LOGO EN EL PIE DE PÁGINA (FOOTER) --- */
+  .footer-logo {
+    height: 55px;
+    width: auto;
+    margin-bottom: 20px;
+    display: block;
+  }
+</style>
+  
+</head>
 
   <body>
 
@@ -64,7 +129,11 @@ SuPlanner
 
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="index.html"><h2>SuPlanner</h2></a>
+          <a class="navbar-brand" href="index.html">
+            
+            <img src="logo2.png" alt="SuPlanner">
+          
+          </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
