@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="TemplateMo">
+    <meta name="description" content="SuPlanner - Plan your future, master your time, organize your mind.">
+    <meta name="author" content="SuPlanner Team">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
     <title>SuPlanner</title>
@@ -18,80 +17,173 @@
     <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-finance-business.css">
     <link rel="stylesheet" href="assets/css/owl.css">
-<!--
-SuPlanner
-
-"URL SuPlanner"
-
--->
-<style>
-  /* --- CONTROL DE LA BARRA DE NAVEGACIÓN Y HEADER --- */
-  header {
-    position: absolute;
-    width: 100%;
-    height: 85px; /* Altura del header ajustada */
-    background-color: transparent;
-    z-index: 100;
-    transition: all 0.3s ease;
-  }
-
-  .navbar {
-    padding: 10px 0px;
-    height: 100%;
-  }
-
-  .navbar-brand {
-    display: flex;
-    align-items: center;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-right: 20px;
-    overflow: visible; /* Permite destacar el logo */
-  }
-
-  /* Logo más visible y destacado */
-  .navbar-brand img {
-    height: 90px;           /* Altura mayor para máxima visibilidad */
-    max-height: 90px;
-    width: auto;            /* Mantiene la proporción original */
-    object-fit: contain;
-    transition: all 0.3s ease;
-    filter:none;
-  }
-
-  .navbar-nav {
-    align-items: center;    /* Centra verticalmente los botones del menú con el logo */
-  }
-
-  .navbar-nav .nav-item .nav-link {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-
-  /* Ajuste responsivo para teléfonos y tablets */
-  @media (max-width: 991px) {
-    header {
-      height: 70px;
-    }
     
-    .navbar-brand img {
-      height: 50px;         /* Tamaño adaptado para pantallas móviles */
-      max-height: 50px;
-    }
-  }
+    <style>
+      /* --- CONTROL DE LA BARRA DE NAVEGACIÓN Y HEADER --- */
+      header {
+        position: absolute;
+        width: 100%;
+        height: 85px;
+        background-color: rgba(0, 0, 0, 0.2);
+        z-index: 100;
+        transition: all 0.3s ease;
+      }
 
-  /* --- LOGO EN EL PIE DE PÁGINA (FOOTER) --- */
-  .footer-logo {
-    height: 55px;
-    width: auto;
-    margin-bottom: 20px;
-    display: block;
-  }
-</style>
-  
+      .navbar {
+        padding: 10px 0px;
+        height: 100%;
+      }
+
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-right: 20px;
+        overflow: visible;
+      }
+
+      .navbar-brand img {
+        height: 75px;
+        max-height: 75px;
+        width: auto;
+        object-fit: contain;
+        transition: all 0.3s ease;
+      }
+
+      .navbar-nav {
+        align-items: center;
+      }
+
+      .navbar-nav .nav-item .nav-link {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        color: #fff !important;
+        font-weight: 500;
+      }
+
+      .navbar-nav .nav-item .nav-link:hover,
+      .navbar-nav .nav-item.active .nav-link {
+        color: #a4c639 !important;
+      }
+
+      /* --- MENÚ HAMBURGUESA ESTÉTICO --- */
+      .navbar-toggler {
+        border: none;
+        background: transparent;
+        padding: 0;
+        outline: none;
+        box-shadow: none;
+      }
+
+      .navbar-toggler:focus {
+        outline: none;
+        box-shadow: none;
+      }
+
+      .hamburger-icon {
+        width: 30px;
+        height: 22px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+      }
+
+      .hamburger-icon span {
+        display: block;
+        height: 3px;
+        width: 100%;
+        background-color: #fff;
+        border-radius: 3px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      /* Animación del menú hamburguesa al abrirse */
+      .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(1) {
+        transform: translateY(9.5px) rotate(45deg);
+        background-color: #a4c639;
+      }
+
+      .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(3) {
+        transform: translateY(-9.5px) rotate(-45deg);
+        background-color: #a4c639;
+      }
+
+      /* Botones de Autenticación Navbar */
+      .btn-nav-login {
+        background-color: transparent;
+        color: #fff !important;
+        border: 2px solid #a4c639;
+        border-radius: 20px;
+        padding: 6px 18px !important;
+        margin-left: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-nav-login:hover {
+        background-color: #a4c639;
+        color: #fff !important;
+      }
+
+      .btn-nav-signup {
+        background-color: #a4c639;
+        color: #fff !important;
+        border-radius: 20px;
+        padding: 8px 20px !important;
+        margin-left: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-nav-signup:hover {
+        background-color: #8fae2d;
+        color: #fff !important;
+      }
+
+      /* Ajuste responsivo para móviles y tablets */
+      @media (max-width: 991px) {
+        header {
+          height: 70px;
+          background-color: #1e1e1e;
+        }
+        
+        .navbar-brand img {
+          height: 50px;
+          max-height: 50px;
+        }
+
+        .navbar-collapse {
+          background-color: #1e1e1e;
+          padding: 20px;
+          border-radius: 0 0 10px 10px;
+          box-shadow: 0px 10px 20px rgba(0,0,0,0.3);
+          margin-top: 10px;
+        }
+
+        .btn-nav-login, .btn-nav-signup {
+          margin-left: 0;
+          margin-top: 10px;
+          text-align: center;
+          display: block;
+        }
+      }
+
+      /* --- LOGO EN EL PIE DE PÁGINA (FOOTER) --- */
+      .footer-logo {
+        height: 55px;
+        width: auto;
+        margin-bottom: 20px;
+        display: block;
+      }
+    </style>
 </head>
 
-  <body>
+<body>
 
     <!-- ***** Preloader Start ***** -->
     <div id="preloader">
@@ -100,7 +192,7 @@ SuPlanner
             <div></div>
             <div></div>
         </div>
-    </div>  
+    </div> 
     <!-- ***** Preloader End ***** -->
 
     <!-- Header -->
@@ -109,8 +201,8 @@ SuPlanner
         <div class="row">
           <div class="col-md-8 col-xs-12">
             <ul class="left-info">
-              <li><a href="#"><i class="fa fa-clock-o"></i>Mon-Sat 05:00 AM -10:00 PM</a></li>
-              <li><a href="#"><i class="fa fa-phone"></i>6825-6832</a></li>
+              <li><a href="#"><i class="fa fa-clock-o"></i> Monday - Friday</a></li>
+              <li><a href="#"><i class="fa fa-phone"></i> 6825-6832</a></li>
             </ul>
           </div>
           <div class="col-md-4">
@@ -125,39 +217,42 @@ SuPlanner
       </div>
     </div>
 
-    <header class="">
-
+    <header>
       <nav class="navbar navbar-expand-lg">
         <div class="container">
           <a class="navbar-brand" href="index.html">
-            
             <img src="logo2.png" alt="SuPlanner">
-          
           </a>
+          
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <div class="hamburger-icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </button>
+
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="#top">Home
-                  <span class="sr-only">(current)</span>
-                </a>
+                <a class="nav-link" href="#top">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="about.html">About Us</a>
-              </li>  
+              </li> 
               <li class="nav-item">
                 <a class="nav-link" href="services.html">Functions</a>
-              </li>                          
+              </li>                                 
               <li class="nav-item">
                 <a class="nav-link" href="contact.html">Contact Us</a>
               </li>
+              
+              <!-- Botones Funcionales de Login y Sign Up -->
               <li class="nav-item">
-                <a class="nav-link" href="Calendario.html">Agenda</a>
+                <a class="nav-link btn-nav-login" href="#" data-toggle="modal" data-target="#loginModal">Log In</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="libreria.html">Library</a>
+                <a class="nav-link btn-nav-signup" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>
               </li>
             </ul>
           </div>
@@ -174,37 +269,34 @@ SuPlanner
             <div class="img-fill">
                 <div class="text-content">
                   <h6></h6>
-                  <h4>Plan your future <br> Master your time <br> Organize your mind  </h4>
-                  <p>SuPlanner, your trusted planner, where you’ll discover the most innovative way to organize your school life. <a href=</a></p> <!-- Seccion de texto, pagina principal -->
+                  <h4>Plan your future <br> Master your time <br> Organize your mind</h4>
+                  <p>SuPlanner, your trusted planner, where you’ll discover the most innovative way to organize your school life.</p>
                   <a href="contact.html" class="filled-button">contact us</a>
                 </div>
             </div>
           </div>
-          <!-- // Item -->
           <!-- Item -->
           <div class="item item-2">
             <div class="img-fill">
                 <div class="text-content">
                   <h6>we are here to support you</h6>
-                  <h4> DESIGNED FOR <br>YOUR GROWTH </h4>
-                  <p>SuPlanner empowers students to organize theit time, track their progress, and build a balanced academic life wuth clarity and confidence.</p>
+                  <h4>DESIGNED FOR <br>YOUR GROWTH</h4>
+                  <p>SuPlanner empowers students to organize their time, track their progress, and build a balanced academic life with clarity and confidence.</p>
                   <a href="services.html" class="filled-button">our services</a>
                 </div>
             </div>
           </div>
-          <!-- // Item -->
           <!-- Item -->
           <div class="item item-3">
             <div class="img-fill">
                 <div class="text-content">
                   <h6>we have a solid background</h6>
-                  <h4>YOUR JOURNEY <br> MATTERS </h4>
-                  <p> Track your progress, save your memories, and see how much you’ve grown over time. </p>
+                  <h4>YOUR JOURNEY <br> MATTERS</h4>
+                  <p>Track your progress, save your memories, and see how much you’ve grown over time.</p>
                   <a href="about.html" class="filled-button">learn more</a>
                 </div>
             </div>
           </div>
-          <!-- // Item -->
         </div>
     </div>
     <!-- Banner Ends Here -->
@@ -213,8 +305,8 @@ SuPlanner
       <div class="container">
         <div class="row">
           <div class="col-md-8">
-            <h4>Request a call back right now ?</h4>
-            <span> Please feel free to contact us. </span>
+            <h4>Request a call back right now?</h4>
+            <span>Please feel free to contact us.</span>
           </div>
           <div class="col-md-4">
             <a href="contact.html" class="border-button">Contact Us</a>
@@ -341,49 +433,44 @@ SuPlanner
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
-              <h2>Meet Out Team</h2>
+              <h2>Meet Our Team</h2>
               <span>Passionate students working together to transform the way students learn and stay organized</span>
             </div>
           </div>
           <div class="col-md-12">
             <div class="owl-testimonials owl-carousel">
-              
               <div class="testimonial-item">
                 <div class="inner-content">
                   <h4>Marlys Nuñez</h4>
                   <span>Chief Financial Analyst</span>
-                  <p>"Nulla ullamcorper, ipsum vel condimentum congue, mi odio vehicula tellus, sit amet malesuada justo sem sit amet quam. Pellentesque in sagittis lacus."</p>
+                  <p>"Nulla ullamcorper, ipsum vel condimentum congue, mi odio vehicula tellus, sit amet malesuada justo sem sit amet quam."</p>
                 </div>
                 <img src="http://placehold.it/60x60" alt="">
               </div>
-              
               <div class="testimonial-item">
                 <div class="inner-content">
                   <h4>Ana Batista</h4>
                   <span>Market Specialist</span>
-                  <p>"In eget leo ante. Sed nibh leo, laoreet accumsan euismod quis, scelerisque a nunc. Mauris accumsan, arcu id ornare malesuada, est nulla luctus nisi."</p>
+                  <p>"In eget leo ante. Sed nibh leo, laoreet accumsan euismod quis, scelerisque a nunc. Mauris accumsan."</p>
                 </div>
                 <img src="http://placehold.it/60x60" alt="">
               </div>
-              
               <div class="testimonial-item">
                 <div class="inner-content">
                   <h4>Ariadne Gonzalez</h4>
                   <span>Chief Accountant</span>
-                  <p>"Ut ultricies maximus turpis, in sollicitudin ligula posuere vel. Donec finibus maximus neque, vitae egestas quam imperdiet nec. Proin nec mauris eu tortor consectetur tristique."</p>
+                  <p>"Ut ultricies maximus turpis, in sollicitudin ligula posuere vel. Donec finibus maximus neque, vitae egestas quam."</p>
                 </div>
                 <img src="http://placehold.it/60x60" alt="">
               </div>
-              
               <div class="testimonial-item">
                 <div class="inner-content">
                   <h4>Dileydis Aguilar</h4>
                   <span>Marketing Head</span>
-                  <p>"Curabitur sollicitudin, tortor at suscipit volutpat, nisi arcu aliquet dui, vitae semper sem turpis quis libero. Quisque vulputate lacinia nisl ac lobortis."</p>
+                  <p>"Curabitur sollicitudin, tortor at suscipit volutpat, nisi arcu aliquet dui, vitae semper sem turpis quis libero."</p>
                 </div>
                 <img src="http://placehold.it/60x60" alt="">
               </div>
-              
             </div>
           </div>
         </div>
@@ -396,7 +483,7 @@ SuPlanner
           <div class="col-md-12">
             <div class="section-heading">
               <h2>Request a <em>call back</em></h2>
-              <span> ¡Let us know what you think! </span>
+              <span>¡Let us know what you think!</span>
             </div>
           </div>
           <div class="col-md-12">
@@ -405,27 +492,27 @@ SuPlanner
                 <div class="row">
                   <div class="col-lg-4 col-md-12 col-sm-12">
                     <fieldset>
-                      <input name="name" type="text" class="form-control" id="name" placeholder="Full Name" required="">
+                      <input name="name" type="text" class="form-control" placeholder="Full Name" required="">
                     </fieldset>
                   </div>
                   <div class="col-lg-4 col-md-12 col-sm-12">
                     <fieldset>
-                      <input name="email" type="text" class="form-control" id="email" pattern="[^ @]*@[^ @]*" placeholder="E-Mail Address" required="">
+                      <input name="email" type="text" class="form-control" pattern="[^ @]*@[^ @]*" placeholder="E-Mail Address" required="">
                     </fieldset>
                   </div>
                   <div class="col-lg-4 col-md-12 col-sm-12">
                     <fieldset>
-                      <input name="subject" type="text" class="form-control" id="subject" placeholder="Subject" required="">
+                      <input name="subject" type="text" class="form-control" placeholder="Subject" required="">
                     </fieldset>
                   </div>
                   <div class="col-lg-12">
                     <fieldset>
-                      <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
+                      <textarea name="message" rows="6" class="form-control" placeholder="Your Message" required=""></textarea>
                     </fieldset>
                   </div>
                   <div class="col-lg-12">
                     <fieldset>
-                      <button type="submit" id="form-submit" class="border-button">Send Message</button>
+                      <button type="submit" class="border-button">Send Message</button>
                     </fieldset>
                   </div>
                 </div>
@@ -441,33 +528,26 @@ SuPlanner
         <div class="row">
           <div class="col-md-12">
             <div class="owl-partners owl-carousel">
-            
               <div class="partner-item">
                 <img src="assets/images/logo.jpg" title="1" alt="1">
               </div>
-              
               <div class="partner-item">
                 <img src="assets/images/logo1.jpg" title="2" alt="2">
               </div>
-              
               <div class="partner-item">
                 <img src="assets/images/logo.jpg" title="3" alt="3">
               </div>
-              
               <div class="partner-item">
                 <img src="assets/images/logo1.jpg" title="4" alt="4">
               </div>
-              
               <div class="partner-item">
                 <img src="assets/images/logo.jpg" title="5" alt="5">
               </div>
-              
             </div>
           </div>
         </div>
       </div>
     </div>
-
 
     <!-- Footer Starts Here -->
     <footer>
@@ -475,8 +555,7 @@ SuPlanner
         <div class="row">
           <div class="col-md-3 footer-item">
             <h4>SuPlanner</h4> 
-            <p> Suplanner was born from the real needs of students.
-              Inspired by everyday life in the Supérate program. </p>
+            <p>Suplanner was born from the real needs of students. Inspired by everyday life in the Supérate program.</p>
             <ul class="social-icons">
               <li><a rel="nofollow" href="https://fb.com/templatemo" target="_blank"><i class="fa fa-facebook"></i></a></li>
               <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -507,26 +586,26 @@ SuPlanner
           <div class="col-md-3 footer-item last-item">
             <h4>Contact Us</h4>
             <div class="contact-form">
-              <form id="contact footer-contact" action="" method="post">
+              <form action="" method="post">
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <fieldset>
-                      <input name="name" type="text" class="form-control" id="name" placeholder="Full Name" required="">
+                      <input name="name" type="text" class="form-control" placeholder="Full Name" required="">
                     </fieldset>
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <fieldset>
-                      <input name="email" type="text" class="form-control" id="email" pattern="[^ @]*@[^ @]*" placeholder="E-Mail Address" required="">
+                      <input name="email" type="text" class="form-control" pattern="[^ @]*@[^ @]*" placeholder="E-Mail Address" required="">
                     </fieldset>
                   </div>
                   <div class="col-lg-12">
                     <fieldset>
-                      <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
+                      <textarea name="message" rows="6" class="form-control" placeholder="Your Message" required=""></textarea>
                     </fieldset>
                   </div>
                   <div class="col-lg-12">
                     <fieldset>
-                      <button type="submit" id="form-submit" class="filled-button">Send Message</button>
+                      <button type="submit" class="filled-button">Send Message</button>
                     </fieldset>
                   </div>
                 </div>
@@ -541,9 +620,82 @@ SuPlanner
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <p>Copyright &copy; 2026 SuPlanner Co., Ltd.
-            
-             <a rel="nofollow noopener" href="https://templatemo.com" target="_blank"></a></p>
+            <p>Copyright &copy; 2026 SuPlanner Co., Ltd.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login Modal Integration -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="background-color: #232323; border: none; border-radius: 5px;">
+          <div class="modal-header" style="border-bottom: 1px solid #333;">
+            <h5 class="modal-title" id="loginModalLabel" style="color: #fff;">SuPlanner <em style="color: #a4c639; font-style: normal;">Login</em></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #fff;">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="padding: 30px;">
+            <form action="" method="post">
+              <div class="row">
+                <div class="col-lg-12" style="margin-bottom: 20px;">
+                  <fieldset>
+                    <input name="login-email" type="email" class="form-control" placeholder="E-Mail Address" required="" style="background-color: #1e1e1e; color: #fff; border: 1px solid #333;">
+                  </fieldset>
+                </div>
+                <div class="col-lg-12" style="margin-bottom: 20px;">
+                  <fieldset>
+                    <input name="login-password" type="password" class="form-control" placeholder="Password" required="" style="background-color: #1e1e1e; color: #fff; border: 1px solid #333;">
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <button type="submit" class="filled-button" style="width: 100%;">Sign In</button>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sign Up Modal Integration -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="background-color: #232323; border: none; border-radius: 5px;">
+          <div class="modal-header" style="border-bottom: 1px solid #333;">
+            <h5 class="modal-title" id="signupModalLabel" style="color: #fff;">SuPlanner <em style="color: #a4c639; font-style: normal;">Sign Up</em></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #fff;">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="padding: 30px;">
+            <form action="" method="post">
+              <div class="row">
+                <div class="col-lg-12" style="margin-bottom: 20px;">
+                  <fieldset>
+                    <input name="signup-name" type="text" class="form-control" placeholder="Full Name" required="" style="background-color: #1e1e1e; color: #fff; border: 1px solid #333;">
+                  </fieldset>
+                </div>
+                <div class="col-lg-12" style="margin-bottom: 20px;">
+                  <fieldset>
+                    <input name="signup-email" type="email" class="form-control" placeholder="E-Mail Address" required="" style="background-color: #1e1e1e; color: #fff; border: 1px solid #333;">
+                  </fieldset>
+                </div>
+                <div class="col-lg-12" style="margin-bottom: 20px;">
+                  <fieldset>
+                    <input name="signup-password" type="password" class="form-control" placeholder="Password" required="" style="background-color: #1e1e1e; color: #fff; border: 1px solid #333;">
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <button type="submit" class="filled-button" style="width: 100%;">Create Account</button>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -559,16 +711,5 @@ SuPlanner
     <script src="assets/js/slick.js"></script>
     <script src="assets/js/accordions.js"></script>
 
-    <script language = "text/Javascript"> 
-      cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
-      function clearField(t){                   //declaring the array outside of the
-      if(! cleared[t.id]){                      // function makes it static and global
-          cleared[t.id] = 1;  // you could use true and false, but that's more typing
-          t.value='';         // with more chance of typos
-          t.style.color='#fff';
-          }
-      }
-    </script>
-
-  </body>
+</body>
 </html>
