@@ -70,6 +70,84 @@ https://templatemo.com/tm-545-finance-business
     padding-bottom: 10px;
   }
 
+   /* --- MENÚ HAMBURGUESA ESTÉTICO --- */
+   .navbar-toggler {
+        border: none;
+        background: transparent;
+        padding: 0;
+        outline: none;
+        box-shadow: none;
+      }
+
+      .navbar-toggler:focus {
+        outline: none;
+        box-shadow: none;
+      }
+
+      .hamburger-icon {
+        width: 30px;
+        height: 22px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+      }
+
+      .hamburger-icon span {
+        display: block;
+        height: 3px;
+        width: 100%;
+        background-color: #fff;
+        border-radius: 3px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      /* Animación del menú hamburguesa al abrirse */
+      .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(1) {
+        transform: translateY(9.5px) rotate(45deg);
+        background-color: #a4c639;
+      }
+
+      .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(3) {
+        transform: translateY(-9.5px) rotate(-45deg);
+        background-color: #a4c639;
+      }
+
+      /* Botones de Autenticación Navbar */
+      .btn-nav-login {
+        background-color: transparent;
+        color: #fff !important;
+        border: 2px solid #a4c639;
+        border-radius: 20px;
+        padding: 6px 18px !important;
+        margin-left: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-nav-login:hover {
+        background-color: #a4c639;
+        color: #fff !important;
+      }
+
+      .btn-nav-signup {
+        background-color: #a4c639;
+        color: #fff !important;
+        border-radius: 20px;
+        padding: 8px 20px !important;
+        margin-left: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-nav-signup:hover {
+        background-color: #8fae2d;
+        color: #fff !important;
+      }
+
   /* Ajuste responsivo para teléfonos y tablets */
   @media (max-width: 991px) {
     header {
@@ -110,7 +188,7 @@ https://templatemo.com/tm-545-finance-business
         <div class="row">
           <div class="col-md-8 col-xs-12">
             <ul class="left-info">
-              <li><a href="#"><i class="fa fa-clock-o"></i>Mon-Sat 05:00 AM -10:00 PM</a></li>
+              <li><a href="#"><i class="fa fa-clock-o"></i>Monday-Friday</a></li>
               <li><a href="#"><i class="fa fa-phone"></i>6825-6832</a></li>
             </ul>
           </div>
@@ -151,12 +229,19 @@ https://templatemo.com/tm-545-finance-business
               <li class="nav-item active">
                 <a class="nav-link" href="contact.html">Contact Us</a>
               </li>
+
+              <!-- Botones Funcionales de Login y Sign Up -->
               <li class="nav-item">
-                <a class="nav-link" href="Calendario.html">Agenda</a>
+                <a class="nav-link btn-nav-login" href="#" data-toggle="modal" data-target="#loginModal">Log In</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="libreria.html">Library</a>
+                <a class="nav-link btn-nav-signup" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>
               </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+              
             </ul>
           </div>
         </div>
@@ -351,6 +436,80 @@ https://templatemo.com/tm-545-finance-business
             <p>Copyright &copy; 2026 SuPlanner Co., Ltd.
             
             - Design: <a rel="nofollow noopener" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Login Modal Integration -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="background-color: #232323; border: none; border-radius: 5px;">
+          <div class="modal-header" style="border-bottom: 1px solid #333;">
+            <h5 class="modal-title" id="loginModalLabel" style="color: #fff;">SuPlanner <em style="color: #a4c639; font-style: normal;">Login</em></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #fff;">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="padding: 30px;">
+            <form action="" method="post">
+              <div class="row">
+                <div class="col-lg-12" style="margin-bottom: 20px;">
+                  <fieldset>
+                    <input name="login-email" type="email" class="form-control" placeholder="E-Mail Address" required="" style="background-color: #1e1e1e; color: #fff; border: 1px solid #333;">
+                  </fieldset>
+                </div>
+                <div class="col-lg-12" style="margin-bottom: 20px;">
+                  <fieldset>
+                    <input name="login-password" type="password" class="form-control" placeholder="Password" required="" style="background-color: #1e1e1e; color: #fff; border: 1px solid #333;">
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <button type="submit" class="filled-button" style="width: 100%;">Sign In</button>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sign Up Modal Integration -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="background-color: #232323; border: none; border-radius: 5px;">
+          <div class="modal-header" style="border-bottom: 1px solid #333;">
+            <h5 class="modal-title" id="signupModalLabel" style="color: #fff;">SuPlanner <em style="color: #a4c639; font-style: normal;">Sign Up</em></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #fff;">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="padding: 30px;">
+            <form action="" method="post">
+              <div class="row">
+                <div class="col-lg-12" style="margin-bottom: 20px;">
+                  <fieldset>
+                    <input name="signup-name" type="text" class="form-control" placeholder="Full Name" required="" style="background-color: #1e1e1e; color: #fff; border: 1px solid #333;">
+                  </fieldset>
+                </div>
+                <div class="col-lg-12" style="margin-bottom: 20px;">
+                  <fieldset>
+                    <input name="signup-email" type="email" class="form-control" placeholder="E-Mail Address" required="" style="background-color: #1e1e1e; color: #fff; border: 1px solid #333;">
+                  </fieldset>
+                </div>
+                <div class="col-lg-12" style="margin-bottom: 20px;">
+                  <fieldset>
+                    <input name="signup-password" type="password" class="form-control" placeholder="Password" required="" style="background-color: #1e1e1e; color: #fff; border: 1px solid #333;">
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <button type="submit" class="filled-button" style="width: 100%;">Create Account</button>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
