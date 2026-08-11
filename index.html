@@ -19,52 +19,73 @@
     <link rel="stylesheet" href="assets/css/owl.css">
     
     <style>
-      /* --- CONTROL DE LA BARRA DE NAVEGACIÓN Y HEADER --- */
-      header {
-        position: absolute;
-        width: 100%;
-        height: 85px;
-        background-color: rgba(0, 0, 0, 0.2);
-        z-index: 100;
-        transition: all 0.3s ease;
-      }
+     /* =========================================================
+   HEADER PRINCIPAL - SUPLANNER
+   ========================================================= */
 
-      .navbar {
-        padding: 10px 0px;
-        height: 100%;
-      }
+header {
+  position: absolute;
+  width: 100%;
+  height: 85px;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 100;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(164, 198, 57, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
 
-      .navbar-brand {
-        display: flex;
-        align-items: center;
-        padding-top: 0;
-        padding-bottom: 0;
-        margin-right: 20px;
-        overflow: visible;
-      }
+/* Barra de navegación */
+.navbar {
+  padding: 10px 0;
+  height: 100%;
+}
 
-      .navbar-brand img {
-        height: 75px;
-        max-height: 75px;
-        width: auto;
-        object-fit: contain;
-        transition: all 0.3s ease;
-      }
+/* =========================================================
+   LOGO
+   ========================================================= */
 
-      .navbar-nav {
-        align-items: center;
-      }
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-right: 35px;
+  overflow: visible;
+}
+
+.navbar-brand img {
+  height: 75px;
+  max-height: 75px;
+  width: auto;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el mouse sobre el logo */
+.navbar-brand:hover img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 8px rgba(164, 198, 57, 0.35));
+}
+
+/* =========================================================
+   MENÚ PRINCIPAL
+   ========================================================= */
+
+.navbar-nav {
+  align-items: center;
+  gap: 5px;
+}
 
       .navbar-nav .nav-item .nav-link {
         padding-top: 10px;
         padding-bottom: 10px;
-        color: #111658 !important;
+        color: #fff !important;
         font-weight: 500;
       }
 
       .navbar-nav .nav-item .nav-link:hover,
       .navbar-nav .nav-item.active .nav-link {
-        color: #111658!important;
+        color: #a4c639 !important;
       }
 
       /* --- MENÚ HAMBURGUESA ESTÉTICO --- */
@@ -76,49 +97,49 @@
         box-shadow: none;
       }
 
-      .navbar-toggler:focus {
-        outline: none;
-        box-shadow: none;
-      }
+.navbar-toggler:focus {
+  outline: none;
+  box-shadow: none;
+}
 
-      .hamburger-icon {
-        width: 30px;
-        height: 22px;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        cursor: pointer;
-      }
+.hamburger-icon {
+  width: 30px;
+  height: 22px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
 
-      .hamburger-icon span {
-        display: block;
-        height: 3px;
-        width: 100%;
-        background-color: #fff;
-        border-radius: 3px;
-        transition: all 0.3s ease-in-out;
-      }
+.hamburger-icon span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
 
-      /* Animación del menú hamburguesa al abrirse */
-      .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(1) {
-        transform: translateY(9.5px) rotate(45deg);
-        background-color: #a4c639;
-      }
+/* Animación al abrir */
+.navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(1) {
+  transform: translateY(9.5px) rotate(45deg);
+  background-color: #a4c639;
+}
 
-      .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(2) {
-        opacity: 0;
-      }
+.navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(2) {
+  opacity: 0;
+}
 
-      .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(3) {
-        transform: translateY(-9.5px) rotate(-45deg);
-        background-color: #a4c639;
-      }
+.navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(3) {
+  transform: translateY(-9.5px) rotate(-45deg);
+  background-color: #a4c639;
+}
 
       /* Botones de Autenticación Navbar */
       .btn-nav-login {
         background-color: transparent;
-        color: #111658;!important;
+        color: #fff !important;
         border: 2px solid #a4c639;
         border-radius: 20px;
         padding: 6px 18px !important;
@@ -133,7 +154,7 @@
 
       .btn-nav-signup {
         background-color: #a4c639;
-        color: #111658; !important;
+        color: #fff !important;
         border-radius: 20px;
         padding: 8px 20px !important;
         margin-left: 8px;
@@ -157,29 +178,56 @@
           max-height: 50px;
         }
 
-        .navbar-collapse {
-          background-color: #1e1e1e;
-          padding: 20px;
-          border-radius: 0 0 10px 10px;
-          box-shadow: 0px 10px 20px rgba(0,0,0,0.3);
-          margin-top: 10px;
-        }
+  .navbar-collapse {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    margin-top: 10px;
+  }
 
-        .btn-nav-login, .btn-nav-signup {
-          margin-left: 0;
-          margin-top: 10px;
-          text-align: center;
-          display: block;
-        }
-      }
+  .navbar-nav {
+    gap: 0;
+  }
 
-      /* --- LOGO EN EL PIE DE PÁGINA (FOOTER) --- */
-      .footer-logo {
-        height: 55px;
-        width: auto;
-        margin-bottom: 20px;
-        display: block;
-      }
+  .navbar-nav .nav-item {
+    width: 100%;
+  }
+
+  .navbar-nav .nav-item .nav-link {
+    color: #ffffff !important;
+    padding: 12px 15px;
+    text-align: center;
+  }
+
+  .navbar-nav .nav-item .nav-link:hover {
+    color: #a4c639 !important;
+    transform: none;
+  }
+
+  .navbar-nav .nav-item .nav-link::after {
+    display: none;
+  }
+
+  .btn-nav-login,
+  .btn-nav-signup {
+    margin-left: 0;
+    margin-top: 10px;
+    text-align: center;
+    display: block;
+  }
+}
+
+/* =========================================================
+   FOOTER LOGO
+   ========================================================= */
+
+.footer-logo {
+  height: 55px;
+  width: auto;
+  margin-bottom: 20px;
+  display: block;
+}
     </style>
 </head>
 
@@ -218,11 +266,29 @@
                 <a class="nav-link" href="about.html">About Us</a>
               </li> 
               <li class="nav-item">
-                <a class="nav-link" href="services.html">Functions</a>
+                <a class="nav-link" href="services.html">Services</a>
               </li>                                 
               <li class="nav-item">
                 <a class="nav-link" href="contact.html">Contact Us</a>
               </li>
+
+              <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="moreDropdown"
+       role="button" data-toggle="dropdown" aria-haspopup="true"
+       aria-expanded="false">
+        More
+    </a>
+
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="moreDropdown">
+        <a class="dropdown-item" href="Calendario.html">
+            <i class="fa fa-calendar"></i> Planner
+        </a>
+
+        <a class="dropdown-item" href="libreria.html">
+            <i class="fa fa-bar-chart"></i> Library
+        </a>
+    </div>
+</li>
               
               <!-- Botones Funcionales de Login y Sign Up -->
               <li class="nav-item">
