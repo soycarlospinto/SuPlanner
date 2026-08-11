@@ -26,145 +26,284 @@ https://templatemo.com/tm-545-finance-business
 
 -->
 <style>
-  /* --- CONTROL DE LA BARRA DE NAVEGACIÓN Y HEADER --- */
+ /* =========================================================
+   HEADER PRINCIPAL - SUPLANNER
+   ========================================================= */
+
+header {
+  position: absolute;
+  width: 100%;
+  height: 85px;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 100;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(164, 198, 57, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Barra de navegación */
+.navbar {
+  padding: 10px 0;
+  height: 100%;
+}
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-right: 35px;
+  overflow: visible;
+}
+
+.navbar-brand img {
+  height: 75px;
+  max-height: 75px;
+  width: auto;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el mouse sobre el logo */
+.navbar-brand:hover img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 8px rgba(164, 198, 57, 0.35));
+}
+
+/* =========================================================
+   MENÚ PRINCIPAL
+   ========================================================= */
+
+.navbar-nav {
+  align-items: center;
+  gap: 5px;
+}
+
+.navbar-nav .nav-item .nav-link {
+  position: relative;
+  padding: 10px 14px;
+  color: #ffffff !important;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Línea verde debajo del enlace */
+.navbar-nav .nav-item .nav-link:not(.btn-nav-login):not(.btn-nav-signup)::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  width: 0;
+  height: 2px;
+  background-color: #a4c639;
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+/* Hover de los enlaces */
+.navbar-nav .nav-item .nav-link:hover {
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+}
+
+/* Línea al pasar el mouse */
+.navbar-nav .nav-item .nav-link:hover::after {
+  width: 65%;
+}
+
+/* Página activa */
+.navbar-nav .nav-item.active .nav-link {
+  color: #ffffff !important;
+}
+
+.navbar-nav .nav-item.active .nav-link::after {
+  width: 65%;
+}
+
+/* =========================================================
+   BOTÓN LOGIN
+   ========================================================= */
+
+.btn-nav-login {
+  background: rgba(0, 0, 0, 0.15);
+  color: #ffffff !important;
+  border: 2px solid #a4c639;
+  border-radius: 25px;
+  padding: 7px 20px !important;
+  margin-left: 12px;
+  transition: all 0.3s ease;
+  text-shadow: none !important;
+}
+
+/* Quitar línea inferior del botón */
+.btn-nav-login::after {
+  display: none !important;
+}
+
+.btn-nav-login:hover {
+  background-color: #a4c639;
+  color: #ffffff !important;
+  border-color: #a4c639;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 5px 15px rgba(164, 198, 57, 0.3);
+}
+
+/* =========================================================
+   BOTÓN SIGN UP
+   ========================================================= */
+
+.btn-nav-signup {
+  background-color: #a4c639;
+  color: #ffffff !important;
+  border: 2px solid #a4c639;
+  border-radius: 25px;
+  padding: 7px 20px !important;
+  margin-left: 8px;
+  transition: all 0.3s ease;
+  text-shadow: none !important;
+}
+
+/* Quitar línea inferior del botón */
+.btn-nav-signup::after {
+  display: none !important;
+}
+
+.btn-nav-signup:hover {
+  background-color: #8fae2d;
+  border-color: #8fae2d;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 5px 15px rgba(164, 198, 57, 0.4);
+}
+
+/* =========================================================
+   MENÚ HAMBURGUESA
+   ========================================================= */
+
+.navbar-toggler {
+  border: none;
+  background: transparent;
+  padding: 0;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.navbar-toggler:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.hamburger-icon {
+  width: 30px;
+  height: 22px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.hamburger-icon span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Animación al abrir */
+.navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(1) {
+  transform: translateY(9.5px) rotate(45deg);
+  background-color: #a4c639;
+}
+
+.navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(3) {
+  transform: translateY(-9.5px) rotate(-45deg);
+  background-color: #a4c639;
+}
+
+/* =========================================================
+   RESPONSIVE - TABLETS Y MÓVILES
+   ========================================================= */
+
+@media (max-width: 991px) {
+
   header {
-    position: absolute;
-    width: 100%;
-    height: 85px; /* Altura del header ajustada */
-    background-color: transparent;
-    z-index: 100;
-    transition: all 0.3s ease;
+    height: 70px;
+    background-color: #1e1e1e;
+    border-bottom: 1px solid rgba(164, 198, 57, 0.3);
   }
 
-  .navbar {
-    padding: 10px 0px;
-    height: 100%;
-  }
-
-  .navbar-brand {
-    display: flex;
-    align-items: center;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-right: 20px;
-    overflow: visible; /* Permite destacar el logo */
-  }
-
-  /* Logo más visible y destacado */
   .navbar-brand img {
-    height: 90px;           /* Altura mayor para máxima visibilidad */
-    max-height: 90px;
-    width: auto;            /* Mantiene la proporción original */
-    object-fit: contain;
-    transition: all 0.3s ease;
-    filter:none;
+    height: 50px;
+    max-height: 50px;
+  }
+
+  .navbar-collapse {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    margin-top: 10px;
   }
 
   .navbar-nav {
-    align-items: center;    /* Centra verticalmente los botones del menú con el logo */
+    gap: 0;
+  }
+
+  .navbar-nav .nav-item {
+    width: 100%;
   }
 
   .navbar-nav .nav-item .nav-link {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-  /* --- MENÚ HAMBURGUESA ESTÉTICO --- */
-  .navbar-toggler {
-        border: none;
-        background: transparent;
-        padding: 0;
-        outline: none;
-        box-shadow: none;
-      }
-
-      .navbar-toggler:focus {
-        outline: none;
-        box-shadow: none;
-      }
-
-      .hamburger-icon {
-        width: 30px;
-        height: 22px;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        cursor: pointer;
-      }
-
-      .hamburger-icon span {
-        display: block;
-        height: 3px;
-        width: 100%;
-        background-color: #fff;
-        border-radius: 3px;
-        transition: all 0.3s ease-in-out;
-      }
-
-      /* Animación del menú hamburguesa al abrirse */
-      .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(1) {
-        transform: translateY(9.5px) rotate(45deg);
-        background-color: #a4c639;
-      }
-
-      .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(2) {
-        opacity: 0;
-      }
-
-      .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(3) {
-        transform: translateY(-9.5px) rotate(-45deg);
-        background-color: #a4c639;
-      }
-
-      /* Botones de Autenticación Navbar */
-      .btn-nav-login {
-        background-color: transparent;
-        color: #fff !important;
-        border: 2px solid #a4c639;
-        border-radius: 20px;
-        padding: 6px 18px !important;
-        margin-left: 10px;
-        transition: all 0.3s ease;
-      }
-
-      .btn-nav-login:hover {
-        background-color: #a4c639;
-        color: #fff !important;
-      }
-
-      .btn-nav-signup {
-        background-color: #a4c639;
-        color: #fff !important;
-        border-radius: 20px;
-        padding: 8px 20px !important;
-        margin-left: 8px;
-        transition: all 0.3s ease;
-      }
-
-      .btn-nav-signup:hover {
-        background-color: #8fae2d;
-        color: #fff !important;
-      }
-
-  /* Ajuste responsivo para teléfonos y tablets */
-  @media (max-width: 991px) {
-    header {
-      height: 70px;
-    }
-    
-    .navbar-brand img {
-      height: 50px;         /* Tamaño adaptado para pantallas móviles */
-      max-height: 50px;
-    }
+    color: #ffffff !important;
+    padding: 12px 15px;
+    text-align: center;
   }
 
-  /* --- LOGO EN EL PIE DE PÁGINA (FOOTER) --- */
-  .footer-logo {
-    height: 55px;
-    width: auto;
-    margin-bottom: 20px;
+  .navbar-nav .nav-item .nav-link:hover {
+    color: #a4c639 !important;
+    transform: none;
+  }
+
+  .navbar-nav .nav-item .nav-link::after {
+    display: none;
+  }
+
+  .btn-nav-login,
+  .btn-nav-signup {
+    margin-left: 0;
+    margin-top: 10px;
+    text-align: center;
     display: block;
   }
+}
+
+/* =========================================================
+   FOOTER LOGO
+   ========================================================= */
+
+.footer-logo {
+  height: 55px;
+  width: auto;
+  margin-bottom: 20px;
+  display: block;
+}
   </style>
   
   </head>
@@ -228,6 +367,24 @@ https://templatemo.com/tm-545-finance-business
               <li class="nav-item">
                 <a class="nav-link" href="contact.html">Contact Us</a>
               </li>
+
+               <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="moreDropdown"
+       role="button" data-toggle="dropdown" aria-haspopup="true"
+       aria-expanded="false">
+        More
+    </a>
+
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="moreDropdown">
+        <a class="dropdown-item" href="Calendario.html">
+            <i class="fa fa-calendar"></i> Planner
+        </a>
+
+        <a class="dropdown-item" href="libreria.html">
+            <i class="fa fa-bar-chart"></i> Library
+        </a>
+    </div>
+</li>
               <!-- Botones Funcionales de Login y Sign Up -->
               <li class="nav-item">
                 <a class="nav-link btn-nav-login" href="#" data-toggle="modal" data-target="#loginModal">Log In</a>

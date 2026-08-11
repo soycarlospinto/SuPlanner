@@ -2,823 +2,2694 @@
 <html lang="es">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta name="description" content="Biblioteca Digital SuPlanner">
     <meta name="author" content="SuPlanner">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
     <title>SuPlanner - Library</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
-    <!-- Additional CSS Files (SuPlanner Main Theme) -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-finance-business.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <style>
-        /* ==========================================================================
-           1. ESTILOS REUTILIZADOS Y AJUSTADOS DEL HEADER GENERAL
-           ========================================================================== */
-        header {
-            position: relative; /* Ajustado para dar paso al layout de la app */
-            width: 100%;
-            height: 85px;
-            background-color: #321a1a; /* Fondo sólido oscuro acorde al tema */
-            z-index: 100;
-            transition: all 0.3s ease;
+
+        /* =========================================================
+           VARIABLES
+        ========================================================= */
+
+        :root {
+            --bg-main: #f4f7fa;
+            --bg-header: #8BC400;
+            --bg-card: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --border-color: #e1e8ed;
+            --accent-blue: #235a9f;
+            --accent-green: #8BC400;
+            --sidebar-hover: #eef5e2;
+            --shadow: 0 8px 20px rgba(0,0,0,0.07);
         }
 
-        .sub-header {
-            background-color: #005191;
+        body.dark-mode {
+            --bg-main: #121824;
+            --bg-header: #1f2937;
+            --bg-card: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --accent-blue: #3b82f6;
+            --accent-green: #8BC400;
+            --sidebar-hover: #263449;
+            --shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            transition:
+                background-color .25s ease,
+                color .25s ease,
+                border-color .25s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+
+        /* =========================================================
+           HEADER GENERAL
+        ========================================================= */
+
+        header {
+            background-color: rgba(0, 0, 0, 0.35);
+            box-shadow: 0 4px 12px rgba(0,0,0,.12);
+            position: static;
+            top: 0;
+            z-index: 999;
         }
 
         .navbar {
-            padding: 10px 0px;
-            height: 100%;
+            padding: 8px 0;
         }
 
         .navbar-brand {
             display: flex;
             align-items: center;
-            padding-top: 0;
-            padding-bottom: 0;
-            margin-right: 20px;
-            overflow: visible;
         }
 
         .navbar-brand img {
-            height: 90px;
-            max-height: 90px;
+            height: 60px;
             width: auto;
             object-fit: contain;
-            transition: all 0.3s ease;
         }
 
-        .navbar-nav {
-            align-items: center;
+        .nav-link {
+            color: white !important;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 9px 15px !important;
+            border-radius: 20px;
         }
 
-        .navbar-nav .nav-item .nav-link {
-            padding-top: 10px;
-            padding-bottom: 10px;
-            color: #ffffff !important;
-            font-weight: 500;
+        .nav-link:hover,
+        .nav-item.active .nav-link {
+            background: rgba(255,255,255,.20);
+            color: white !important;
         }
 
-        .navbar-nav .nav-item.active .nav-link,
-        .navbar-nav .nav-item .nav-link:hover {
-            color: #a4c639 !important; /* Accent color del sitio */
+        .navbar-toggler {
+            border: 1px solid rgba(255,255,255,.5);
+            padding: 6px 9px;
         }
 
-        @media (max-width: 991px) {
-            header {
-                height: auto;
-            }
-            .navbar-brand img {
-                height: 50px;
-                max-height: 50px;
-            }
+        .navbar-toggler-icon {
+            background-image: url(
+                "data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"
+            );
         }
 
-        /* ==========================================================================
-           2. ESTILOS DE LA APLICACIÓN DE BIBLIOTECA (SPA)
-           ========================================================================== */
-        :root {
-            --bg-color: #F8F9FA;
-            --sidebar-bg: #FFFFFF;
-            --primary-accent: #2c3e50;
-            --secondary-accent: #34495e;
-            --text-dark: #222222;
-            --text-muted: #777777;
-            --card-bg: #FFFFFF;
-            --border-color: #E0E0E0;
-        }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-        }
+        /* =========================================================
+           CONTENEDOR PRINCIPAL
+        ========================================================= */
 
-        /* Layout principal dividiendo Sidebar y Contenido */
-        .app-wrapper {
+        .library-wrapper {
             display: flex;
-            min-height: calc(100vh - 125px); /* Ajustado según header y subheader */
+            min-height: calc(100vh - 68px);
         }
+
+
+        /* =========================================================
+           SIDEBAR
+        ========================================================= */
 
         .sidebar {
-            width: 260px;
-            background-color: var(--sidebar-bg);
+            width: 255px;
+            flex-shrink: 0;
+            background: var(--bg-card);
             border-right: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 20px 0;
-            flex-shrink: 0;
+            padding: 22px 12px;
         }
 
-        .nav-menu {
+        .library-brand {
+            padding: 5px 14px 20px;
+        }
+
+        .library-brand h3 {
+            font-size: 18px;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .library-brand p {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .sidebar-menu {
             display: flex;
             flex-direction: column;
-            gap: 5px;
-            padding: 0 10px;
+            gap: 6px;
         }
 
-        .nav-link-app {
+        .sidebar-link {
+            width: 100%;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px 15px;
-            color: var(--text-muted);
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .nav-link-app:hover, .nav-link-app.active {
-            background-color: #f0f4f8;
-            color: var(--primary-accent);
+            font-size: 14px;
             font-weight: 600;
+            cursor: pointer;
+            text-align: left;
         }
 
-        .sidebar-footer {
-            padding: 20px 15px 0 15px;
-            border-top: 1px solid var(--border-color);
+        .sidebar-link i {
+            width: 20px;
             text-align: center;
         }
 
-        .sidebar-footer .sub-text {
-            font-size: 0.75rem;
-            color: var(--text-muted);
+        .sidebar-link:hover {
+            background: var(--sidebar-hover);
+            color: var(--accent-blue);
+            text-decoration: none;
         }
+
+        .sidebar-link.active {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .sidebar-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 18px 12px 5px;
+            text-align: center;
+        }
+
+        .sidebar-footer strong {
+            font-size: 13px;
+        }
+
+        .sidebar-footer span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+
+        /* =========================================================
+           CONTENIDO
+        ========================================================= */
 
         .main-content {
             flex: 1;
-            padding: 25px 35px;
-            overflow-y: auto;
+            padding: 25px 30px;
+            min-width: 0;
         }
 
-        .top-header {
+
+        /* =========================================================
+           BARRA SUPERIOR
+        ========================================================= */
+
+        .top-bar {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .action-controls {
-            display: flex;
-            align-items: center;
             gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
         }
 
-        .btn-icon-text {
-            background: #FFFFFF;
+        .top-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
             border: 1px solid var(--border-color);
-            padding: 8px 16px;
+            background: var(--bg-card);
+            color: var(--text-main);
             border-radius: 20px;
+            padding: 9px 14px;
             cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-            color: var(--text-dark);
-            transition: all 0.2s ease;
+            gap: 7px;
         }
 
-        .btn-icon-text:hover {
-            background: #f0f0f0;
+        .action-btn:hover {
+            background: var(--sidebar-hover);
+            color: var(--accent-blue);
         }
 
-        .search-box {
+        .search-container {
             position: relative;
-            width: 320px;
+            width: 330px;
+            max-width: 100%;
         }
 
-        .search-box input {
-            width: 100%;
-            padding: 10px 15px 10px 38px;
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            outline: none;
-            font-size: 0.9rem;
-        }
-
-        .search-box i {
+        .search-container i {
             position: absolute;
-            left: 14px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-muted);
         }
 
-        /* Vistas / Páginas SPA */
+        .search-container input {
+            width: 100%;
+            height: 42px;
+            border-radius: 22px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-main);
+            padding: 0 15px 0 42px;
+            outline: none;
+        }
+
+        .search-container input:focus {
+            border-color: var(--accent-blue);
+        }
+
+
+        /* =========================================================
+           PÁGINAS
+        ========================================================= */
+
         .page {
             display: none;
+            animation: fadeIn .25s ease;
         }
 
         .page.active {
             display: block;
         }
 
-        /* Secciones y Rejilla */
-        .section-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--text-dark);
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .categories-grid, .vestibules-grid {
+
+        /* =========================================================
+           TITULOS
+        ========================================================= */
+
+        .page-title {
+            margin-bottom: 5px;
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        .page-description {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================================================
+           CATEGORÍAS
+        ========================================================= */
+
+        .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
             gap: 15px;
             margin-bottom: 35px;
         }
 
-        .cat-card, .vest-card {
-            background-color: var(--card-bg);
+        .category-card {
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 15px;
+            padding: 25px 15px;
             text-align: center;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: var(--shadow);
         }
 
-        .cat-card:hover, .vest-card:hover {
+        .category-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+            border-color: var(--accent-blue);
         }
 
-        .cat-card i {
-            font-size: 1.8rem;
-            color: var(--primary-accent);
+        .category-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: var(--sidebar-hover);
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 22px;
+        }
+
+        .category-card h4 {
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .category-card span {
+            color: var(--text-muted);
+            font-size: 11px;
+        }
+
+
+        /* =========================================================
+           VESTÍBULOS
+        ========================================================= */
+
+        .vestibules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .vestibule-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+
+        .vestibule-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-green);
+        }
+
+        .vestibule-card i {
+            color: var(--accent-green);
+            font-size: 22px;
             margin-bottom: 10px;
         }
 
-        /* Formato de Libros */
-        .tabs-header {
-            display: flex;
+        .vestibule-card h4 {
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .vestibule-card p {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin: 0;
+        }
+
+
+        /* =========================================================
+           ESTADÍSTICAS
+        ========================================================= */
+
+        .library-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card i {
+            color: var(--accent-blue);
+            font-size: 20px;
+        }
+
+        .stat-card h3 {
+            font-size: 24px;
+            margin: 8px 0 2px;
+        }
+
+        .stat-card p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+
+        /* =========================================================
+           CATALOGO
+        ========================================================= */
+
+        .catalog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
             border-bottom: 1px solid var(--border-color);
             margin-bottom: 25px;
         }
 
-        .tab-item {
-            padding: 10px 5px;
-            cursor: pointer;
+        .tab {
+            border: none;
+            background: transparent;
             color: var(--text-muted);
+            padding: 10px 15px;
+            cursor: pointer;
+            font-weight: 600;
             border-bottom: 2px solid transparent;
-            font-weight: 500;
         }
 
-        .tab-item.active {
-            color: var(--primary-accent);
-            border-bottom-color: var(--primary-accent);
+        .tab:hover {
+            color: var(--accent-blue);
         }
+
+        .tab.active {
+            color: var(--accent-blue);
+            border-bottom-color: var(--accent-blue);
+        }
+
+
+        /* =========================================================
+           LIBROS
+        ========================================================= */
 
         .books-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
             gap: 20px;
         }
 
         .book-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
+            border-radius: 14px;
             overflow: hidden;
+            box-shadow: var(--shadow);
             position: relative;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.2s ease;
         }
 
         .book-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
         }
 
         .book-cover {
-            height: 200px;
+            height: 190px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             color: white;
-            font-weight: bold;
             position: relative;
         }
 
-        .cover-1 { background: linear-gradient(135deg, #1e3c72, #2a5298); }
-        .cover-2 { background: linear-gradient(135deg, #2b5876, #4e4376); }
-        .cover-3 { background: linear-gradient(135deg, #00b09b, #96c93d); }
-        .cover-4 { background: linear-gradient(135deg, #d31027, #ea384d); }
-
-        .book-title { font-size: 1.1rem; }
-        .book-code { font-size: 0.8rem; opacity: 0.8; }
-
-        .bookmark-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255,255,255,0.8);
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #777;
-            transition: all 0.2s ease;
+        .cover-1 {
+            background: linear-gradient(135deg, #235a9f, #4285d4);
         }
 
-        .bookmark-btn.saved {
+        .cover-2 {
+            background: linear-gradient(135deg, #34495e, #58728b);
+        }
+
+        .cover-3 {
+            background: linear-gradient(135deg, #5f9f00, #8BC400);
+        }
+
+        .cover-4 {
+            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+        }
+
+        .book-cover i {
+            font-size: 38px;
+            margin-bottom: 12px;
+            opacity: .9;
+        }
+
+        .book-title {
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .book-code {
+            font-size: 12px;
+            opacity: .85;
+            margin-top: 3px;
+        }
+
+        .bookmark {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            z-index: 5;
+            width: 34px;
+            height: 34px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255,255,255,.9);
+            color: #777;
+            cursor: pointer;
+        }
+
+        .bookmark.saved {
             color: #e74c3c;
-            background: #ffffff;
         }
 
         .book-info {
-            padding: 12px;
+            padding: 14px;
         }
 
         .book-name {
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 5px;
         }
 
         .book-category {
-            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-size: 11px;
+        }
+
+        .book-language {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 8px;
+            border-radius: 10px;
+            background: var(--sidebar-hover);
+            color: var(--accent-blue);
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+
+        /* =========================================================
+           MENSAJE VACIO
+        ========================================================= */
+
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
             color: var(--text-muted);
         }
 
-        /* Estilos Adaptativos */
-        @media (max-width: 900px) {
-            .app-wrapper {
+        .empty-state i {
+            font-size: 45px;
+            margin-bottom: 15px;
+            opacity: .5;
+        }
+
+        .empty-state h3 {
+            font-size: 17px;
+            margin-bottom: 5px;
+        }
+
+        .empty-state p {
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           MODO OSCURO
+        ========================================================= */
+
+        .theme-button {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-main);
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .theme-button:hover {
+            transform: scale(1.08);
+        }
+
+
+        /* =========================================================
+           MODAL
+        ========================================================= */
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 2000;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .custom-modal {
+            width: 100%;
+            max-width: 430px;
+            background: var(--bg-card);
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,.25);
+        }
+
+        .custom-modal h3 {
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+
+        .custom-modal p {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .modal-btn {
+            border: none;
+            border-radius: 8px;
+            padding: 9px 16px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .modal-primary {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .modal-secondary {
+            background: var(--border-color);
+            color: var(--text-main);
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 991px) {
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .search-container {
+                width: 260px;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .library-wrapper {
                 flex-direction: column;
             }
+
             .sidebar {
                 width: 100%;
+                padding: 12px;
                 border-right: none;
                 border-bottom: 1px solid var(--border-color);
-                padding: 15px;
             }
-            .nav-menu {
+
+            .library-brand {
+                display: none;
+            }
+
+            .sidebar-menu {
                 flex-direction: row;
-                justify-content: space-around;
+                overflow-x: auto;
             }
+
+            .sidebar-link {
+                white-space: nowrap;
+                justify-content: center;
+            }
+
             .sidebar-footer {
                 display: none;
             }
-            .top-header {
-                flex-direction: column;
-                gap: 15px;
+
+            .top-bar {
                 align-items: stretch;
             }
-            .search-box {
+
+            .top-actions {
                 width: 100%;
             }
+
+            .action-btn {
+                flex: 1;
+                justify-content: center;
+            }
+
+            .search-container {
+                width: 100%;
+            }
+
+            .library-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .books-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
+
+        @media (max-width: 480px) {
+
+            .navbar-brand img {
+                height: 45px;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+
+            .page-title {
+                font-size: 21px;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .action-btn span {
+                display: none;
+            }
+        }
+
     </style>
 </head>
 
-<body>
 
-    <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-    <!-- ***** Preloader End ***** -->
+<body id="body">
 
-    <!-- Sub Header General -->
-    <div class="sub-header">
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+
+<header>
+
+    <nav class="navbar navbar-expand-lg">
+
         <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-xs-12">
-                    <ul class="left-info">
-                        <li><a href="#"><i class="fa fa-clock-o"></i>Mon-Sat 05:00 AM -10:00 PM</a></li>
-                        <li><a href="#"><i class="fa fa-phone"></i>6825-6832</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <ul class="right-icons">
-                        <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-behance"></i></a></li>
-                    </ul>
-                </div>
+
+            <a class="navbar-brand" href="index.html">
+                <img src="logo2.png"
+                     alt="SuPlanner"
+                     onerror="this.style.display='none';">
+            </a>
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarResponsive">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">
+                            About Us
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">
+                            Functions
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">
+                            Contact Us
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="Calendario.html">
+                            Agenda
+                        </a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="libreria.html">
+                            Library
+                        </a>
+                    </li>
+
+                </ul>
+
             </div>
+
         </div>
-    </div>
 
-    <!-- Header / Barra de Navegación del Sitio -->
-    <header>
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <a class="navbar-brand" href="index.html">
-                    <img src="logo2.png" alt="SuPlanner">
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="services.html">Functions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="Calendario.html">Agenda</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="libreria.html">Library <span class="sr-only">(current)</span></a>
-                        </li>
-                    </ul>
-                </div>
+    </nav>
+
+</header>
+
+
+<!-- ============================================================
+     BIBLIOTECA
+============================================================ -->
+
+<div class="library-wrapper">
+
+
+    <!-- ========================================================
+         SIDEBAR
+    ========================================================= -->
+
+    <aside class="sidebar">
+
+        <div>
+
+            <div class="library-brand">
+
+                <h3>
+                    <i class="fas fa-book-open"></i>
+                    SuPlanner Library
+                </h3>
+
+                <p>
+                    Biblioteca Digital
+                </p>
+
             </div>
-        </nav>
-    </header>
 
-    <!-- App Wrapper (Layout de Biblioteca Digital) -->
-    <div class="app-wrapper">
-        
-        <!-- Sidebar SPA -->
-        <aside class="sidebar">
-            <nav class="nav-menu">
-                <a class="nav-link-app active" onclick="showPage('home', this)">
-                    <i class="fas fa-th-large"></i>
-                    <span data-i18n="navHome">Inicio & Categorías</span>
-                </a>
-                <a class="nav-link-app" onclick="showPage('catalog', this)">
+
+            <nav class="sidebar-menu">
+
+                <button class="sidebar-link active"
+                        onclick="showPage('home', this)">
+
+                    <i class="fas fa-house"></i>
+
+                    <span data-i18n="navHome">
+                        Inicio
+                    </span>
+
+                </button>
+
+
+                <button class="sidebar-link"
+                        onclick="showPage('catalog', this)">
+
                     <i class="fas fa-book"></i>
-                    <span data-i18n="navCatalog">Explorar Catálogo</span>
-                </a>
-                <a class="nav-link-app" onclick="showPage('saved', this)">
+
+                    <span data-i18n="navCatalog">
+                        Catálogo
+                    </span>
+
+                </button>
+
+
+                <button class="sidebar-link"
+                        onclick="showPage('saved', this)">
+
                     <i class="fas fa-bookmark"></i>
-                    <span data-i18n="navSaved">Mis Marcadores</span>
-                </a>
+
+                    <span data-i18n="navSaved">
+                        Mis Marcadores
+                    </span>
+
+                </button>
+
             </nav>
 
-            <div class="sidebar-footer">
-                <strong>SuPlanner Library</strong>
-                <div class="sub-text" data-i18n="footerSub">Sistema de Gestión Escolar</div>
-            </div>
-        </aside>
-
-        <!-- Área de Contenido Principal -->
-        <main class="main-content">
-            
-            <!-- Barra Superior Interna (Navegación y Búsqueda) -->
-            <div class="top-header">
-                <div class="action-controls">
-                    <button class="btn-icon-text" onclick="goBack()">
-                        <i class="fas fa-arrow-left"></i>
-                        <span data-i18n="backBtn">Volver</span>
-                    </button>
-                    <button class="btn-icon-text" onclick="goHome()">
-                        <i class="fas fa-home"></i>
-                        <span data-i18n="homeBtn">Ir al Inicio</span>
-                    </button>
-                    <button class="btn-icon-text" onclick="toggleLanguage()">
-                        <i class="fas fa-globe"></i>
-                        <span id="lang-label">ES / EN</span>
-                    </button>
-                </div>
-
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="global-search" placeholder="Buscar por título, categoría..." data-i18n-ph="searchPh">
-                </div>
-            </div>
-
-            <!-- VISTA 1: INICIO & CATEGORÍAS -->
-            <div id="page-home" class="page active">
-                <div class="section-title" data-i18n="categoriesTitle">Categorías Principales</div>
-                <div class="categories-grid">
-                    <div class="cat-card" onclick="openCategory('Education')">
-                        <i class="fas fa-graduation-cap"></i>
-                        <div>Education</div>
-                    </div>
-                    <div class="cat-card" onclick="openCategory('Sciences')">
-                        <i class="fas fa-flask"></i>
-                        <div>Sciences</div>
-                    </div>
-                    <div class="cat-card" onclick="openCategory('Philosophy')">
-                        <i class="fas fa-brain"></i>
-                        <div>Philosophy</div>
-                    </div>
-                    <div class="cat-card" onclick="openCategory('History')">
-                        <i class="fas fa-landmark"></i>
-                        <div>History</div>
-                    </div>
-                    <div class="cat-card" onclick="openCategory('Technology')">
-                        <i class="fas fa-laptop-code"></i>
-                        <div>Technology</div>
-                    </div>
-                </div>
-
-                <div class="section-title" data-i18n="vestibulesTitle">Vestíbulos</div>
-                <div class="vestibules-grid">
-                    <div class="vest-card" onclick="showPage('catalog')">
-                        <strong data-i18n="vestibule">Vestíbulo</strong> 1
-                    </div>
-                    <div class="vest-card" onclick="showPage('catalog')">
-                        <strong data-i18n="vestibule">Vestíbulo</strong> 2
-                    </div>
-                    <div class="vest-card" onclick="showPage('catalog')">
-                        <strong data-i18n="vestibule">Vestíbulo</strong> 3
-                    </div>
-                </div>
-            </div>
-
-            <!-- VISTA 2: CATÁLOGO -->
-            <div id="page-catalog" class="page">
-                <div class="section-title" id="catalog-title">Catálogo Completo</div>
-                
-                <div class="tabs-header">
-                    <div class="tab-item active" onclick="filterTab(this, 'All')" data-i18n="tabAll">Todos</div>
-                    <div class="tab-item" onclick="filterTab(this, 'English')">English</div>
-                    <div class="tab-item" onclick="filterTab(this, 'Spanish')">Spanish</div>
-                    <div class="tab-item" onclick="filterTab(this, 'Math')">Math</div>
-                    <div class="tab-item" onclick="filterTab(this, 'Science')">Science</div>
-                </div>
-
-                <div class="books-grid" id="books-container">
-                    <!-- Tarjetas de libros generadas dinámicamente -->
-                </div>
-            </div>
-
-            <!-- VISTA 3: MARCADORES / GUARDADOS -->
-            <div id="page-saved" class="page">
-                <div class="section-title" data-i18n="savedTitle">Libros Guardados / Marcadores</div>
-                <div class="books-grid" id="saved-container">
-                    <!-- Libros guardados -->
-                </div>
-            </div>
-
-        </main>
-    </div>
-
-    <!-- Sub Footer -->
-    <div class="sub-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <p>Copyright &copy; 2026 SuPlanner Co., Ltd.</p>
-                </div>
-            </div>
         </div>
+
+
+        <div class="sidebar-footer">
+
+            <strong>SuPlanner</strong>
+
+            <span data-i18n="footerSub">
+                Sistema de Gestión Escolar
+            </span>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ========================================================
+         CONTENIDO
+    ========================================================= -->
+
+    <main class="main-content">
+
+
+        <!-- ====================================================
+             BARRA SUPERIOR
+        ==================================================== -->
+
+        <div class="top-bar">
+
+            <div class="top-actions">
+
+                <button class="action-btn"
+                        onclick="goBack()">
+
+                    <i class="fas fa-arrow-left"></i>
+
+                    <span data-i18n="backBtn">
+                        Volver
+                    </span>
+
+                </button>
+
+
+                <button class="action-btn"
+                        onclick="goHome()">
+
+                    <i class="fas fa-home"></i>
+
+                    <span data-i18n="homeBtn">
+                        Inicio
+                    </span>
+
+                </button>
+
+
+                <button class="action-btn"
+                        onclick="toggleLanguage()">
+
+                    <i class="fas fa-globe"></i>
+
+                    <span id="lang-label">
+                        ES
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <div class="search-container">
+
+                <i class="fas fa-search"></i>
+
+                <input type="text"
+                       id="global-search"
+                       placeholder="Buscar libros, categorías..."
+                       data-i18n-ph="searchPh">
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================================
+             PÁGINA HOME
+        ==================================================== -->
+
+        <section id="page-home" class="page active">
+
+            <h1 class="page-title"
+                data-i18n="homeTitle">
+
+                Biblioteca Digital
+
+            </h1>
+
+            <p class="page-description"
+               data-i18n="homeDescription">
+
+                Encuentra libros, materiales y recursos para tus estudios.
+
+            </p>
+
+
+            <!-- ESTADÍSTICAS -->
+
+            <div class="library-stats">
+
+                <div class="stat-card">
+
+                    <i class="fas fa-book"></i>
+
+                    <h3 id="totalBooks">
+                        0
+                    </h3>
+
+                    <p data-i18n="totalBooksText">
+                        Libros disponibles
+                    </p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <i class="fas fa-bookmark"></i>
+
+                    <h3 id="totalSaved">
+                        0
+                    </h3>
+
+                    <p data-i18n="totalSavedText">
+                        Libros guardados
+                    </p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <i class="fas fa-layer-group"></i>
+
+                    <h3 id="totalCategories">
+                        0
+                    </h3>
+
+                    <p data-i18n="totalCategoriesText">
+                        Categorías
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CATEGORÍAS -->
+
+            <h2 class="section-title"
+                data-i18n="categoriesTitle">
+
+                Categorías Principales
+
+            </h2>
+
+
+            <div class="categories-grid">
+
+
+                <div class="category-card"
+                     onclick="openCategory('Education')">
+
+                    <div class="category-icon">
+
+                        <i class="fas fa-graduation-cap"></i>
+
+                    </div>
+
+                    <h4>Education</h4>
+
+                    <span data-i18n="explore">
+                        Explorar
+                    </span>
+
+                </div>
+
+
+                <div class="category-card"
+                     onclick="openCategory('Sciences')">
+
+                    <div class="category-icon">
+
+                        <i class="fas fa-flask"></i>
+
+                    </div>
+
+                    <h4>Sciences</h4>
+
+                    <span data-i18n="explore">
+                        Explorar
+                    </span>
+
+                </div>
+
+
+                <div class="category-card"
+                     onclick="openCategory('Philosophy')">
+
+                    <div class="category-icon">
+
+                        <i class="fas fa-brain"></i>
+
+                    </div>
+
+                    <h4>Philosophy</h4>
+
+                    <span data-i18n="explore">
+                        Explorar
+                    </span>
+
+                </div>
+
+
+                <div class="category-card"
+                     onclick="openCategory('History')">
+
+                    <div class="category-icon">
+
+                        <i class="fas fa-landmark"></i>
+
+                    </div>
+
+                    <h4>History</h4>
+
+                    <span data-i18n="explore">
+                        Explorar
+                    </span>
+
+                </div>
+
+
+                <div class="category-card"
+                     onclick="openCategory('Technology')">
+
+                    <div class="category-icon">
+
+                        <i class="fas fa-laptop-code"></i>
+
+                    </div>
+
+                    <h4>Technology</h4>
+
+                    <span data-i18n="explore">
+                        Explorar
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- VESTÍBULOS -->
+
+            <h2 class="section-title"
+                data-i18n="vestibulesTitle">
+
+                Vestíbulos
+
+            </h2>
+
+
+            <div class="vestibules-grid">
+
+
+                <div class="vestibule-card"
+                     onclick="showPage('catalog')">
+
+                    <i class="fas fa-door-open"></i>
+
+                    <h4>
+                        <span data-i18n="vestibule">
+                            Vestíbulo
+                        </span>
+                        1
+                    </h4>
+
+                    <p data-i18n="vestibuleText">
+                        Material educativo
+                    </p>
+
+                </div>
+
+
+                <div class="vestibule-card"
+                     onclick="showPage('catalog')">
+
+                    <i class="fas fa-door-open"></i>
+
+                    <h4>
+                        <span data-i18n="vestibule">
+                            Vestíbulo
+                        </span>
+                        2
+                    </h4>
+
+                    <p data-i18n="vestibuleText">
+                        Material educativo
+                    </p>
+
+                </div>
+
+
+                <div class="vestibule-card"
+                     onclick="showPage('catalog')">
+
+                    <i class="fas fa-door-open"></i>
+
+                    <h4>
+                        <span data-i18n="vestibule">
+                            Vestíbulo
+                        </span>
+                        3
+                    </h4>
+
+                    <p data-i18n="vestibuleText">
+                        Material educativo
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             PÁGINA CATÁLOGO
+        ==================================================== -->
+
+        <section id="page-catalog" class="page">
+
+            <div class="catalog-header">
+
+                <div>
+
+                    <h1 class="page-title"
+                        id="catalog-title">
+
+                        Catálogo Completo
+
+                    </h1>
+
+                    <p class="page-description"
+                       data-i18n="catalogDescription">
+
+                        Explora todos los recursos disponibles.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FILTROS -->
+
+            <div class="tabs">
+
+                <button class="tab active"
+                        onclick="filterTab(this, 'All')"
+                        data-i18n="tabAll">
+
+                    Todos
+
+                </button>
+
+                <button class="tab"
+                        onclick="filterTab(this, 'English')">
+
+                    English
+
+                </button>
+
+                <button class="tab"
+                        onclick="filterTab(this, 'Spanish')">
+
+                    Spanish
+
+                </button>
+
+                <button class="tab"
+                        onclick="filterTab(this, 'Math')">
+
+                    Math
+
+                </button>
+
+                <button class="tab"
+                        onclick="filterTab(this, 'Science')">
+
+                    Science
+
+                </button>
+
+            </div>
+
+
+            <div class="books-grid"
+                 id="books-container">
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             PÁGINA GUARDADOS
+        ==================================================== -->
+
+        <section id="page-saved" class="page">
+
+            <h1 class="page-title"
+                data-i18n="savedTitle">
+
+                Mis Marcadores
+
+            </h1>
+
+            <p class="page-description"
+               data-i18n="savedDescription">
+
+                Aquí aparecerán los libros que hayas guardado.
+
+            </p>
+
+
+            <div class="books-grid"
+                 id="saved-container">
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- ============================================================
+     BOTÓN MODO OSCURO
+============================================================ -->
+
+<button class="theme-button"
+        id="themeButton"
+        title="Cambiar tema">
+
+    <i class="fas fa-moon"
+       id="themeIcon"></i>
+
+</button>
+
+
+<!-- ============================================================
+     MODAL LIBRO
+============================================================ -->
+
+<div class="modal-overlay"
+     id="bookModal">
+
+    <div class="custom-modal">
+
+        <h3 id="modalBookTitle">
+            Libro
+        </h3>
+
+        <p id="modalBookInfo">
+            Información del libro.
+        </p>
+
+        <div class="modal-buttons">
+
+            <button class="modal-btn modal-secondary"
+                    onclick="closeBookModal()"
+                    data-i18n="close">
+
+                Cerrar
+
+            </button>
+
+        </div>
+
     </div>
 
-    <!-- Scripts Base -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/custom.js"></script>
+</div>
 
-    <!-- Lógica de Aplicación Web y Persistencia -->
-    <script>
-        // Base de Datos de Libros
-        const initialBooks = [
-            { id: 1, title: 'LCL', code: '3.1', category: 'Education', language: 'Spanish', coverClass: 'cover-1' },
-            { id: 2, title: 'LCL', code: '4.3', category: 'Education', language: 'Spanish', coverClass: 'cover-2' },
-            { id: 3, title: 'MATH', code: '1.0', category: 'Sciences', language: 'Math', coverClass: 'cover-3' },
-            { id: 4, title: 'SCI', code: '2.2', category: 'Sciences', language: 'Science', coverClass: 'cover-4' },
-            { id: 5, title: 'ENG', code: '5.0', category: 'Education', language: 'English', coverClass: 'cover-1' },
-            { id: 6, title: 'PHIL', code: '1.1', category: 'Philosophy', language: 'Spanish', coverClass: 'cover-3' },
-            { id: 7, title: 'HIST', code: '2.0', category: 'History', language: 'Spanish', coverClass: 'cover-2' },
-            { id: 8, title: 'TECH', code: '4.0', category: 'Technology', language: 'English', coverClass: 'cover-4' }
-        ];
 
-        // Cargar estado de marcadores
-        function loadSavedState() {
-            const savedIds = JSON.parse(localStorage.getItem('su_saved_books') || '[]');
-            return initialBooks.map(book => ({
-                ...book,
-                saved: savedIds.includes(book.id)
-            }));
-        }
+<!-- ============================================================
+     SCRIPTS
+============================================================ -->
 
-        let booksData = loadSavedState();
-        let currentLang = 'es';
-        let currentPage = 'home';
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
 
-        const translations = {
-            es: {
-                navHome: "Inicio & Categorías",
-                navCatalog: "Explorar Catálogo",
-                navSaved: "Mis Marcadores",
-                footerSub: "Sistema de Gestión Escolar",
-                searchPh: "Buscar por título, categoría...",
-                categoriesTitle: "Categorías Principales",
-                vestibulesTitle: "Vestíbulos",
-                vestibule: "Vestíbulo",
-                backBtn: "Volver",
-                homeBtn: "Ir al Inicio",
-                tabAll: "Todos",
-                savedTitle: "Libros Guardados / Marcadores",
-                noBooks: "No se encontraron libros en esta sección.",
-                noSaved: "Aún no has guardado ningún libro.",
-                searchResults: "Resultados de Búsqueda"
-            },
-            en: {
-                navHome: "Home & Categories",
-                navCatalog: "Explore Catalog",
-                navSaved: "My Bookmarks",
-                footerSub: "School Management System",
-                searchPh: "Search by title, category...",
-                categoriesTitle: "Main Categories",
-                vestibulesTitle: "Vestibules",
-                vestibule: "Vestibule",
-                backBtn: "Back",
-                homeBtn: "Go to Home",
-                tabAll: "All",
-                savedTitle: "Saved Books / Bookmarks",
-                noBooks: "No books found in this section.",
-                noSaved: "You haven't saved any books yet.",
-                searchResults: "Search Results"
-            }
-        };
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-        function showPage(pageId, linkElement = null) {
-            currentPage = pageId;
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.querySelectorAll('.nav-link-app').forEach(link => link.classList.remove('active'));
 
-            const targetPage = document.getElementById(`page-${pageId}`);
-            if (targetPage) targetPage.classList.add('active');
+<script>
 
-            if (linkElement) {
-                linkElement.classList.add('active');
-            }
+/* =============================================================
+   BASE DE DATOS DE LIBROS
+============================================================= */
 
-            if (pageId === 'catalog') renderBooks(booksData);
-            if (pageId === 'saved') renderSavedBooks();
-        }
+const initialBooks = [
 
-        function goBack() {
-            if (window.history.length > 1) {
-                window.history.back();
-            } else {
-                window.location.href = 'index.html';
-            }
-        }
+    {
+        id: 1,
+        title: "LCL",
+        code: "3.1",
+        category: "Education",
+        language: "Spanish",
+        coverClass: "cover-1",
+        icon: "fa-graduation-cap"
+    },
 
-        function goHome() {
-            showPage('home');
-        }
+    {
+        id: 2,
+        title: "LCL",
+        code: "4.3",
+        category: "Education",
+        language: "Spanish",
+        coverClass: "cover-2",
+        icon: "fa-book"
+    },
 
-        function toggleLanguage() {
-            currentLang = currentLang === 'es' ? 'en' : 'es';
-            document.getElementById('lang-label').innerText = currentLang === 'es' ? 'ES / EN' : 'EN / ES';
-            applyTranslations();
-            
-            if (currentPage === 'catalog') renderBooks(booksData);
-            if (currentPage === 'saved') renderSavedBooks();
-        }
+    {
+        id: 3,
+        title: "MATH",
+        code: "1.0",
+        category: "Sciences",
+        language: "Math",
+        coverClass: "cover-3",
+        icon: "fa-calculator"
+    },
 
-        function applyTranslations() {
-            const langData = translations[currentLang];
-            document.querySelectorAll('[data-i18n]').forEach(elem => {
-                const key = elem.getAttribute('data-i18n');
-                if (langData[key]) elem.innerText = langData[key];
-            });
-            document.querySelectorAll('[data-i18n-ph]').forEach(elem => {
-                const key = elem.getAttribute('data-i18n-ph');
-                if (langData[key]) elem.placeholder = langData[key];
-            });
-        }
+    {
+        id: 4,
+        title: "SCI",
+        code: "2.2",
+        category: "Sciences",
+        language: "Science",
+        coverClass: "cover-4",
+        icon: "fa-flask"
+    },
 
-        function renderBooks(list) {
-            const container = document.getElementById('books-container');
-            container.innerHTML = '';
+    {
+        id: 5,
+        title: "ENG",
+        code: "5.0",
+        category: "Education",
+        language: "English",
+        coverClass: "cover-1",
+        icon: "fa-language"
+    },
 
-            if (list.length === 0) {
-                container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">${translations[currentLang].noBooks}</p>`;
-                return;
-            }
+    {
+        id: 6,
+        title: "PHIL",
+        code: "1.1",
+        category: "Philosophy",
+        language: "Spanish",
+        coverClass: "cover-3",
+        icon: "fa-brain"
+    },
 
-            list.forEach((book) => {
-                const card = document.createElement('div');
-                card.className = 'book-card';
-                card.innerHTML = `
-                    <button class="bookmark-btn ${book.saved ? 'saved' : ''}" onclick="toggleSave(${book.id})">
-                        <i class="fas fa-bookmark"></i>
-                    </button>
-                    <div class="book-cover ${book.coverClass}">
-                        <span class="book-title">${book.title}</span>
-                        <span class="book-code">${book.code}</span>
-                    </div>
-                    <div class="book-info">
-                        <div class="book-name">${book.title} ${book.code}</div>
-                        <div class="book-category">${book.category}</div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
+    {
+        id: 7,
+        title: "HIST",
+        code: "2.0",
+        category: "History",
+        language: "Spanish",
+        coverClass: "cover-2",
+        icon: "fa-landmark"
+    },
 
-        function renderSavedBooks() {
-            const saved = booksData.filter(b => b.saved);
-            const container = document.getElementById('saved-container');
-            container.innerHTML = '';
+    {
+        id: 8,
+        title: "TECH",
+        code: "4.0",
+        category: "Technology",
+        language: "English",
+        coverClass: "cover-4",
+        icon: "fa-laptop-code"
+    }
 
-            if (saved.length === 0) {
-                container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">${translations[currentLang].noSaved}</p>`;
-                return;
-            }
+];
 
-            saved.forEach((book) => {
-                const card = document.createElement('div');
-                card.className = 'book-card';
-                card.innerHTML = `
-                    <button class="bookmark-btn saved" onclick="toggleSave(${book.id})">
-                        <i class="fas fa-bookmark"></i>
-                    </button>
-                    <div class="book-cover ${book.coverClass}">
-                        <span class="book-title">${book.title}</span>
-                        <span class="book-code">${book.code}</span>
-                    </div>
-                    <div class="book-info">
-                        <div class="book-name">${book.title} ${book.code}</div>
-                        <div class="book-category">${book.category}</div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
 
-        function toggleSave(id) {
-            const book = booksData.find(b => b.id === id);
-            if (book) {
-                book.saved = !book.saved;
-                const savedIds = booksData.filter(b => b.saved).map(b => b.id);
-                localStorage.setItem('su_saved_books', JSON.stringify(savedIds));
+/* =============================================================
+   VARIABLES
+============================================================= */
 
-                if (currentPage === 'catalog') renderBooks(booksData);
-                if (currentPage === 'saved') renderSavedBooks();
-            }
-        }
+let currentLang = "es";
 
-        function openCategory(catName) {
-            document.getElementById('catalog-title').innerText = catName;
-            showPage('catalog');
-            const filtered = booksData.filter(b => b.category.toLowerCase() === catName.toLowerCase());
-            renderBooks(filtered.length > 0 ? filtered : booksData);
-        }
+let currentPage = "home";
 
-        function filterTab(tabElem, lang) {
-            document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
-            tabElem.classList.add('active');
+let currentFilter = "All";
 
-            if (lang === 'All') {
-                renderBooks(booksData);
-            } else {
-                const filtered = booksData.filter(b => b.language === lang);
-                renderBooks(filtered);
-            }
-        }
+let booksData = loadSavedState();
 
-        document.getElementById('global-search').addEventListener('input', function(e) {
-            const query = e.target.value.toLowerCase().trim();
-            if (query.length > 0) {
-                if (currentPage !== 'catalog') showPage('catalog');
-                document.getElementById('catalog-title').innerText = translations[currentLang].searchResults;
-                const filtered = booksData.filter(b => 
-                    b.title.toLowerCase().includes(query) || 
-                    b.category.toLowerCase().includes(query) ||
-                    b.code.toLowerCase().includes(query)
-                );
-                renderBooks(filtered);
-            } else {
-                renderBooks(booksData);
-            }
+
+/* =============================================================
+   TRADUCCIONES
+============================================================= */
+
+const translations = {
+
+    es: {
+
+        navHome: "Inicio",
+        navCatalog: "Catálogo",
+        navSaved: "Mis Marcadores",
+
+        footerSub: "Sistema de Gestión Escolar",
+
+        homeTitle: "Biblioteca Digital",
+
+        homeDescription:
+            "Encuentra libros, materiales y recursos para tus estudios.",
+
+        catalogDescription:
+            "Explora todos los recursos disponibles.",
+
+        savedTitle:
+            "Mis Marcadores",
+
+        savedDescription:
+            "Aquí aparecerán los libros que hayas guardado.",
+
+        searchPh:
+            "Buscar libros, categorías...",
+
+        categoriesTitle:
+            "Categorías Principales",
+
+        vestibulesTitle:
+            "Vestíbulos",
+
+        vestibule:
+            "Vestíbulo",
+
+        vestibuleText:
+            "Material educativo",
+
+        explore:
+            "Explorar",
+
+        backBtn:
+            "Volver",
+
+        homeBtn:
+            "Inicio",
+
+        tabAll:
+            "Todos",
+
+        totalBooksText:
+            "Libros disponibles",
+
+        totalSavedText:
+            "Libros guardados",
+
+        totalCategoriesText:
+            "Categorías",
+
+        noBooks:
+            "No se encontraron libros.",
+
+        noSaved:
+            "Todavía no has guardado ningún libro.",
+
+        searchResults:
+            "Resultados de búsqueda",
+
+        close:
+            "Cerrar",
+
+        bookInfo:
+            "Información del recurso"
+
+    },
+
+    en: {
+
+        navHome: "Home",
+
+        navCatalog:
+            "Catalog",
+
+        navSaved:
+            "My Bookmarks",
+
+        footerSub:
+            "School Management System",
+
+        homeTitle:
+            "Digital Library",
+
+        homeDescription:
+            "Find books, materials and resources for your studies.",
+
+        catalogDescription:
+            "Explore all available resources.",
+
+        savedTitle:
+            "My Bookmarks",
+
+        savedDescription:
+            "Books you save will appear here.",
+
+        searchPh:
+            "Search books, categories...",
+
+        categoriesTitle:
+            "Main Categories",
+
+        vestibulesTitle:
+            "Vestibules",
+
+        vestibule:
+            "Vestibule",
+
+        vestibuleText:
+            "Educational material",
+
+        explore:
+            "Explore",
+
+        backBtn:
+            "Back",
+
+        homeBtn:
+            "Home",
+
+        tabAll:
+            "All",
+
+        totalBooksText:
+            "Available books",
+
+        totalSavedText:
+            "Saved books",
+
+        totalCategoriesText:
+            "Categories",
+
+        noBooks:
+            "No books found.",
+
+        noSaved:
+            "You haven't saved any books yet.",
+
+        searchResults:
+            "Search results",
+
+        close:
+            "Close",
+
+        bookInfo:
+            "Resource information"
+
+    }
+
+};
+
+
+/* =============================================================
+   CARGAR MARCADORES
+============================================================= */
+
+function loadSavedState() {
+
+    let savedIds = [];
+
+    try {
+
+        savedIds =
+            JSON.parse(
+                localStorage.getItem("su_saved_books") || "[]"
+            );
+
+    } catch {
+
+        savedIds = [];
+
+    }
+
+    return initialBooks.map(book => ({
+
+        ...book,
+
+        saved: savedIds.includes(book.id)
+
+    }));
+
+}
+
+
+/* =============================================================
+   GUARDAR MARCADORES
+============================================================= */
+
+function saveBookmarkState() {
+
+    const savedIds =
+        booksData
+            .filter(book => book.saved)
+            .map(book => book.id);
+
+    localStorage.setItem(
+        "su_saved_books",
+        JSON.stringify(savedIds)
+    );
+
+}
+
+
+/* =============================================================
+   CAMBIAR PÁGINA
+============================================================= */
+
+function showPage(pageId, button = null) {
+
+    currentPage = pageId;
+
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
+            page.classList.remove("active");
         });
 
-        // Inicialización
-        applyTranslations();
+    document
+        .querySelectorAll(".sidebar-link")
+        .forEach(link => {
+            link.classList.remove("active");
+        });
+
+
+    const page =
+        document.getElementById(
+            "page-" + pageId
+        );
+
+    if (page) {
+
+        page.classList.add("active");
+
+    }
+
+
+    if (button) {
+
+        button.classList.add("active");
+
+    } else {
+
+        const menuButtons =
+            document.querySelectorAll(".sidebar-link");
+
+        if (pageId === "home")
+            menuButtons[0]?.classList.add("active");
+
+        if (pageId === "catalog")
+            menuButtons[1]?.classList.add("active");
+
+        if (pageId === "saved")
+            menuButtons[2]?.classList.add("active");
+
+    }
+
+
+    if (pageId === "catalog") {
+
+        resetTabs();
+
         renderBooks(booksData);
-    </script>
+
+    }
+
+
+    if (pageId === "saved") {
+
+        renderSavedBooks();
+
+    }
+
+}
+
+
+/* =============================================================
+   IR AL INICIO
+============================================================= */
+
+function goHome() {
+
+    document.getElementById("global-search").value = "";
+
+    showPage("home");
+
+}
+
+
+/* =============================================================
+   VOLVER
+============================================================= */
+
+function goBack() {
+
+    if (currentPage === "catalog" ||
+        currentPage === "saved") {
+
+        goHome();
+
+        return;
+
+    }
+
+    window.location.href = "index.html";
+
+}
+
+
+/* =============================================================
+   CAMBIAR IDIOMA
+============================================================= */
+
+function toggleLanguage() {
+
+    currentLang =
+        currentLang === "es"
+            ? "en"
+            : "es";
+
+    document.getElementById("lang-label")
+        .textContent =
+        currentLang === "es"
+            ? "ES"
+            : "EN";
+
+    applyTranslations();
+
+    renderBooks(
+        getCurrentBooks()
+    );
+
+    renderSavedBooks();
+
+}
+
+
+/* =============================================================
+   APLICAR TRADUCCIONES
+============================================================= */
+
+function applyTranslations() {
+
+    const lang =
+        translations[currentLang];
+
+
+    document
+        .querySelectorAll("[data-i18n]")
+        .forEach(element => {
+
+            const key =
+                element.getAttribute(
+                    "data-i18n"
+                );
+
+            if (lang[key]) {
+
+                element.textContent =
+                    lang[key];
+
+            }
+
+        });
+
+
+    document
+        .querySelectorAll("[data-i18n-ph]")
+        .forEach(element => {
+
+            const key =
+                element.getAttribute(
+                    "data-i18n-ph"
+                );
+
+            if (lang[key]) {
+
+                element.placeholder =
+                    lang[key];
+
+            }
+
+        });
+
+}
+
+
+/* =============================================================
+   OBTENER LIBROS SEGÚN FILTRO
+============================================================= */
+
+function getCurrentBooks() {
+
+    if (currentFilter === "All") {
+
+        return booksData;
+
+    }
+
+    return booksData.filter(
+        book =>
+            book.language === currentFilter
+    );
+
+}
+
+
+/* =============================================================
+   RENDERIZAR LIBROS
+============================================================= */
+
+function renderBooks(list) {
+
+    const container =
+        document.getElementById(
+            "books-container"
+        );
+
+    container.innerHTML = "";
+
+
+    if (!list || list.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-state">
+
+                <i class="fas fa-book-open"></i>
+
+                <h3>
+                    ${translations[currentLang].noBooks}
+                </h3>
+
+                <p>
+                    Intenta utilizar otro filtro
+                    o término de búsqueda.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    list.forEach(book => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "book-card";
+
+
+        card.innerHTML = `
+
+            <button
+                class="bookmark ${book.saved ? "saved" : ""}"
+                onclick="toggleSave(${book.id})"
+                title="Guardar">
+
+                <i class="fas fa-bookmark"></i>
+
+            </button>
+
+
+            <div
+                class="book-cover ${book.coverClass}"
+                onclick="openBook(${book.id})"
+                style="cursor:pointer;">
+
+                <i class="fas ${book.icon}"></i>
+
+                <span class="book-title">
+                    ${book.title}
+                </span>
+
+                <span class="book-code">
+                    ${book.code}
+                </span>
+
+            </div>
+
+
+            <div class="book-info">
+
+                <div class="book-name">
+
+                    ${book.title} ${book.code}
+
+                </div>
+
+                <div class="book-category">
+
+                    ${book.category}
+
+                </div>
+
+                <span class="book-language">
+
+                    ${book.language}
+
+                </span>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* =============================================================
+   RENDERIZAR GUARDADOS
+============================================================= */
+
+function renderSavedBooks() {
+
+    const container =
+        document.getElementById(
+            "saved-container"
+        );
+
+    container.innerHTML = "";
+
+
+    const saved =
+        booksData.filter(
+            book => book.saved
+        );
+
+
+    if (saved.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-state">
+
+                <i class="far fa-bookmark"></i>
+
+                <h3>
+                    ${translations[currentLang].noSaved}
+                </h3>
+
+                <p>
+                    Guarda un libro utilizando
+                    el botón de marcador.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    saved.forEach(book => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "book-card";
+
+
+        card.innerHTML = `
+
+            <button
+                class="bookmark saved"
+                onclick="toggleSave(${book.id})">
+
+                <i class="fas fa-bookmark"></i>
+
+            </button>
+
+
+            <div
+                class="book-cover ${book.coverClass}"
+                onclick="openBook(${book.id})"
+                style="cursor:pointer;">
+
+                <i class="fas ${book.icon}"></i>
+
+                <span class="book-title">
+                    ${book.title}
+                </span>
+
+                <span class="book-code">
+                    ${book.code}
+                </span>
+
+            </div>
+
+
+            <div class="book-info">
+
+                <div class="book-name">
+                    ${book.title} ${book.code}
+                </div>
+
+                <div class="book-category">
+                    ${book.category}
+                </div>
+
+                <span class="book-language">
+                    ${book.language}
+                </span>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* =============================================================
+   GUARDAR / QUITAR MARCADOR
+============================================================= */
+
+function toggleSave(id) {
+
+    const book =
+        booksData.find(
+            item => item.id === id
+        );
+
+
+    if (!book)
+        return;
+
+
+    book.saved =
+        !book.saved;
+
+
+    saveBookmarkState();
+
+    updateStatistics();
+
+
+    if (currentPage === "catalog") {
+
+        renderBooks(
+            getCurrentBooks()
+        );
+
+    }
+
+
+    if (currentPage === "saved") {
+
+        renderSavedBooks();
+
+    }
+
+}
+
+
+/* =============================================================
+   ABRIR LIBRO
+============================================================= */
+
+function openBook(id) {
+
+    const book =
+        booksData.find(
+            item => item.id === id
+        );
+
+
+    if (!book)
+        return;
+
+
+    document.getElementById(
+        "modalBookTitle"
+    ).textContent =
+        `${book.title} ${book.code}`;
+
+
+    document.getElementById(
+        "modalBookInfo"
+    ).textContent =
+        `${translations[currentLang].bookInfo}: ${book.category} — ${book.language}`;
+
+
+    document
+        .getElementById("bookModal")
+        .classList.add("active");
+
+}
+
+
+/* =============================================================
+   CERRAR MODAL
+============================================================= */
+
+function closeBookModal() {
+
+    document
+        .getElementById("bookModal")
+        .classList.remove("active");
+
+}
+
+
+/* =============================================================
+   CATEGORÍA
+============================================================= */
+
+function openCategory(category) {
+
+    currentPage = "catalog";
+
+    currentFilter = "All";
+
+
+    document.getElementById(
+        "catalog-title"
+    ).textContent =
+        category;
+
+
+    showPage("catalog");
+
+
+    const filtered =
+        booksData.filter(
+            book =>
+                book.category.toLowerCase()
+                === category.toLowerCase()
+        );
+
+
+    renderBooks(filtered);
+
+
+    document
+        .querySelectorAll(".tab")
+        .forEach(tab =>
+            tab.classList.remove("active")
+        );
+
+    document
+        .querySelector(".tab")
+        ?.classList.add("active");
+
+}
+
+
+/* =============================================================
+   FILTROS
+============================================================= */
+
+function filterTab(button, filter) {
+
+    currentFilter =
+        filter;
+
+
+    document
+        .querySelectorAll(".tab")
+        .forEach(tab =>
+            tab.classList.remove("active")
+        );
+
+
+    button.classList.add("active");
+
+
+    document.getElementById(
+        "catalog-title"
+    ).textContent =
+        filter === "All"
+            ? "Catálogo Completo"
+            : filter;
+
+
+    renderBooks(
+        getCurrentBooks()
+    );
+
+}
+
+
+/* =============================================================
+   REINICIAR FILTROS
+============================================================= */
+
+function resetTabs() {
+
+    currentFilter = "All";
+
+    document
+        .querySelectorAll(".tab")
+        .forEach(tab =>
+            tab.classList.remove("active")
+        );
+
+    document
+        .querySelector(".tab")
+        ?.classList.add("active");
+
+    document.getElementById(
+        "catalog-title"
+    ).textContent =
+        "Catálogo Completo";
+
+}
+
+
+/* =============================================================
+   BUSCADOR
+============================================================= */
+
+document
+    .getElementById("global-search")
+    .addEventListener("input", function () {
+
+        const query =
+            this.value
+                .toLowerCase()
+                .trim();
+
+
+        if (!query) {
+
+            if (currentPage === "catalog") {
+
+                document.getElementById(
+                    "catalog-title"
+                ).textContent =
+                    "Catálogo Completo";
+
+                renderBooks(
+                    getCurrentBooks()
+                );
+
+            }
+
+            return;
+
+        }
+
+
+        showPage("catalog");
+
+
+        document.getElementById(
+            "catalog-title"
+        ).textContent =
+            translations[currentLang]
+                .searchResults;
+
+
+        const results =
+            booksData.filter(book =>
+
+                book.title
+                    .toLowerCase()
+                    .includes(query)
+
+                ||
+
+                book.code
+                    .toLowerCase()
+                    .includes(query)
+
+                ||
+
+                book.category
+                    .toLowerCase()
+                    .includes(query)
+
+                ||
+
+                book.language
+                    .toLowerCase()
+                    .includes(query)
+
+            );
+
+
+        renderBooks(results);
+
+    });
+
+
+/* =============================================================
+   MODO OSCURO
+============================================================= */
+
+const themeButton =
+    document.getElementById(
+        "themeButton"
+    );
+
+const themeIcon =
+    document.getElementById(
+        "themeIcon"
+    );
+
+
+function loadTheme() {
+
+    const savedTheme =
+        localStorage.getItem(
+            "su_theme"
+        );
+
+
+    if (savedTheme === "dark") {
+
+        document.body.classList.add(
+            "dark-mode"
+        );
+
+        themeIcon.className =
+            "fas fa-sun";
+
+    }
+
+}
+
+
+themeButton.addEventListener(
+    "click",
+    function () {
+
+        document.body.classList.toggle(
+            "dark-mode"
+        );
+
+
+        const dark =
+            document.body.classList
+                .contains("dark-mode");
+
+
+        localStorage.setItem(
+            "su_theme",
+            dark ? "dark" : "light"
+        );
+
+
+        themeIcon.className =
+            dark
+                ? "fas fa-sun"
+                : "fas fa-moon";
+
+    }
+);
+
+
+/* =============================================================
+   CERRAR MODAL AL HACER CLICK FUERA
+============================================================= */
+
+document
+    .getElementById("bookModal")
+    .addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                event.target === this
+            ) {
+
+                closeBookModal();
+
+            }
+
+        }
+    );
+
+
+/* =============================================================
+   ESC PARA CERRAR MODAL
+============================================================= */
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (event.key === "Escape") {
+
+            closeBookModal();
+
+        }
+
+    }
+);
+
+
+/* =============================================================
+   ESTADÍSTICAS
+============================================================= */
+
+function updateStatistics() {
+
+    document.getElementById(
+        "totalBooks"
+    ).textContent =
+        booksData.length;
+
+
+    document.getElementById(
+        "totalSaved"
+    ).textContent =
+        booksData.filter(
+            book => book.saved
+        ).length;
+
+
+    const categories =
+        new Set(
+            booksData.map(
+                book => book.category
+            )
+        );
+
+
+    document.getElementById(
+        "totalCategories"
+    ).textContent =
+        categories.size;
+
+}
+
+
+/* =============================================================
+   INICIALIZACIÓN
+============================================================= */
+
+function initializeLibrary() {
+
+    applyTranslations();
+
+    loadTheme();
+
+    updateStatistics();
+
+    renderBooks(
+        booksData
+    );
+
+    renderSavedBooks();
+
+}
+
+
+initializeLibrary();
+
+</script>
+
 </body>
 </html>
